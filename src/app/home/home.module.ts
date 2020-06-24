@@ -10,6 +10,7 @@ import { InicioComponent } from './inicio/inicio.component';
   imports: [
     CommonModule,
     HomeRoutingModule
-  ]
+  ],
+  exports: [InicioComponent]
 })
 export class HomeModule { }
