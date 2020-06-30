@@ -1,0 +1,98 @@
+$width: 681px;
+$height: 384px;
+
+.slick-slider {
+  width: 90%;
+  margin: auto;
+}
+
+.nav-btn {
+  height: 47px;
+  position: absolute;
+  width: 26px;
+  cursor: pointer;
+  top: 100px !important;
+}
+
+.prev-slide.slick-disabled,
+.next-slide.slick-disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.prev-slide {
+  background: url("/assets/img/1.png") no-repeat scroll 0 0;
+  left: -33px;
+}
+
+.next-slide {
+  background: url("/assets/img/1.png") no-repeat scroll -24px 0px;
+}
+
+.prev-slide:hover {
+  background-position: 0px -53px;
+}
+
+.next-slide:hover {
+  background-position: -24px -53px;
+}
+.parent {
+  width: 100%;
+  height: $height;
+  background: none;
+  display: inline-flex;
+  overflow: hidden;
+  position: relative;
+  -webkit-box-shadow: 0 0 88px 5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0 0 88px 5px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 88px 5px rgba(0, 0, 0, 0.75);
+}
+
+svg {
+  position: absolute;
+  z-index: 1;
+  width: $width;
+  height: $height;
+}
+
+button {
+  position: absolute;
+  z-index: 50;
+  width: 40px;
+  overflow: hidden;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 88px 5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0 0 88px 5px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 88px 5px rgba(0, 0, 0, 0.75);
+
+  &:focus {
+    outline-width: 0;
+  }
+}
+.right {
+  margin-left: 6%;
+  margin-top: 64px;
+  border: 1px solid #849494;
+  background-color: transparent;
+  transition: 0.5s;
+  &:hover {
+    background-color: #fff;
+  }
+}
+
+.left {
+  position: absolute;
+  display: block;
+  margin-left: 91.2%;
+  margin-top: 64px;
+  border: 1px solid #849494;
+  background-color: transparent;
+  transition: 0.5s;
+  &:hover {
+    background-color: #fff;
+  }
+}

@@ -2,7 +2,20 @@
 <app-header></app-header>
 <!-- router-outlet: marcador de posición que Angular se llena
 dinámicamente según el estado actual del enrutador -->
-<app-inicio *ngIf="router.url == '/'"></app-inicio>
+<div class="row container-fluid p-0 m-0">
+  <app-inicio class="col-xl-12 p-0 m-0" *ngIf="router.url == '/'"></app-inicio>
+</div>
+<div class="container-fluid p-0 m-0 mb-4">
+  <app-carrousel class="col-xl-12 p-0 m-0"></app-carrousel>
+</div>
+
+<div class="row container-fluid p-0 m-0">
+  <div class="col-xl-9">
+    <billboard></billboard>
+  </div>
+  <app-siderbar class="col-xl-3"></app-siderbar>
+</div>
 <router-outlet></router-outlet>
+
 <!-- Selector del pie de página definido en el módulo Core -->
 <app-footer></app-footer>

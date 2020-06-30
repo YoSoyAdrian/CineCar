@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { InicioComponent } from "./inicio/inicio.component";
 
 
-
 const routes: Routes = [
   { path: 'home', component: InicioComponent },
 ];

@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
+
     // importar HttpClientModule después BrowserModule.
     // comunicarse con un servidor a través del protocolo HTTP
     HttpClientModule,
@@ -32,6 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     // al final el gestor de las rutas principal
     AppRoutingModule,
     NgbModule,
+    BrowserAnimationsModule,
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,12 @@
 <div class="parent">
   <div class="slider">
-    <button type="button" id="right" class="right" name="button">
+    <button
+      onmousedown="rightSlide()"
+      type="button"
+      id="right"
+      class="right"
+      name="button"
+    >
       <svg
         version="1.1"
         id="Capa_1"
@@ -24,10 +30,16 @@
         </g>
       </svg>
     </button>
-    <button type="button" id="left" class="left" name="button">
+    <button
+      type="button"
+      id="left"
+      onmousedown="leftSlide()"
+      class="left"
+      name="button"
+    >
       <svg
         version="1.1"
-        id="Capa_2"
+        id="Capa_1"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         x="0px"
@@ -125,9 +137,9 @@
         r="660"
       />
     </svg>
-    <div id="slide1" class="slide1 up1">MOUNTAIN</div>
-    <div id="slide2" class="slide2">BEACH</div>
-    <div id="slide3" class="slide3">FOREST</div>
-    <div id="slide4" class="slide4">DESERT</div>
+    <div id="slide1" class="slide1 up1"></div>
+    <div id="slide2" class="slide2"></div>
+    <div id="slide3" class="slide3"></div>
+    <div id="slide4" class="slide4"></div>
   </div>
 </div>

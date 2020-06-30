@@ -14,7 +14,7 @@ function leftSlide() {
     console.log("woek");
     sliding = true;
     curpage--;
-    svg = true;
+    svg = false;
     click = false;
     for (k = 1; k <= 4; k++) {
       var a1 = document.getElementById(pagePrefix + k);
@@ -112,15 +112,7 @@ function move() {
   }
 }
 
-left.onmousedown = () => {
-  leftSlide();
-};
-
-right.onmousedown = () => {
-  rightSlide();
-};
-
-document.onkeydown = (e) => {
+$(document).onkeydown = (e) => {
   if (e.keyCode == 37) {
     leftSlide();
   } else if (e.keyCode == 39) {
