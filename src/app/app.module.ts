@@ -12,6 +12,7 @@ import { HomeModule } from './home/home.module';
 import { UserModule } from './user/user.module';
 import { MovieModule } from './movie/movie.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MainModule } from './main/main.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     // importar otras dependencias que sean necesario cargar en el componente principal.
     // importar los módulos creados propios en orden
     CoreModule,
-    CoreModule,
     ShareModule,
     // después los demás módulos
     HomeModule,
@@ -36,7 +36,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    MainModule
   ],
   providers: [],
   bootstrap: [AppComponent]

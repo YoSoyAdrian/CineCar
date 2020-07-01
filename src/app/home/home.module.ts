@@ -4,18 +4,15 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { InicioComponent } from './inicio/inicio.component';
-import { SiderbarComponent } from './siderbar/siderbar.component';
-import { CarrouselComponent } from './carrousel/carrousel.component';
-import { BillboardComponent } from "./billboard/billboard.component";
 
 
 @NgModule({
-  declarations: [InicioComponent, SiderbarComponent, CarrouselComponent, BillboardComponent],
+  declarations: [InicioComponent,],
   imports: [
     CommonModule,
     HomeRoutingModule,
     SlickCarouselModule
   ],
-  exports: [InicioComponent, SiderbarComponent, CarrouselComponent, BillboardComponent]
+  exports: [InicioComponent,]
 })
 export class HomeModule { }

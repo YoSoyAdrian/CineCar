@@ -7,11 +7,14 @@ import * as $ from "jquery";
 })
 export class InicioComponent implements OnInit {
 
-
-  ngOnInit(): void {
+  constructor() {
 
   }
 
+  ngOnInit(): void {
+
+    
+  }
 }
 
 
