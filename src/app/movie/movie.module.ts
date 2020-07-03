@@ -4,17 +4,17 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { MovieRoutingModule } from './movie-routing.module';
 import { PeliculasComponent } from './peliculas/peliculas.component';
 import { SiderbarComponent } from './siderbar/siderbar.component';
-import { CarrouselComponent } from './carrousel/carrousel.component';
+
 
 
 
 @NgModule({
-  declarations: [PeliculasComponent, SiderbarComponent, CarrouselComponent],
+  declarations: [PeliculasComponent, SiderbarComponent,],
   imports: [
     CommonModule,
     MovieRoutingModule,
     SlickCarouselModule
   ],
-  exports: [PeliculasComponent, SiderbarComponent, CarrouselComponent]
+  exports: [PeliculasComponent, SiderbarComponent, ]
 })
 export class MovieModule { }

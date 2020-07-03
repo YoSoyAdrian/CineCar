@@ -59,9 +59,10 @@ body {
   position: relative;
 
   display: block;
-  width: 800px;
-  height: 350px;
-  margin: 100px auto;
+  width: 683px;
+  height: 320px;
+  margin-top: 15px;
+  margin-left: 7%;
   overflow: hidden;
   border-radius: 10px;
   transition: all 0.4s;
@@ -119,7 +120,7 @@ body {
     .movie_social {
       height: 10%;
       padding-left: 15px;
-      padding-bottom: 20px;
+
       ul {
         list-style: none;
         padding: 0;
@@ -223,7 +224,7 @@ body {
 
 #ave {
   box-shadow: 0px 0px 150px -45px rgba(199, 147, 75, 0.7);
-  margin-bottom: 200px;
+  margin-bottom: 10px;
   &:hover {
     box-shadow: 0px 0px 120px -55px rgba(199, 147, 75, 0.7);
   }
@@ -247,11 +248,9 @@ body {
   border: 4px double rgba(255, 255, 255, 0.25);
   border-width: 4px 0;
   padding: 1.5em 0em;
-  position: absolute;
-  top: 18%;
-  left: 50%;
   width: 40em;
-  margin: 0 0 0 -20em;
+
+  text-align: center;
 
   span {
     font: 566 2em/1 "Oswald", sans-serif;
@@ -263,7 +262,7 @@ body {
 
     /* Clip Background Image */
 
-    background: url(http://f.cl.ly/items/010q3E1u3p2Q0j1L1S1o/animated_text_fill.png)
+    background: url("http://f.cl.ly/items/010q3E1u3p2Q0j1L1S1o/animated_text_fill.png")
       repeat-y;
     -webkit-background-clip: text;
     background-clip: text;
@@ -271,22 +270,61 @@ body {
     /* Animate Background Image */
 
     -webkit-text-fill-color: transparent;
-    -webkit-animation: aitf 80s linear infinite;
+    animation: aitf 80s linear infinite;
 
     /* Activate hardware acceleration for smoother animations */
 
-    -webkit-transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
   }
 }
 
 /* Animate Background Image */
 
-@-webkit-keyframes aitf {
+@keyframes aitf {
   0% {
     background-position: 0% 50%;
   }
   100% {
     background-position: 100% 50%;
+  }
+}
+// ccss boton flotante
+.card.horizontal .card-image {
+  max-width: none;
+}
+.card-content p {
+  width: 100%;
+  font-size: 1.3em;
+
+  text-align: center;
+  font-family: "Roboto Mono", monospace;
+}
+
+//ccss del titulo pelicula
+
+#titulo {
+  position: relative;
+  text-align: center;
+  font-size: 8vmin;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  line-height: 0.9;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  background-size: 80% 100%;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position-x: -500%;
+  }
+
+  100% {
+    background-position-x: 500%;
   }
 }

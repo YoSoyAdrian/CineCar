@@ -1,42 +1,27 @@
-<div class="row col-xl-12">
-  <header class="main-header bg-dark">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg main-nav px-0">
-        <a class="navbar-brand" href="/mojo"> </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#mainMenu"
-          aria-controls="mainMenu"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="icon-bar icon-bar-1"></span>
-          <span class="icon-bar icon-bar-2"></span>
-          <span class="icon-bar icon-bar-3"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainMenu">
-          <ul class="navbar-nav ml-auto text-uppercase f1">
-            <li>
-              <a routerLink="/home" routerLinkActive="active">Inicio</a>
-            </li>
-            <li>
-              <a routerLink="/movie" routerLinkActive="active">Peliculas</a>
-            </li>
-            <li>
-              <a href="#billboard">Carteleras</a>
-            </li>
-            <li>
-              <a href="#service">Productos</a>
-            </li>
-            <li>
-              <a href="#contact">contactenos</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-    <!-- /.container -->
-  </header>
-</div>
+<nav
+  style="
+    background-color: #212529;
+    display: block;
+    z-index: 3;
+  "
+>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo">Logo</a>
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+      ><i class="material-icons">menu</i></a
+    >
+    <ul class="right hide-on-med-and-down">
+      <li><a routerLinkActive="active" routerLink="/home">Inicio</a></li>
+      <li><a routerLinkActive="active" routerLink="/movie">Películas</a></li>
+      <li><a routerLinkActive="active" routerLink="/home">Cartelera</a></li>
+      <li><a routerLinkActive="active" routerLink="/home">Acerca De</a></li>
+    </ul>
+  </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+  <li><a href="sass.html">Sass</a></li>
+  <li><a href="badges.html">Components</a></li>
+  <li><a href="collapsible.html">Javascript</a></li>
+  <li><a href="mobile.html">Mobile</a></li>
+</ul>

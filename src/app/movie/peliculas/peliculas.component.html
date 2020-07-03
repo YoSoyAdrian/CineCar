@@ -1,5 +1,8 @@
-<div class="mt-4">
-  <div class="col-xl-12 text-center p-0 m-0">
+<div class="row">
+  <div class="col-xl-12">
+    <p id="titulo">Películas</p>
+  </div>
+  <div class="col col-xl-12 text-center">
     <ul class="menu-bar">
       <li>Lunes</li>
       <li>Martes</li>
@@ -9,7 +12,7 @@
       <li>Sabado</li>
     </ul>
   </div>
-  <div class="col-xl-12">
+  <div class="col-xl-12 text-center">
     <p id="estreno">
       <span>
         Proximamente
@@ -17,64 +20,94 @@
     </p>
   </div>
 </div>
-<div class="col-xl-12">
-  <div class="movie_card" id="bright" style="margin-left: 20%;">
-    <div class="info_section">
-      <div class="movie_header">
-        <img
-          class="locandina"
-          src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg"
-        />
-        <h1>Bright</h1>
-        <h4>2017, David Ayer</h4>
-        <span class="minutes">117 min</span>
-        <p class="type">Action, Crime, Fantasy</p>
-      </div>
-      <div class="movie_desc">
-        <p class="text">
-          Set in a world where fantasy creatures live side by side with humans.
-          A human cop is forced to work with an Orc to find a weapon everyone is
-          prepared to kill for.
-        </p>
-      </div>
-      <div class="movie_social">
-        <ul> 
-          <li><i class="material-icons">share</i></li>
-          <li><i class="material-icons"></i></li>
-          <li><i class="material-icons">chat_bubble</i></li>
-        </ul>
-      </div>
-    </div>
-    <div class="blur_back bright_back"></div>
+<div class="row">
+  <div class="col-xl-2">
+    <app-siderbar></app-siderbar>
   </div>
-  <div class="movie_card" id="ave" style="margin-left: 20%;">
-    <div class="info_section">
-      <div class="movie_header">
-        <img
-          class="locandina"
-          src="https://mr.comingsoon.it/imgdb/locandine/235x336/53715.jpg"
-        />
-        <h1>Black Panther</h1>
-        <h4>2018, Ryan Coogler</h4>
-        <span class="minutes">134 min</span>
-        <p class="type">Action, Adventure, Sci-Fi</p>
+
+  <div class="col-xl-10 right" style="margin-bottom: 40px;">
+    <div class="movie_card" id="bright">
+      <div class="info_section">
+        <div class="movie_header">
+          <img
+            class="locandina"
+            src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg"
+          />
+          <h1>Bright</h1>
+          <h4>2017, David Ayer</h4>
+          <span class="minutes">117 min</span>
+          <p class="type">Action, Crime, Fantasy</p>
+        </div>
+        <div class="movie_desc">
+          <p class="text">
+            Set in a world where fantasy creatures live side by side with
+            humans. A human cop is forced to work with an Orc to find a weapon
+            everyone is prepared to kill for.
+          </p>
+        </div>
+        <div class="movie_social">
+          <ul>
+            <li><i class="material-icons">share</i></li>
+            <li><i class="material-icons"></i></li>
+            <li><i class="material-icons">chat_bubble</i></li>
+          </ul>
+        </div>
       </div>
-      <div class="movie_desc">
-        <p class="text">
-          T'Challa, the King of Wakanda, rises to the throne in the isolated,
-          technologically advanced African nation, but his claim is challenged
-          by a vengeful outsider who was a childhood victim of T'Challa's
-          father's mistake.
-        </p>
-      </div>
-      <div class="movie_social">
-        <ul>
-          <li><i class="material-icons">share</i></li>
-          <li><i class="material-icons"></i></li>
-          <li><i class="material-icons">chat_bubble</i></li>
-        </ul>
-      </div>
+      <div class="blur_back bright_back"></div>
     </div>
-    <div class="blur_back ave_back"></div>
+    <div class="movie_card" id="ave">
+      <div class="info_section">
+        <div class="movie_header">
+          <img
+            class="locandina"
+            src="https://mr.comingsoon.it/imgdb/locandine/235x336/53715.jpg"
+          />
+          <h1>Black Panther</h1>
+          <h4>2018, Ryan Coogler</h4>
+          <span class="minutes">134 min</span>
+          <p class="type">Action, Adventure, Sci-Fi</p>
+        </div>
+        <div class="movie_desc">
+          <p class="text">
+            T'Challa, the King of Wakanda, rises to the throne in the isolated,
+            technologically advanced African nation, but his claim is challenged
+            by a vengeful outsider who was a childhood victim of T'Challa's
+            father's mistake.
+          </p>
+        </div>
+        <div class="movie_social">
+          <ul>
+            <li><i class="material-icons">share</i></li>
+            <li><i class="material-icons"></i></li>
+            <li><i class="material-icons">chat_bubble</i></li>
+          </ul>
+        </div>
+      </div>
+      <div class="blur_back ave_back"></div>
+    </div>
+  </div>
+  <!-- boton flotante-->
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large deep-orange lighten-1">
+      <i class="large material-icons">pets</i>
+    </a>
+    <ul style="width: 344px;">
+      <li style="position: relative; right: 56%;">
+        <div class="col s12 m7" style="width: 262px;">
+          <div class="card small horizontal">
+            <div class="card-image">
+              <img src="/assets/img/pet Friendly 2.png" />
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>
+                  Tu mascota es bienvenida!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
