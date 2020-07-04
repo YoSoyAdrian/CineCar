@@ -13,6 +13,7 @@ import { UserModule } from './user/user.module';
 import { MovieModule } from './movie/movie.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainModule } from './main/main.module';
+import { ProductModule } from './product/product.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MainModule } from './main/main.module';
     NgbModule,
     BrowserAnimationsModule,
     SlickCarouselModule,
-    MainModule
+    MainModule,
+    ProductModule
   ],
   providers: [],
   bootstrap: [AppComponent]
