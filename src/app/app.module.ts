@@ -33,13 +33,14 @@ import { ProductModule } from './product/product.module';
     HomeModule,
     UserModule,
     MovieModule,
+    ProductModule,
     // al final el gestor de las rutas principal
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
     SlickCarouselModule,
     MainModule,
-    ProductModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

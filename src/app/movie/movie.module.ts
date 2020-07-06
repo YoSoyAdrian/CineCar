@@ -5,12 +5,13 @@ import { MovieRoutingModule } from './movie-routing.module';
 import { PeliculasComponent } from './peliculas/peliculas.component';
 import { SiderbarComponent } from './siderbar/siderbar.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { PeliculasShowComponent } from './peliculas-show/peliculas-show.component';
 
 
 
 
 @NgModule({
-  declarations: [PeliculasComponent, SiderbarComponent, CarouselComponent,],
+  declarations: [PeliculasComponent, SiderbarComponent, CarouselComponent, PeliculasShowComponent,],
   imports: [
     CommonModule,
     MovieRoutingModule,
