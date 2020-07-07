@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from "jquery";
+import { NotificacionService } from 'src/app/share/notificacion.service';
+import { GenericService } from 'src/app/share/generic.service';
+import { Subject } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { takeUntil } from 'rxjs/operators';
+import { domainToASCII } from 'url';
 
 @Component({
   selector: 'app-carousel',
@@ -7,13 +12,31 @@ import * as $ from "jquery";
   styleUrls: ['./carousel.component.scss']
 })
 export class CarouselComponent implements OnInit {
-
-
-
-  constructor() { }
-
+  datos: any;
+  error: any;
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  constructor(private gService: GenericService,
+    private notificacion: NotificacionService) {
+  }
   ngOnInit(): void {
+    this.listaPeliculas();
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
 
+  listaPeliculas() {
+    this.gService.list('peliculas/').pipe(takeUntil(this.destroy$)).
+      subscribe((data: any) => {
+        console.log(data);
+        this.datos = data;
+      },
+        (error: any) => {
+          this.notificacion.mensaje(error.mensaje, error.name, 'error')
+            ;
+        }
+      );
   }
 
 }

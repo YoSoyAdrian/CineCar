@@ -8,15 +8,13 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { PeliculasShowComponent } from './peliculas-show/peliculas-show.component';
 
 
-
-
 @NgModule({
-  declarations: [PeliculasComponent, SiderbarComponent, CarouselComponent, PeliculasShowComponent,],
+  declarations: [PeliculasComponent, SiderbarComponent, CarouselComponent, PeliculasShowComponent],
   imports: [
     CommonModule,
     MovieRoutingModule,
     SlickCarouselModule
   ],
-  exports: [PeliculasComponent, SiderbarComponent, CarouselComponent]
+  exports: [PeliculasComponent, SiderbarComponent, CarouselComponent, PeliculasShowComponent]
 })
 export class MovieModule { }

@@ -1,72 +1,59 @@
-<section id="gallery">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 mb-4">
-        <div class="card">
-          <img
-            src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60"
-            alt=""
-            class="card-img-top"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Sunset</h5>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum
-              similique repellat a laborum, rerum voluptates ipsam eos quo
-              tempore iusto dolore modi dolorum in pariatur. Incidunt
-              repellendus praesentium quae!
-            </p>
-            <a href="" class="btn btn-outline-success btn-sm">Read More</a>
-            <a href="" class="btn btn-outline-danger btn-sm"
-              ><i class="far fa-heart"></i
-            ></a>
-          </div>
+<div class="movie-card">
+
+  <div class="container" *ngIf="datos?.id">
+
+    <a href="#"><img src="{{datos.image}}" style="width: 225px;" alt="cover" class="cover" /></a>
+
+    <div class="hero" style="background-image: url({{datos.banner}}); background-repeat: round;">
+
+      <div class="details">
+
+        <div class="title1">{{datos.name}} <span>PG-13</span></div>
+
+        <fieldset class="rating">
+          <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5"
+            title="Awesome - 5 stars"></label>
+          <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half"
+            title="Pretty good - 4.5 stars"></label>
+          <input type="radio" id="star4" name="rating" value="4" checked /><label class="full" for="star4"
+            title="Pretty good - 4 stars"></label>
+          <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half"
+            title="Meh - 3.5 stars"></label>
+          <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3"
+            title="Meh - 3 stars"></label>
+          <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half"
+            title="Kinda bad - 2.5 stars"></label>
+          <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2"
+            title="Kinda bad - 2 stars"></label>
+          <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half"
+            title="Meh - 1.5 stars"></label>
+          <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1"
+            title="Sucks big time - 1 star"></label>
+          <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf"
+            title="Sucks big time - 0.5 stars"></label>
+        </fieldset>
+
+        <span class="likes">{{datos.votes}} Me gustas</span>
+
+      </div> <!-- end details -->
+
+    </div> <!-- end hero -->
+
+    <div class="description">
+
+      <div class="column1">
+        <div *ngFor="let genero of datos.gener_movies">
+          <span class="tag">{{genero.name}}</span>
         </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card">
-          <img
-            src="https://images.unsplash.com/photo-1516214104703-d870798883c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60"
-            alt=""
-            class="card-img-top"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Sunset</h5>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum
-              similique repellat a laborum, rerum voluptates ipsam eos quo
-              tempore iusto dolore modi dolorum in pariatur. Incidunt
-              repellendus praesentium quae!
-            </p>
-            <a href="" class="btn btn-outline-success btn-sm">Read More</a>
-            <a href="" class="btn btn-outline-danger btn-sm"
-              ><i class="far fa-heart"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card">
-          <img
-            src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60"
-            alt=""
-            class="card-img-top"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Sunset</h5>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum
-              similique repellat a laborum, rerum voluptates ipsam eos quo
-              tempore iusto dolore modi dolorum in pariatur. Incidunt
-              repellendus praesentium quae!
-            </p>
-            <a href="" class="btn btn-outline-success btn-sm">Read More</a>
-            <a href="" class="btn btn-outline-danger btn-sm"
-              ><i class="far fa-heart"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </div> <!-- end column1 -->
+
+      <div class="column2">
+        <p>{{datos.synopsis}}<a href="#">read more</a></p>
+
+      </div> <!-- end column2 -->
+    </div> <!-- end description -->
+
+
+  </div> <!-- end container -->
+</div> <!-- end movie-card -->
+<app-carousel></app-carousel>
