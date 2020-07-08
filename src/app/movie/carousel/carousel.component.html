@@ -1,14 +1,21 @@
 <!--TOP RATED-->
 <div class="homeslider">
+
   <main class="content">
+
     <section class="panel">
+
       <h2>Recomendadas</h2>
+
       <div class="recentslider">
+
         <div class="swiper-container">
+
           <div class="swiper-wrapper">
+
             <div class="swiper-slide col-3" *ngFor="let peli of datos">
               <div class="example-2 card col-12">
-                <div class="wrapper" style="background-image: url({{peli.image}});">
+                <div class="wrapper" style="background-image: url({{peli.image}}); background-position: center;">
                   <div class="header">
                     <div class="date">
                       <span class="day">{{peli.premiere_date}}</span>
@@ -34,12 +41,7 @@
               </div>
             </div>
           </div>
-          <div class="nextdirection recent-next">
-            <img src="assets/img/right-arrow.svg" />
-          </div>
-          <div class="leftdirection recent-prev">
-            <img src="assets/img/left-arrow.svg" />
-          </div>
+          <button role="button" id="flecha-izquierda" class="leftdirection"><i class="fas fa-angle-left"></i></button>
         </div>
       </div>
     </section>

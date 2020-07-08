@@ -98,6 +98,10 @@ a:hover {
 
   .likes {
     margin-left: 24px;
+    color: white ;
+
+    position: relative;
+    text-shadow: 2px 2px 2px darkgray;
   }
 
   .likes:before {

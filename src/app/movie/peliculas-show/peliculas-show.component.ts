@@ -33,7 +33,7 @@ export class PeliculasShowComponent implements OnInit {
   }
   obtenerPelicula(id: any) {
     this.gService.get("peliculas", id).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      console.log(data);
+     
       this.datos = data;
     },
       (error: any) => {

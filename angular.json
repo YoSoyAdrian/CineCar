@@ -32,9 +32,7 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/slick-carousel/slick/slick.min.js",
-              "src/assets/js/header.js",
               "node_modules/@fortawesome/fontawesome-free/js/all.js"
             ]
           },

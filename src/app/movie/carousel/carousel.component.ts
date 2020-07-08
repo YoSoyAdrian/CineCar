@@ -29,7 +29,7 @@ export class CarouselComponent implements OnInit {
   listaPeliculas() {
     this.gService.list('peliculas/').pipe(takeUntil(this.destroy$)).
       subscribe((data: any) => {
-        console.log(data);
+
         this.datos = data;
       },
         (error: any) => {
