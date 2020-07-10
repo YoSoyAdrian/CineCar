@@ -12,27 +12,29 @@ import { domainToASCII } from 'url';
   styleUrls: ['./peliculas.component.scss']
 })
 export class PeliculasComponent implements OnInit {
-
-
-
+  datos: any;
+  error: any;
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  constructor(private gService: GenericService,
+    private notificacion: NotificacionService) {
+  }
   ngOnInit(): void {
-
+    this.listaPeliculasTop();
   }
-
   ngOnDestroy() {
-
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+  listaPeliculasTop() {
+    this.gService.list('peliculas/top').pipe(takeUntil(this.destroy$)).
+      subscribe((data: any) => {
+        this.datos = data;
+      },
+        (error: any) => {
+          this.notificacion.mensaje(error.mensaje, error.name, 'error')
+            ;
+        }
+      );
 
   }
-
-
-
-
-
-
-
-
-
-
-
-
 }

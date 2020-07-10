@@ -6,7 +6,7 @@ import { InicioComponent } from './home/inicio/inicio.component';
 import { ProductosComponent } from './product/productos/productos.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: InicioComponent },
   { path: 'peliculas', component: PeliculasComponent },
   { path: 'product', component: ProductosComponent },

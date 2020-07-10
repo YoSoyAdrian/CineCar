@@ -13,14 +13,11 @@
 
           <div class="swiper-wrapper">
 
-            <div class="swiper-slide col-3" *ngFor="let peli of datos">
+            <div class="swiper-slide col-2" *ngFor="let peli of datos">
               <div class="example-2 card col-12">
                 <div class="wrapper" style="background-image: url({{peli.image}}); background-position: center;">
                   <div class="header">
-                    <div class="date">
-                      <span class="day">{{peli.premiere_date}}</span>
-                    </div>
-                    <ul class="menu-content">
+                    <ul class="menu-content mt-3">
                       <li>
                         <a href="#"><i class="fas fa-heart"></i></a>
                       </li>
@@ -41,7 +38,7 @@
               </div>
             </div>
           </div>
-          <button role="button" id="flecha-izquierda" class="leftdirection"><i class="fas fa-angle-left"></i></button>
+
         </div>
       </div>
     </section>
