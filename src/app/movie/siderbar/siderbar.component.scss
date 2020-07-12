@@ -19,7 +19,7 @@
 }
 .panel {
   display: inline-block;
- 
+
   visibility: visible;
   position: relative;
   overflow: hidden;
@@ -243,5 +243,12 @@
 @media (max-width: 600px) {
   .panel__title {
     font-size: 1.25em;
+  }
+}
+@media (min-width: 768px) {
+  .col-md-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+    visibility: hidden;
   }
 }

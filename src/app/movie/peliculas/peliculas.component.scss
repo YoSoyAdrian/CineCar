@@ -62,7 +62,7 @@ body {
   width: 683px;
   height: 320px;
   margin-top: 15px;
-  margin-left: 7%;
+
   overflow: hidden;
   border-radius: 10px;
   transition: all 0.4s;
@@ -172,10 +172,10 @@ body {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 766px) {
   .movie_card {
-    width: 95%;
-    margin: 70px auto;
+    right: 5%;
+    width: 55%;
     min-height: 350px;
     height: auto;
   }
@@ -197,6 +197,11 @@ body {
   .info_section {
     background: linear-gradient(to top, rgb(20, 20, 19) 50%, transparent 100%);
     display: inline-grid;
+  }
+}
+@media screen and (min-width: 992px) {
+  .movie_card {
+    margin-left: 9%;
   }
 }
 
