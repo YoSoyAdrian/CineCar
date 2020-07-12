@@ -1,22 +1,30 @@
-<div class='container col-12'>
-  <div class="container_content" *ngIf="datos?.id">
-    <div class="container_content_inner">
-      <div class="title">
-        <h1>{{datos.name}} {{datos.classification_movies}}</h1>
-
+<div class="row">
+  <div class='container col-12'>
+    <div class="container_content" *ngIf="datos?.id">
+      <div class="container_content_inner">
+        <div class="title">
+          <h1>{{datos.name}}
+            <span class="classification">{{datos.classification_name}}</span>
+          </h1>
+        </div>
+        <div class="column1 row">
+          <div *ngFor="let genero of datos.gener_movies">
+            <span class="tag col-xl-2 col-sm-2 col-md-2">{{genero.name}}</span>
+          </div>
+        </div> <!-- end column1 -->
+        <div class="par col-xl-12 col-sm-12 col-md-12">
+          <p>{{datos.synopsis}} </p>
+        </div>
+        <div class="btns">
+          <button class=' btns_more'> Me gusta </button>
+        </div>
       </div>
-      <div class="par">
-        <p>{{datos.synopsis}} </p>
-      </div>
-      <div class="btns">
-        <button class=' btns_more'> Me gusta </button>
+    </div>
+    <div class="container_outer_img ">
+      <div class="img-inner">
+        <img src="{{datos.banner}}" alt="" class=" container_img" />
       </div>
     </div>
   </div>
-  <div class="container_outer_img">
-    <div class="img-inner">
-      <img src='{{datos.banner}}' alt="" class="container_img" />
-    </div>
-  </div>
+  <div class="overlay"></div>
 </div>
-<div class="overlay"></div>

@@ -50,7 +50,7 @@
 
 .container_img {
   width: 100%;
-  animation: slideIn 1.5s ease-in-out forwards;
+  animation: slideIn 0.8s ease-in-out forwards;
 }
 
 .par {
@@ -96,7 +96,7 @@ h1 {
   color: var(--contrast-color);
   margin-bottom: 20px;
   transform: translateY(100px);
-  animation: slideUp 0.8s ease forwards 0.5s;
+  animation: slideUp 0.8s ease forwards 0.4s;
 }
 
 @keyframes slideIn {
@@ -124,4 +124,37 @@ h1 {
   100% {
     transform: translateX(0px);
   }
+}
+.column1 {
+  float: left;
+  text-align: center;
+  overflow: hidden;
+  animation: slideIn 2s ease-in-out forwards;
+}
+.tag {
+  background: darkmagenta;
+  border-radius: 10px;
+  padding: 3px 8px;
+  font-size: 14px;
+  margin-right: 4px;
+  line-height: 35px;
+  cursor: pointer;
+  overflow: hidden;
+
+  animation: slideUp 0.9s ease forwards 0.2s;
+}
+.tag:hover {
+  overflow: hidden;
+
+  animation: slideUp 0.9s ease forwards 0.1s;
+}
+.classification {
+  position: relative;
+  bottom: 5px;
+  margin-left: 12px;
+  background: #c4af3d;
+  border-radius: 5px;
+  color: #544c21;
+  font-size: 14px;
+  padding: 0px 4px;
 }
