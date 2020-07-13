@@ -1,26 +1,22 @@
 <div class="container py-5">
-  <!-- For Demo Purpose-->
-  <header class="text-center mb-5">
+<header class="text-center mb-5">
     <h1 class="display-4 font-weight-bold text-white">Nuestros Productos</h1>
 
   </header>
 
   <!-- First Row [Prosucts]-->
   <h2 class="font-weight-bold mb-2 text-">Productos recomendados</h2>
-  <p class="font-italic text-muted mb-4">
+  <p class="font-italic text-muted mb-4"></p>
 
-
-  </p>
-
-  <div class="row pb-5 mb-4">
-    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+  <div class="row pb-5 mb-4" >
+    <div class="col-lg-3 col-md-6 mb-lg-0" *ngFor="let products of datos" >
       <!-- Card-->
-      <div class="card rounded shadow-sm border-0">
-        <div class="card-body p-4">
-          <img src="assets/img/nachos.jpg" alt="" class="img-fluid d-block mx-auto mb-3" />
-          <h5><a href="#" class="text-dark">Awesome product</a></h5>
+      <div class="card rounded shadow-sm border-0" >
+        <div class="card-body"  >
+          <img class="card-img-top" src={{products.image}} alt="">
+          <h4>{{products.name}}</h4>
           <p class="small text-muted font-italic">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            {{products.description}}
           </p>
           <ul class="list-inline small">
             <li class="list-inline-item m-0">
@@ -43,94 +39,5 @@
       </div>
     </div>
 
-    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-      <!-- Card-->
-      <div class="card rounded shadow-sm border-0">
-        <div class="card-body p-4">
-          <img src="assets/img/hamburguesa.jpg" alt="" class="img-fluid d-block mx-auto mb-3" />
-          <h5><a href="#" class="text-dark">Awesome product</a></h5>
-          <p class="small text-muted font-italic">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </p>
-          <ul class="list-inline small">
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="far fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="far fa-star text-success"></i>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-      <!-- Card-->
-      <div class="card rounded shadow-sm border-0">
-        <div class="card-body p-4">
-          <img src="assets/img/helados.jpg" alt="" class="img-fluid d-block mx-auto mb-3" />
-          <h5><a href="#" class="text-dark">Awesome product</a></h5>
-          <p class="small text-muted font-italic">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </p>
-          <ul class="list-inline small">
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-      <!-- Card-->
-      <div class="card rounded shadow-sm border-0">
-        <div class="card-body p-4">
-          <img src="assets/img/palomitas.jpg" alt="" class="img-fluid d-block mx-auto mb-3" />
-          <h5><a href="#" class="text-dark">Awesome product</a></h5>
-          <p class="small text-muted font-italic">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          </p>
-          <ul class="list-inline small">
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fa fa-star text-success"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="far fa-star text-success"></i>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
