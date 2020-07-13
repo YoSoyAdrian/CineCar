@@ -19,7 +19,7 @@ export class PeliculasComponent implements OnInit {
     private notificacion: NotificacionService) {
   }
   ngOnInit(): void {
-    this.listaPeliculasTop();
+
   }
   ngOnDestroy() {
     this.destroy$.next(true);

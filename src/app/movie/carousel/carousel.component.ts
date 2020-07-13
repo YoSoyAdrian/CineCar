@@ -19,15 +19,15 @@ export class CarouselComponent implements OnInit {
     private notificacion: NotificacionService) {
   }
   ngOnInit(): void {
-    this.listaPeliculas();
+    this.listaPeliculasTop();
   }
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
 
-  listaPeliculas() {
-    this.gService.list('peliculas/').pipe(takeUntil(this.destroy$)).
+  listaPeliculasTop() {
+    this.gService.list('peliculas/top').pipe(takeUntil(this.destroy$)).
       subscribe((data: any) => {
 
         this.datos = data;
