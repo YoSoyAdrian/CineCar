@@ -1,46 +1,14 @@
-<!--TOP RATED-->
-<div class="homeslider">
-
-  <main class="content">
-
-    <section class="panel">
-
-      <h2>Recomendadas</h2>
-
-      <div class="recentslider">
-
-        <div class="swiper-container">
-
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide col-2" *ngFor="let peli of datos">
-              <div class="example-2 card col-12">
-                <div class="wrapper" style="background-image: url({{peli.image}}); background-position: center;">
-                  <div class="header">
-                    <ul class="menu-content mt-3">
-                      <li>
-                        <a href="#"><i class="fas fa-heart"></i></a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="fas fa-comment"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="data">
-                    <div class="content">
-                      <a href="#" class="button" [routerLink]="['/peliculas/', peli.id]" routerLinkActive="active">Leer
-                        más</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+<div class="top">
+  <h3>Top Megusta</h3>
+</div>
+<div class="wrapper">
+  <div class="card" *ngFor="let peli of datos"><img src="{{peli.image}}" />
+    <div class="info col-12">
+      <h3>{{peli.name}}</h3>
+      <p></p>
+      <div class="col-12">
+        <button [routerLink]="['/peliculas/', peli.id]" routerLinkActive="active">Leer más</button>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
 </div>

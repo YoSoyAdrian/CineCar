@@ -9,12 +9,12 @@ import { PeliculasShowComponent } from './peliculas-show/peliculas-show.componen
 
 
 @NgModule({
-  declarations: [PeliculasComponent, SiderbarComponent, CarouselComponent, PeliculasShowComponent],
+  declarations: [PeliculasComponent, CarouselComponent, PeliculasShowComponent],
   imports: [
     CommonModule,
     MovieRoutingModule,
     SlickCarouselModule
   ],
-  exports: [PeliculasComponent, SiderbarComponent, CarouselComponent, PeliculasShowComponent]
+  exports: [PeliculasComponent, CarouselComponent, PeliculasShowComponent]
 })
 export class MovieModule { }
