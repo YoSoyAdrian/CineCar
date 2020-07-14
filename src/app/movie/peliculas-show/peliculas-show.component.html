@@ -1,30 +1,57 @@
 <div class="row">
-  <div class='container col-12'>
+
+  <div class='container col-xl-12 col-sm-12 col-md-12'>
+
     <div class="container_content" *ngIf="datos?.id">
       <div class="container_content_inner">
         <div class="title">
           <h1>{{datos.name}}
             <span class="minutes">{{datos.duration}}</span>
-            <span class="classification">{{datos.classification_name}}</span>
+            <span class="minutes">{{datos.classification_name}}</span>
 
           </h1>
         </div>
         <div class="column1 row">
           <div *ngFor="let genero of datos.gener_movies">
             <span class="tag col-xl-2 col-sm-2 col-md-2">{{genero.name}}</span>
+
           </div>
         </div> <!-- end column1 -->
         <div class="par col-xl-12 col-sm-12 col-md-12">
+
           <p>{{datos.synopsis}} </p>
         </div>
         <div class="btns">
-          <button class=' btns_more'> Me gusta </button>
+          <fieldset class="rating">
+            <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5"
+              title="Awesome - 5 stars"></label>
+            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half"
+              title="Pretty good - 4.5 stars"></label>
+            <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4"
+              title="Pretty good - 4 stars"></label>
+            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half"
+              title="Meh - 3.5 stars"></label>
+            <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3"
+              title="Meh - 3 stars"></label>
+            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half"
+              title="Kinda bad - 2.5 stars"></label>
+            <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2"
+              title="Kinda bad - 2 stars"></label>
+            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half"
+              title="Meh - 1.5 stars"></label>
+            <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1"
+              title="Sucks big time - 1 star"></label>
+            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf"
+              title="Sucks big time - 0.5 stars"></label>
+
+          </fieldset>
+          <button class=' btns_more' type="button"> {{datos.votes_count}} Me gusta </button>
         </div>
       </div>
     </div>
     <div class="container_outer_img ">
       <div class="img-inner">
-        <img src="{{datos.banner}}" alt="" class=" container_img" />
+        <img [src]="datos.banner" class=" container_img" />
       </div>
     </div>
   </div>

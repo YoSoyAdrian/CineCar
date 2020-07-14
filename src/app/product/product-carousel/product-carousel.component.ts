@@ -18,14 +18,14 @@ export class ProductCarouselComponent implements OnInit {
     private notificacion: NotificacionService) {
   }
   ngOnInit(): void {
-  this.listaProductosTop();
+    this.listaProductosTop();
   }
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
   listaProductosTop() {
-    this.gService.list('productos/').pipe(takeUntil(this.destroy$)).
+    this.gService.list('productos/likesTop').pipe(takeUntil(this.destroy$)).
       subscribe((data: any) => {
         this.datos = data;
       },

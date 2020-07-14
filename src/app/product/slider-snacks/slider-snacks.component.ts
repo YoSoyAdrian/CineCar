@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificacionService } from 'src/app/share/notificacion.service';
-import { GenericService } from 'src/app/share/generic.service';
 import { Subject } from 'rxjs';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { GenericService } from 'src/app/share/generic.service';
+import { NotificacionService } from 'src/app/share/notificacion.service';
 import { takeUntil } from 'rxjs/operators';
-import { domainToASCII } from 'url';
-
 @Component({
-  selector: 'app-carousel',
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss']
+  selector: 'app-slider-snacks',
+  templateUrl: './slider-snacks.component.html',
+  styleUrls: ['./slider-snacks.component.scss']
 })
-export class CarouselComponent implements OnInit {
+export class SliderSnacksComponent implements OnInit {
   datos: any;
   error: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -19,17 +16,15 @@ export class CarouselComponent implements OnInit {
     private notificacion: NotificacionService) {
   }
   ngOnInit(): void {
-    this.listaPeliculasTop();
+    this.listaProductosTop();
   }
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
-
-  listaPeliculasTop() {
-    this.gService.list('peliculas/votosTop').pipe(takeUntil(this.destroy$)).
+  listaProductosTop() {
+    this.gService.list('productos/snacksTop').pipe(takeUntil(this.destroy$)).
       subscribe((data: any) => {
-
         this.datos = data;
       },
         (error: any) => {
@@ -37,6 +32,7 @@ export class CarouselComponent implements OnInit {
             ;
         }
       );
+
   }
 
 }

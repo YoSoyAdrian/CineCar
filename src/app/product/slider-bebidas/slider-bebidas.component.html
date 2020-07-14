@@ -1,0 +1,38 @@
+<h3 class="font-weight-bold text-white mb-2 text-">
+  <hr id="nine" data-symbol="Bebidas" />
+</h3>
+<p class="font-italic text-muted mb-4"></p>
+
+<div class="row pb-5 mb-4">
+  <div class="col-lg-3 mb-4 col-md-6 mb-lg-4" *ngFor="let products of datos">
+    <!-- Card-->
+    <div class="card rounded shadow-sm border-0">
+      <div class="card-body p-4">
+        <img class="card-img-top" [src]="products.image" alt="">
+        <h4>{{products.name}}</h4>
+        <h6>¢{{products.price}}</h6>
+        <p class="small text-muted font-italic">
+          {{products.description}}
+        </p>
+        <ul class="list-inline small">
+          <li class="list-inline-item m-0">
+            <i class="fa fa-star text-success"></i>
+          </li>
+          <li class="list-inline-item m-0">
+            <i class="fa fa-star text-success"></i>
+          </li>
+          <li class="list-inline-item m-0">
+            <i class="fa fa-star text-success"></i>
+          </li>
+          <li class="list-inline-item m-0">
+            <i class="fa fa-star text-success"></i>
+          </li>
+          <li class="list-inline-item m-0">
+            <i class="far fa-star text-success"></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>

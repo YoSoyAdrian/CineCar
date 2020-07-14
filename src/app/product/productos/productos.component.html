@@ -1,25 +1,12 @@
 <div class="col-12">
   <app-product-carousel></app-product-carousel>
 </div>
-
-<div class="container-fluid" class="holder">
-  <div class="row my-2">
-    <div class="col-md-4 my-3" *ngFor="let pr of datos">
-      <div class="card border-info mb-3">
-        <div class="card-body">
-          <h4 class="card-title">{{pr.name}}</h4>
-          <p class="card-text">{{pr.description}}</p>
-          <p class="card-text">₡{{pr.price}}</p>
-          <img class="card-img-top" src={{pr.image}} alt="" background-position: content>
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
+<div class="col-12">
+  <app-slider-snacks></app-slider-snacks>
 </div>
-
+<div class="col-12">
+  <app-slider-platillos></app-slider-platillos>
+</div>
+<div class="col-12">
+  <app-slider-bebidas></app-slider-bebidas>
+</div>

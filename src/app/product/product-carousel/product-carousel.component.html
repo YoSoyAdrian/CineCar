@@ -1,20 +1,22 @@
 <div class="container py-5">
-<header class="text-center mb-5">
+  <header class="text-center mb-5">
     <h1 class="display-4 font-weight-bold text-white">Nuestros Productos</h1>
-
   </header>
 
-  <!-- First Row [Prosucts]-->
-  <h2 class="font-weight-bold mb-2 text-">Productos recomendados</h2>
+  <h3 class="font-weight-bold text-white mb-2 text-">
+    <hr id="nine" data-symbol="Más gustados" />
+  </h3>
+
   <p class="font-italic text-muted mb-4"></p>
 
-  <div class="row pb-5 mb-4" >
-    <div class="col-lg-3 col-md-6 mb-lg-0" *ngFor="let products of datos" >
+  <div class="row pb-5 mb-4">
+    <div class="col-lg-3 mb-4 col-md-6 mb-lg-4" *ngFor="let products of datos">
       <!-- Card-->
-      <div class="card rounded shadow-sm border-0" >
-        <div class="card-body"  >
-          <img class="card-img-top" src={{products.image}} alt="">
+      <div class="card rounded shadow-sm border-0">
+        <div class="card-body p-4">
+          <img class="card-img-top" [src]="products.image">
           <h4>{{products.name}}</h4>
+          <h6>¢{{products.price}}</h6>
           <p class="small text-muted font-italic">
             {{products.description}}
           </p>
