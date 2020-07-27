@@ -13,6 +13,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./peliculas-show.component.scss']
 })
 export class PeliculasShowComponent implements OnInit {
+  stars: number[] = [1, 2, 3, 4, 5];
+  selectedValue: number;
   datos: any;
   error: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -31,9 +33,14 @@ export class PeliculasShowComponent implements OnInit {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
+  countStar(star) {
+    this.selectedValue = star;
+    console.log('Value of star', star);
+  }
+
   obtenerPelicula(id: any) {
     this.gService.get("peliculas", id).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-     
+
       this.datos = data;
     },
       (error: any) => {

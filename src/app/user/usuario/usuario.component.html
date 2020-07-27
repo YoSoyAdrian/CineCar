@@ -1,0 +1,30 @@
+<div class="login-reg-panel" id="panel">
+
+  <div class="login-info-box">
+    <h2>Ya tienes cuenta?</h2>
+    <p>Inicia sesión con tu cuenta</p>
+    <label id="label-register" for="log-reg-show">Iniciar Sesión</label>
+    <input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
+  </div>
+
+  <div class="register-info-box">
+    <h2>Aún no tienes cuenta?</h2>
+    <p>Registrate, para ser parte de la familia</p>
+    <label id="label-login" for="log-login-show">Registrarse</label>
+    <input type="radio" name="active-log-panel" id="log-login-show">
+  </div>
+
+  <div class="white-panel">
+
+    <div class="login-show">
+      <h2>INICIO SESIÓN</h2>
+      <app-user-login></app-user-login>
+    
+    </div>
+    <div class="register-show">
+      <h2>REGISTRARSE</h2>
+      <app-user-create></app-user-create>
+    </div>
+
+  </div>
+</div>

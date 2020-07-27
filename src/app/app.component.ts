@@ -8,6 +8,6 @@ import * as $ from "jquery";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'appMovieCar';
+  title = 'appCineCar';
   constructor(public router: Router) { }
 }

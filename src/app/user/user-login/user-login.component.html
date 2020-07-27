@@ -1,0 +1,17 @@
+<form [formGroup]='formulario' (ngSubmit)='submitFormLogin()' class="col-xl-12" novalidate>
+  <input type="text" placeholder="Email" formControlName="email">
+  <input type="password" placeholder="Password" formControlName="password">
+  <button [name]="loading" type="submit" value="Login">Iniciar Sesión</button>
+
+</form>
+<a href="" class="col-xl-12">Olvide mi contraseña?</a>
+<ng-container *ngIf="loading">
+  <div class="a col-xl-12" style="--n: 5; margin-top: 25%;
+    margin-left: 60px;">
+    <div class="dot" style="--i: 0"></div>
+    <div class="dot" style="--i: 1"></div>
+    <div class="dot" style="--i: 2"></div>
+    <div class="dot" style="--i: 3"></div>
+    <div class="dot" style="--i: 4"></div>
+  </div>
+</ng-container>
