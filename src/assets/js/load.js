@@ -29,6 +29,7 @@ function loadScript(src, callback) {
 addEvent(window, "load", function () {
   loadScript(
     "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js",
+   
     function () {
       loadScript("/assets/js/login.js");
     }
