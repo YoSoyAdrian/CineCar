@@ -1,0 +1,23 @@
+<nav class="menu" tabindex="0">
+  <div class="smartphone-menu-trigger"></div>
+  <header class="avatar">
+    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" />
+    <h2>John D.</h2>
+  </header>
+  <ul>
+    <li tabindex="0" class="icon-dashboard"><span [routerLink]="['/peliculas/mantenimiento/registrar']"
+        routerLinkActive="active" [class.active]="router.url == '/peliculas/mantenimiento'">Registrar Pelicula</span>
+    </li>
+    <li tabindex="0" class="icon-customers"><span>Customers</span></li>
+    <li tabindex="0" class="icon-users"><span>Users</span></li>
+    <li tabindex="0" class="icon-settings"><span>Settings</span></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="helper">
+    <app-peliculas-create *ngIf="router.url == '/peliculas/mantenimiento'"></app-peliculas-create>
+    <router-outlet></router-outlet>
+
+  </div>
+</main>
