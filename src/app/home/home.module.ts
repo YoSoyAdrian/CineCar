@@ -6,6 +6,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { InicioComponent } from './inicio/inicio.component';
 
 
+
 @NgModule({
   declarations: [InicioComponent,],
   imports: [
@@ -13,6 +14,6 @@ import { InicioComponent } from './inicio/inicio.component';
     HomeRoutingModule,
     SlickCarouselModule
   ],
-  exports: [InicioComponent,]
+  exports: [InicioComponent]
 })
 export class HomeModule { }

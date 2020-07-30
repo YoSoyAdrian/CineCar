@@ -1,0 +1,281 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap");
+$primary-bg-color: rgba(44, 170, 134, 0.9);
+$secondary-bg-color: #807182;
+$font-color: rgba(0, 0, 0, 0.8);
+$font-family: "Montserrat", sans-serif;
+$form-border-color: rgba(0, 0, 0, 0.1);
+
+body {
+  align-items: center;
+
+  color: $font-color;
+  display: grid;
+  font-family: $font-family;
+  font-size: 14px;
+  font-weight: 400;
+  height: 100vh;
+  justify-items: center;
+  font-weight: 100vw;
+}
+
+.signup-container {
+  display: inline-flex;
+  grid-template-areas: "left right";
+  max-width: 1131px;
+  position: relative;
+  left: 17%;
+  margin-top: 4%;
+  height: 588px;
+}
+
+.left-container {
+  background: #ffffff;
+  overflow: hidden;
+  padding: 40px 0 0 0;
+  position: relative;
+  text-align: center;
+
+  & h1 {
+    color: $font-color;
+
+    font-size: 24px;
+
+    & i {
+      background: $primary-bg-color;
+      border-radius: 50%;
+      color: $secondary-bg-color;
+      font-size: 24px;
+      margin-right: 5px;
+      padding: 10px;
+      transform: rotate(-45deg);
+    }
+  }
+
+  .puppy {
+    bottom: -5px;
+    position: absolute;
+    text-align: center;
+
+    &:before {
+      background: $secondary-bg-color;
+      content: "";
+      height: 100%;
+      left: 0;
+      opacity: 0.4;
+      position: absolute;
+      width: 100%;
+      z-index: 1;
+    }
+  }
+
+  img {
+    width: 42%;
+    border-style: groove;
+  }
+}
+
+.right-container {
+  background: lighten($primary-bg-color, 5%);
+  display: grid;
+  grid-template-areas: "." ".";
+  width: 1074px;
+
+  & h1:nth-of-type(1) {
+    color: $font-color;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  & .set {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+
+  & input {
+    border: 1px solid $form-border-color;
+    border-radius: 4px;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 5px;
+  }
+
+  & input,
+  label {
+    color: $font-color;
+  }
+
+  & header {
+    padding: 40px;
+    padding-bottom: 0;
+  }
+
+  & label,
+  input,
+  .pets-photo {
+    width: 176px;
+  }
+
+  & .pets-photo {
+    align-items: center;
+    display: grid;
+    grid-template-areas: ". .";
+
+    & button {
+      border: none;
+      border-radius: 50%;
+      height: 38px;
+      margin-right: 10px;
+      outline: none;
+      width: 38px;
+    }
+
+    & button i {
+      color: $font-color;
+      font-size: 16px;
+    }
+  }
+
+  .peli-clasificacion .radio-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  footer {
+    align-items: center;
+    background: #fff;
+    display: grid;
+    padding: 5px 40px;
+
+    & button {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      height: 38px;
+      line-height: 38px;
+      width: 100px;
+      border-radius: 19px;
+      font-family: $font-family;
+    }
+
+    & #back {
+      background: #fff;
+      transition: 0.2s all ease-in-out;
+
+      &:hover {
+        background: #171a2b;
+        color: white;
+      }
+    }
+
+    & #next {
+      background: $secondary-bg-color;
+      border: 1px solid transparent;
+      color: #fff;
+
+      &:hover {
+        background: #171a2b;
+      }
+    }
+  }
+}
+
+.peli-name,
+.peli-synopsis,
+.peli-fecha,
+.peli-disponible,
+.peli-genero {
+  & label {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+.peli-fecha {
+  display: inline-block;
+  position: relative;
+  bottom: 130px;
+}
+.peli-disponible {
+  display: inline-block;
+  position: relative;
+  bottom: 43px;
+  right: 176px;
+}
+textarea {
+  height: 174px;
+  width: 291px;
+}
+.radio-container {
+  background: #fff;
+  border: 1px solid $form-border-color;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 5px;
+}
+.radio-container label {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  transition: 0.2s all ease-in-out;
+  width: 80px;
+}
+.radio-container input[type="radio"] {
+  display: none;
+}
+.radio-container input[type="radio"]:checked + label {
+  background: $primary-bg-color;
+  border: 1px solid $form-border-color;
+}
+
+input[type="file"] #file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+label[for="file-input"] {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #106ba0;
+  display: inline-block;
+  transition: all 0.5s;
+  cursor: pointer;
+  padding: 15px 40px !important;
+  text-transform: uppercase;
+  width: fit-content;
+  text-align: center;
+}
+
+.image-area {
+  border: 2px dashed rgba(255, 255, 255, 0.7);
+  padding: 1rem;
+  position: relative;
+}
+
+.image-area::before {
+  content: "Uploaded image result";
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  z-index: 1;
+}
+
+.image-area img {
+  z-index: 2;
+  position: relative;
+}
+
+///

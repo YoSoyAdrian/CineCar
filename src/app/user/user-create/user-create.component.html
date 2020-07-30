@@ -1,0 +1,16 @@
+<form [formGroup]='formCreate' (ngSubmit)='submitFormCreate()' novalidate>
+  <input type="text" placeholder="Email" formControlName='email'>
+  <input type="password" placeholder="Password" formControlName='password'>
+  <input type="password" placeholder="Confirm Password" formControlName='password'>
+  <button [name]="loading" type="submit">Registrarse</button>
+</form>
+<ng-template *ngIf="loading">
+  <div class="a" style="--n: 5; margin-top: 25%;
+    margin-left: 83px;">
+    <div class="dot" style="--i: 0"></div>
+    <div class="dot" style="--i: 1"></div>
+    <div class="dot" style="--i: 2"></div>
+    <div class="dot" style="--i: 3"></div>
+    <div class="dot" style="--i: 4"></div>
+  </div>
+</ng-template>

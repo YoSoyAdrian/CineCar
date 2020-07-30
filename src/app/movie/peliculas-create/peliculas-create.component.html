@@ -1,0 +1,75 @@
+<div class='signup-container'>
+  <div class='left-container col-xl-6'>
+    <h1>Foto de portada</h1>
+    <img id="imgSalida" width="50%" height="50%" style="width: 39%;
+    height: 36%;" />
+    <span class="col-xl-6">
+      <input type="file" id="file-input" name="file-input" style="display: contents;">
+    </span>
+    <label for="file-input">
+      <span>Portada</span>
+    </label>
+
+    <h1>Foto de portada</h1>
+    <img id="imgSalida1" width="50%" height="50%" style="height: 40%;
+width: 70%;" />
+    <span class="col-xl-6">
+      <input type="file" id="file-input" name="file-input" style="display: contents;">
+    </span>
+    <label for="file-input">
+      <span>Portada</span>
+    </label>
+  </div>
+
+  <div class='right-container'>
+    <header>
+      <h1>Ingrese los datos de la película</h1>
+      <div class='set'>
+        <div class='peli-name'>
+          <label for='nombre'>Nombre</label>
+          <input id='nombre' placeholder="Nombre de la pelicula" type='text'>
+        </div>
+        <div class='peli-name'>
+          <label for='synopsis'>Synopsis</label>
+          <textarea id='synopsis' class="form-control" placeholder="Escriba la synopsis de la pelicula"
+            type='text'></textarea>
+        </div>
+
+      </div>
+      <div class='peli-fecha'>
+        <label for='peli-fecha'>Fecha de estreno</label>
+        <input id='peli-fecha' placeholder='MM/DD/YYYY' type='datetime'>
+      </div>
+
+      <div class='peli-disponible'>
+        <label for=' peli-disponible'>Disponible</label>
+        <div class='radio-container'>
+          <input checked='' id='peli-disponible-si' name='disponible' type='radio' value='0'>
+          <label for='peli-disponible-si'>Sí</label>
+          <input id='peli-disponible-no' name='disponible' type='radio' value='0'>
+          <label for='peli-disponible-no'>No</label>
+        </div>
+      </div>
+
+      <div class='pets-clasificacion'>
+        <label for='pet-weight-0-25'>Clasificación Película</label>
+        <div class='radio-container'>
+          <input checked='' id='pet-weight-0-25' name='pet-weight' type='radio' value='0-25'>
+          <label for='pet-weight-0-25'>0-25 lbs</label>
+          <input id='pet-weight-25-50' name='pet-weight' type='radio' value='25-50'>
+          <label for='pet-weight-25-50'>25-50 lbs</label>
+          <input id='pet-weight-50-100' name='pet-weight' type='radio' value='50-100'>
+          <label for='pet-weight-50-100'>50-100 lbs</label>
+          <input id='pet-weight-100-plus' name='pet-weight' type='radio' value='100+'>
+          <label for='pet-weight-100-plus'>100+ lbs</label>
+        </div>
+      </div>
+    </header>
+    <footer>
+      <div class='set'>
+        <button id='back'>Back</button>
+        <button id='next'>Next</button>
+      </div>
+    </footer>
+  </div>
+</div>

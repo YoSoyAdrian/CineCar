@@ -2,7 +2,8 @@
 
 <app-header></app-header>
 
-<router-outlet ro></router-outlet>
+<app-inicio *ngIf="router.url == '/'"></app-inicio>
+<router-outlet></router-outlet>
 
 <!-- Selector del pie de página definido en el módulo Core -->
 <app-footer></app-footer>
