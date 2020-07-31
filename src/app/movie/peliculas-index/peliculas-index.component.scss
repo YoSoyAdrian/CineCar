@@ -82,8 +82,7 @@ main {
     left: 100px;
     margin: 0;
     min-width: 200px;
-    border-radius: 4px;
-    background: rgba(0, 0, 0, 0.4);
+
     transform: translate3d(-20px, -50%, 0);
     transition: all 0.15s ease-in-out;
   }
@@ -102,7 +101,7 @@ main {
     position: absolute;
     background: rgba(0, 0, 0, 0.5);
     padding: 0.2em 0.5em;
-    border-radius: 4px;
+ 
     top: 50%;
     left: 80px;
     transform: translate3d(-15px, -50%, 0);
@@ -117,7 +116,7 @@ main {
     left: -5px;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
-    border-right: 5px solid rgba(0, 0, 0, 0.5);
+
     transform: translateY(-50%);
   }
   .menu ul li:hover span {
@@ -131,7 +130,7 @@ main {
   }
   .menu {
     width: 230px;
-    box-shadow: 0 0 0 100em rgba(0, 0, 0, 0);
+
     transform: translate3d(-230px, 0, 0);
     transition: all 0.3s ease-in-out;
   }
@@ -164,7 +163,6 @@ main {
   }
   .menu:focus {
     transform: translate3d(0, 0, 0);
-    box-shadow: 0 0 0 100em rgba(0, 0, 0, 0.6);
   }
   .menu:focus .smartphone-menu-trigger {
     pointer-events: none;

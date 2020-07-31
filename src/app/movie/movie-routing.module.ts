@@ -4,6 +4,7 @@ import { PeliculasComponent } from "./peliculas/peliculas.component";
 import { PeliculasShowComponent } from './peliculas-show/peliculas-show.component';
 import { PeliculasCreateComponent } from './peliculas-create/peliculas-create.component';
 import { PeliculasIndexComponent } from './peliculas-index/peliculas-index.component';
+import { PeliculasListComponent } from './peliculas-list/peliculas-list.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,7 @@ const routes: Routes = [
     path: 'peliculas/mantenimiento', component: PeliculasIndexComponent,
     children: [
       { path: 'registrar', component: PeliculasCreateComponent },
-
+      { path: 'listado', component: PeliculasListComponent },
     ]
   },
   { path: 'peliculas/:id', component: PeliculasShowComponent },

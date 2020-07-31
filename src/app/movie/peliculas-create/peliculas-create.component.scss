@@ -21,9 +21,9 @@ body {
 .signup-container {
   display: inline-flex;
   grid-template-areas: "left right";
-  max-width: 1131px;
+  max-width: 1202px;
   position: relative;
-  left: 17%;
+  left: 12%;
   margin-top: 4%;
   height: 588px;
 }
@@ -31,7 +31,7 @@ body {
 .left-container {
   background: #ffffff;
   overflow: hidden;
-  padding: 40px 0 0 0;
+
   position: relative;
   text-align: center;
 
@@ -78,7 +78,7 @@ body {
   background: lighten($primary-bg-color, 5%);
   display: grid;
   grid-template-areas: "." ".";
-  width: 1074px;
+  width: 989px;
 
   & h1:nth-of-type(1) {
     color: $font-color;
@@ -106,8 +106,10 @@ body {
   }
 
   & header {
-    padding: 40px;
+    padding-left: 35px;
+    padding-right: 29px;
     padding-bottom: 0;
+    height: 493px;
   }
 
   & label,
@@ -224,6 +226,13 @@ textarea {
   transition: 0.2s all ease-in-out;
   width: 80px;
 }
+.radio-container input[type="checkbox"] {
+  display: none;
+}
+.radio-container input[type="checkbox"]:checked + label {
+  background: $primary-bg-color;
+  border: 1px solid $form-border-color;
+}
 .radio-container input[type="radio"] {
   display: none;
 }
@@ -253,7 +262,28 @@ label[for="file-input"] {
   width: fit-content;
   text-align: center;
 }
-
+input[type="file"] #file-input1 {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+label[for="file-input1"] {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #106ba0;
+  display: inline-block;
+  transition: all 0.5s;
+  cursor: pointer;
+  padding: 15px 40px !important;
+  text-transform: uppercase;
+  width: fit-content;
+  text-align: center;
+  margin-top: 11px;
+}
 .image-area {
   border: 2px dashed rgba(255, 255, 255, 0.7);
   padding: 1rem;

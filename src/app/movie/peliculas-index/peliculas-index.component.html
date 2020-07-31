@@ -5,10 +5,21 @@
     <h2>John D.</h2>
   </header>
   <ul>
-    <li tabindex="0" class="icon-dashboard"><span [routerLink]="['/peliculas/mantenimiento/registrar']"
-        routerLinkActive="active" [class.active]="router.url == '/peliculas/mantenimiento'">Registrar Pelicula</span>
+    <li tabindex="0" class="icon-dashboard">
+      <span
+        [routerLink]="['/peliculas/mantenimiento/registrar']"
+        routerLinkActive="active"
+        [class.active]="router.url == '/peliculas/mantenimiento'"
+        >Registrar Pelicula</span
+      >
     </li>
-    <li tabindex="0" class="icon-customers"><span>Customers</span></li>
+    <li tabindex="0" class="icon-customers">
+      <span
+        [routerLink]="['/peliculas/mantenimiento/listado']"
+        routerLinkActive="active"
+        >Listado Pelicula</span
+      >
+    </li>
     <li tabindex="0" class="icon-users"><span>Users</span></li>
     <li tabindex="0" class="icon-settings"><span>Settings</span></li>
   </ul>
@@ -16,8 +27,9 @@
 
 <main>
   <div class="helper">
-    <app-peliculas-create *ngIf="router.url == '/peliculas/mantenimiento'"></app-peliculas-create>
+    <app-peliculas-create
+      *ngIf="router.url == '/peliculas/mantenimiento'"
+    ></app-peliculas-create>
     <router-outlet></router-outlet>
-
   </div>
 </main>

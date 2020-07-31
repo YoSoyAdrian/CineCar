@@ -9,10 +9,11 @@ import { PeliculasShowComponent } from './peliculas-show/peliculas-show.componen
 import { PeliculasCreateComponent } from './peliculas-create/peliculas-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PeliculasIndexComponent } from './peliculas-index/peliculas-index.component';
+import { PeliculasListComponent } from './peliculas-list/peliculas-list.component';
 
 
 @NgModule({
-  declarations: [PeliculasComponent, CarouselComponent, PeliculasShowComponent, PeliculasCreateComponent, PeliculasIndexComponent],
+  declarations: [PeliculasComponent, CarouselComponent, PeliculasShowComponent, PeliculasCreateComponent, PeliculasIndexComponent, PeliculasListComponent],
   imports: [
     CommonModule,
     MovieRoutingModule,
