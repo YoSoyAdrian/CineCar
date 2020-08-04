@@ -1,80 +1,126 @@
-<form [formGroup]>
-  <div class="signup-container">
-    <div class="left-container col-xl-6">
-      <div class="set" style="position: relative; left: 10%; margin-top: 6px; width: 90%;">
-        <h4>
-          Imagen de portada
-          <label for="file-input">
-            <span>Portada</span>
-          </label>
-        </h4>
-        <img id="imgSalida" width="50%" height="50%" style="width: 34%; height: 40%;" />
-        <span class="col-xl-6">
-          <input type="file" id="file-input" name="file-input" style="display: contents;" />
-        </span>
-      </div>
-      <div class="set" style="position: relative; left: 6%;">
-        <h1>
-          Imagen de Fondo
-          <label for="file-input1">
-            <span>Banner</span>
-          </label>
-        </h1>
-        <img id="imgSalida1" width="50%" height="50%" style="height: 30%; width: 53%;" />
-        <span class="col-xl-6">
-          <input type="file" id="file-input1" name="file-input1" style="display: contents;" />
-        </span>
-      </div>
+<form [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
+  <div class="row" style="background-color: 2b3e50;">
+    <div class="col-xl-12 text-center mt-3 mb-3">
+      <h3>Ingrese los datos de la pelicula</h3>
     </div>
-    <div class="right-container">
-      <header>
-        <h1>Ingrese los datos de la película</h1>
-        <div class="set">
-          <div class="peli-name">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" placeholder="Nombre de la pelicula" type="text" />
-          </div>
-          <div class="peli-name">
-            <label for="synopsis">Synopsis</label>
-            <textarea id="synopsis" class="form-control" placeholder="Escriba la synopsis de la pelicula"
-              type="text"></textarea>
-          </div>
+    <div class="col-xl-6">
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label for="exampleInputEmail1">Nombre</label>
+          <input type="text" class="form-control" id="namme" placeholder="nombre" />
         </div>
-        <div class="peli-fecha">
-          <label for="date">Fecha de estreno</label>
-          <input id="date" placeholder="MM/DD/YYYY" data-inputmask="'alias': 'date'" />
+      </div>
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label for="synopsis">Sinopsis</label>
+          <textarea class="form-control" id="synopsis"></textarea>
         </div>
+      </div>
 
-        <div class="peli-disponible">
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label for="premiere_date">Fecha de estreno</label>
+          <input type="datetime" class="form-control" id="premiere_date" placeholder="dd/MM/YYYY" />
+        </div>
+      </div>
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label for="duration">Duración</label>
+          <input type="text" class="form-control" id="duration" placeholder="eje: #h #m" />
+        </div>
+      </div>
+      <div class="form-group col-xl-12">
+        <div class="col-xl-8">
           <label for=" peli-disponible">Disponible</label>
-          <div class="radio-container">
-            <input checked="" id="peli-disponible-si" name="disponible" type="radio" value="0" />
-            <label for="peli-disponible-si">Sí</label>
-            <input id="peli-disponible-no" name="disponible" type="radio" value="0" />
-            <label for="peli-disponible-no">No</label>
+        </div>
+        <div>
+          <div class="inputGroup">
+            <input id="radio1" name="radio" type="radio" />
+            <label for="radio1">Sí</label>
+          </div>
+          <div class="inputGroup">
+            <input id="radio2" name="radio" type="radio" />
+            <label for="radio2">No</label>
           </div>
         </div>
-
-        <div class="pets-clasificacion">
-          <label for="pet-weight-0-25">Clasificación Película</label>
-          <div class="radio-container">
-            <input checked="" id="pet-weight-0-25" name="pet-weight" type="checkbox" value="0-25" />
-            <label for="pet-weight-0-25">0-25 lbs</label>
-            <input id="pet-weight-25-50" name="pet-weight" type="checkbox" value="25-50" />
-            <label for="pet-weight-25-50">25-50 lbs</label>
-            <input id="pet-weight-50-100" name="pet-weight" type="checkbox" value="50-100" />
-            <label for="pet-weight-50-100">50-100 lbs</label>
-            <input id="pet-weight-100-plus" name="pet-weight" type="checkbox" value="100+" />
-            <label for="pet-weight-100-plus">100+ lbs</label>
-          </div>
-        </div>
-      </header>
-      <footer>
-        <div class="set">
-          <button id="back">Back</button>
-          <button id="next">Next</button>
-        </div>
-      </footer>
+      </div>
     </div>
+
+    <div class="col-xl-6">
+      <div class="form-group col-xl-12">
+        <label for="synopsis">Seleccione los generos</label>
+        <div class="container" formArrayName="gener_movies">
+          <ul class="ks-cboxtags">
+
+            <li *ngFor="let g of gener_movies.controls; index as i">
+              <input type="checkbox" [formControlName]="i" id="checkbox{{i}}" [value]="generoList[i]?.id"
+                (change)="onCheckChange(generoList[i]?.id, $event)" /><label
+                for="checkbox{{i}}">{{generoList[i]?.name}}</label>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="form-group col-xl-12">
+        <label for="synopsis">Seleccione los generos</label>
+        <div class="container" formArrayName="gener_movies">
+          <ul class="ks-cboxtags">
+
+            <li *ngFor="let g of gener_movies.controls; index as i">
+              <input type="checkbox" [formControlName]="i" id="checkbox{{i}}" [value]="generoList[i]?.id"
+                (change)="onCheckChange(generoList[i]?.id, $event)" /><label
+                for="checkbox{{i}}">{{generoList[i]?.name}}</label>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="col-xl-12">
+        <div class="file-upload">
+          <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Añadir
+            portada</button>
+
+          <div class="image-upload-wrap">
+            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+            <div class="drag-text">
+              <h3>Arrastre y suelte un archivo o seleccione agregar imagen</h3>
+            </div>
+          </div>
+          <div class="file-upload-content">
+            <img class="file-upload-image" src="#" alt="your image" />
+            <div class="image-title-wrap">
+              <button type="button" onclick="removeUpload()" class="remove-image">Eliminar <span
+                  class="image-title">Subir
+                  imagen</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-12">
+        <div class="file-upload">
+          <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Añadir
+            banner</button>
+
+          <div class="image-upload-wrap">
+            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+            <div class="drag-text">
+              <h3>Arrastre y suelte un archivo o seleccione agregar imagen</h3>
+            </div>
+          </div>
+          <div class="file-upload-content">
+            <img class="file-upload-image" src="#" alt="your image" />
+            <div class="image-title-wrap">
+              <button type="button" onclick="removeUpload()" class="remove-image">Eliminar <span
+                  class="image-title">Subir
+                  imagen</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+
   </div>
 </form>
