@@ -18,13 +18,13 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Cartelera</a>
+          <a class="nav-link" [routerLink]="['/cartelera']" routerLinkActive="router-link-active">Cartelera</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/productos']" routerLinkActive="router-link-active">Productos</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Mantenimiento
           </a>
@@ -32,7 +32,7 @@
             <a class="dropdown-item" [routerLink]="['/mantenimiento/registrar']"
               routerLinkActive="router-link-active">Peliculas</a>
             <a class="dropdown-item" href="#">Productos</a>
-            <a class="dropdown-item" href="#">Cartelera</a>
+            <a class="dropdown-item">Cartelera</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Usuarios</a>
           </div>

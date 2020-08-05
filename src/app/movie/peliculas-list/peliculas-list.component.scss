@@ -274,6 +274,7 @@ table {
     td,
     th {
       padding: 10px;
+      color: white;
     }
 
     tr:nth-child(2n + 2) td {
@@ -286,6 +287,7 @@ table {
 
     .select {
       padding: 10px;
+      text-align: center;
     }
   }
 }
@@ -319,6 +321,7 @@ td:before {
 }
 
 table {
+  margin-bottom: 4%;
   width: 100%;
 }
 
@@ -349,6 +352,8 @@ tfoot th {
   color: #fff;
   padding: 8px;
   background-color: #4b908f;
+  margin-right: 4%;
+  margin-left: 4%;
 }
 
 .select {
@@ -360,7 +365,7 @@ tfoot th {
 }
 
 .detail {
-  background-color: #bd2a4e;
+  background-color: #081627;
   width: 100%;
   height: 100%;
   padding: 40px 0;

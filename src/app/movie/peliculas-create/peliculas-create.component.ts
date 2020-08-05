@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/share/authentication.service';
 import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-peliculas-create',
   templateUrl: './peliculas-create.component.html',
@@ -13,6 +14,7 @@ import * as $ from 'jquery';
 })
 export class PeliculasCreateComponent implements OnInit {
   $: any;
+  classification_movie: any;
   pelicula: any;
   generoList: any;
   error: any;
@@ -22,6 +24,7 @@ export class PeliculasCreateComponent implements OnInit {
     public fb: FormBuilder,
     private router: Router,
     private gService: GenericService,
+    private authService: AuthenticationService,
     private notificacion: NotificacionService
   ) {
     this.reactiveForm();
@@ -32,20 +35,37 @@ export class PeliculasCreateComponent implements OnInit {
       name: ['', [Validators.required]],
       synopsis: ['', [Validators.required]],
       premiere_date: ['', [Validators.required]],
+      duration: ['', [Validators.required]],
+      images: ['', [Validators.required]],
+      banner: ['', [Validators.required]],
       active: ['', [Validators.required]],
-      classification_movie: ['', [Validators.required]],
+      classification_movie_id: ['', [Validators.required]],
       gener_movies: this.fb.array([]),
       gener_movie_id: this.fb.array([]),
+
     });
 
     this.getGeneros();
+    this.getClasificaciones();
   }
 
   ngOnInit(): void {
 
 
   }
-
+  getClasificaciones() {
+    this.gService
+      .list('peliculas/clasificaciones')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (data: any) => {
+          this.classification_movie = data;
+        },
+        (error: any) => {
+          this.notificacion.mensaje(error.message, error.name, 'error');
+        }
+      );
+  }
   getGeneros() {
     return this.gService.list('peliculas/generos').subscribe(
       (respuesta: any) => {
@@ -98,7 +118,7 @@ export class PeliculasCreateComponent implements OnInit {
     this.gService.create('peliculas/create', this.formCreate.value).subscribe(
       (respuesta: any) => {
         this.pelicula = respuesta;
-        this.router.navigate(['/peliculas'], {
+        this.router.navigate(['/peliculas/listado'], {
           queryParams: { register: 'true' },
         });
       },

@@ -2,54 +2,78 @@
   <div class="row" style="background-color: 2b3e50;">
     <div class="col-xl-12 text-center mt-3 mb-3">
       <h3>Ingrese los datos de la pelicula</h3>
+      <div class="btn-group" role="group">
+        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="reset" (click)="onReset()" class="btn btn-secondary">
+          Cancelar
+        </button>
+      </div>
     </div>
     <div class="col-xl-6">
       <div class="col-xl-12">
         <div class="form-group col-xl-12">
-          <label for="exampleInputEmail1">Nombre</label>
-          <input type="text" class="form-control" id="namme" placeholder="nombre" />
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control" id="name" formControlName="name" placeholder="nombre" />
+          <small *ngIf="errorHandling('name', 'required')" class="text-danger">
+            El nombre de la pelicula es requerido
+          </small>
         </div>
       </div>
       <div class="col-xl-12">
         <div class="form-group col-xl-12">
           <label for="synopsis">Sinopsis</label>
-          <textarea class="form-control" id="synopsis"></textarea>
+          <textarea formControlName="synopsis" class="form-control" id="synopsis"></textarea>
+          <small *ngIf="errorHandling('synopsis', 'required')" class="text-danger">
+            Sinopsis requerida
+          </small>
         </div>
       </div>
 
       <div class="col-xl-12">
         <div class="form-group col-xl-12">
-          <label for="premiere_date">Fecha de estreno</label>
-          <input type="datetime" class="form-control" id="premiere_date" placeholder="dd/MM/YYYY" />
+          <label>Fecha de estreno</label>
+          <input formControlName="premiere_date" for="premiere_date" type="datetime" class="form-control"
+            id="premiere_date" placeholder="dd/MM/YYYY" />
+          <small *ngIf="errorHandling('premiere_date', 'required')" class="text-danger">
+            Fecha de estreno requerida (Día/Mes/Año)
+          </small>
         </div>
       </div>
       <div class="col-xl-12">
         <div class="form-group col-xl-12">
-          <label for="duration">Duración</label>
-          <input type="text" class="form-control" id="duration" placeholder="eje: #h #m" />
+          <label>Duración</label>
+          <input formControlName="duration" for="duration" type="text" class="form-control" id="duration"
+            placeholder="eje: #h #m" />
+
         </div>
+        <small *ngIf="errorHandling('duration', 'required')" class="text-danger">
+          La duración de la pelicula es requerida
+        </small>
       </div>
       <div class="form-group col-xl-12">
         <div class="col-xl-8">
-          <label for=" peli-disponible">Disponible</label>
+          <label for="active">Disponible</label>
         </div>
         <div>
           <div class="inputGroup">
-            <input id="radio1" name="radio" type="radio" />
+            <input id="radio1" formControlName="active" value=1 type="radio" />
             <label for="radio1">Sí</label>
           </div>
           <div class="inputGroup">
-            <input id="radio2" name="radio" type="radio" />
+            <input id="radio2" formControlName="active" value=0 type="radio" />
             <label for="radio2">No</label>
           </div>
         </div>
+        <small *ngIf="errorHandling('active', 'required')" class="text-danger">
+          Disponibilidad de la pelicula requerida
+        </small>
       </div>
     </div>
 
     <div class="col-xl-6">
       <div class="form-group col-xl-12">
-        <label for="synopsis">Seleccione los generos</label>
-        <div class="container" formArrayName="gener_movies">
+        <label>Seleccione los generos</label>
+        <div class="container" formArrayName="gener_movies" for="gener_movies">
           <ul class="ks-cboxtags">
 
             <li *ngFor="let g of gener_movies.controls; index as i">
@@ -60,20 +84,20 @@
 
           </ul>
         </div>
+        <small *ngIf="errorHandling('gener_movies', 'required')" class="text-danger">
+          Seleccione al menos un genero
+        </small>
       </div>
       <div class="form-group col-xl-12">
-        <label for="synopsis">Seleccione los generos</label>
-        <div class="container" formArrayName="gener_movies">
-          <ul class="ks-cboxtags">
-
-            <li *ngFor="let g of gener_movies.controls; index as i">
-              <input type="checkbox" [formControlName]="i" id="checkbox{{i}}" [value]="generoList[i]?.id"
-                (change)="onCheckChange(generoList[i]?.id, $event)" /><label
-                for="checkbox{{i}}">{{generoList[i]?.name}}</label>
-            </li>
-
-          </ul>
-        </div>
+        <label for="classification_movie_id">Seleccione la clasificación</label>
+        <select class="form-control" formControlName="classification_movie_id">
+          <option *ngFor="let c of classification_movie" id="classification_movie" [value]="c.id">
+            {{c.name}}
+          </option>
+        </select>
+        <small *ngIf="errorHandling('classification_movie_id', 'required')" class="text-danger">
+          La clasificación de la pelicula es necesaria
+        </small>
       </div>
       <div class="col-xl-12">
         <div class="file-upload">
@@ -81,7 +105,8 @@
             portada</button>
 
           <div class="image-upload-wrap">
-            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+            <input for='images' formControlName="images" class="file-upload-input" type='file' onchange="readURL(this);"
+              accept="image/*" />
             <div class="drag-text">
               <h3>Arrastre y suelte un archivo o seleccione agregar imagen</h3>
             </div>
@@ -95,27 +120,34 @@
             </div>
           </div>
         </div>
+        <small *ngIf="errorHandling('images', 'required')" class="text-danger">
+          La imagen de portada es requerida
+        </small>
       </div>
       <div class="col-xl-12">
-        <div class="file-upload">
-          <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Añadir
+        <div class="file-upload1">
+          <button class="file-upload-btn1" type="button" onclick="$('.file-upload-input1').trigger( 'click' )">Añadir
             banner</button>
 
-          <div class="image-upload-wrap">
-            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-            <div class="drag-text">
+          <div class="image-upload-wrap1">
+            <input for="banner" formControlName="banner" class="file-upload-input1" type='file'
+              onchange="readURL1(this);" accept="image/*" />
+            <div class="drag-text1">
               <h3>Arrastre y suelte un archivo o seleccione agregar imagen</h3>
             </div>
           </div>
-          <div class="file-upload-content">
-            <img class="file-upload-image" src="#" alt="your image" />
-            <div class="image-title-wrap">
-              <button type="button" onclick="removeUpload()" class="remove-image">Eliminar <span
-                  class="image-title">Subir
+          <div class="file-upload-content1">
+            <img class="file-upload-image1" src="#" alt="your image" />
+            <div class="image-title-wrap1">
+              <button type="button" onclick="removeUpload1()" class="remove-image1">Eliminar <span
+                  class="image-title1">Subir
                   imagen</span></button>
             </div>
           </div>
         </div>
+        <small *ngIf="errorHandling('banner', 'required')" class="text-danger">
+          La imagen de banner es requerida
+        </small>
       </div>
     </div>
 

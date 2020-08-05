@@ -14,6 +14,7 @@ import { MovieModule } from './movie/movie.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainModule } from './main/main.module';
 import { ProductModule } from './product/product.module';
+import { BillboardModule } from './billboard/billboard.module';
 
 @NgModule({
   declarations: [
@@ -34,13 +35,16 @@ import { ProductModule } from './product/product.module';
     UserModule,
     MovieModule,
     ProductModule,
+    BillboardModule,
     NgbModule,
     BrowserAnimationsModule,
     SlickCarouselModule,
     MainModule,
-    
+
     // al final el gestor de las rutas principal
     AppRoutingModule,
+
+
 
   ],
   providers: [],
