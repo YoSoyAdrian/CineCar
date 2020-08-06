@@ -29,10 +29,11 @@
             Mantenimiento
           </a>
           <div class="dropdown-menu" style="background-color: #1d2629;" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="['/mantenimiento/registrar']"
+            <a class="dropdown-item" [routerLink]="['/mantenimiento/peliculas/registrar']"
               routerLinkActive="router-link-active">Peliculas</a>
             <a class="dropdown-item" href="#">Productos</a>
-            <a class="dropdown-item">Cartelera</a>
+            <a class="dropdown-item" [routerLink]="['/mantenimiento/carteleras/registrar']"
+              routerLinkActive="router-link-active">Cartelera</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Usuarios</a>
           </div>

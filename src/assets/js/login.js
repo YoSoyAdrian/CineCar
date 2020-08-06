@@ -91,3 +91,5 @@ $(".image-upload-wrap1").bind("dragover", function () {
 $(".image-upload-wrap1").bind("dragleave", function () {
   $(".image-upload-wrap1").removeClass("image-dropping1");
 });
+
+///DateTime

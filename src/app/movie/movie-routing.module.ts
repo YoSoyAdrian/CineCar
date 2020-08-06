@@ -10,7 +10,7 @@ import { PeliculasListComponent } from './peliculas-list/peliculas-list.componen
 const routes: Routes = [
   { path: 'peliculas', component: PeliculasComponent },
   {
-    path: 'mantenimiento', component: PeliculasIndexComponent,
+    path: 'mantenimiento/peliculas', component: PeliculasIndexComponent,
     children: [
       { path: 'registrar', component: PeliculasCreateComponent },
       { path: 'listado', component: PeliculasListComponent },

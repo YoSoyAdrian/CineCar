@@ -1,0 +1,133 @@
+<form [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
+  <div class="row" style="background-color: 2b3e50;">
+    <div class="col-xl-12 text-center mt-3 mb-3">
+      <h3>Ingrese los datos de la cartelera</h3>
+      <div class="btn-group" role="group">
+        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="reset" (click)="onReset()" class="btn btn-secondary">
+          Cancelar
+        </button>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label for="location_id">Seleccione la ubicación</label>
+          <select class="form-control" formControlName="location_id">
+            <option *ngFor="let l of location" id="location" [value]="l.id">
+              {{l.name}}
+            </option>
+          </select>
+          <small *ngIf="errorHandling('location_id', 'required')" class="text-danger">
+            La ubicación es requerida
+          </small>
+        </div>
+      </div>
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label for="movie_id">Seleccione la pelicula</label>
+          <select class="form-control" formControlName="movie_id">
+            <option *ngFor="let m of movie" id="movie" [value]="m.id">
+              {{m.name}}
+            </option>
+          </select>
+          <small *ngIf="errorHandling('movie_id', 'required')" class="text-danger">
+            La pelicula es requerida
+          </small>
+        </div>
+      </div>
+
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label>Fecha a estrenar</label>
+          <input formControlName="current_date" type="date" class="form-control" id="premiere_date"
+            placeholder="dd/MM/YYYY" />
+          <small *ngIf="errorHandling('current_date', 'required')" class="text-danger">
+            Fecha de estreno requerida (Día/Mes/Año)
+          </small>
+        </div>
+      </div>
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label>Hora</label>
+          <input formControlName="hour" type="number" class="form-control" placeholder="eje: #h #m" />
+
+        </div>
+        <small *ngIf="errorHandling('hour', 'required')" class="text-danger">
+          La hora de la pelicula es requerida
+        </small>
+      </div>
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label for="number_space">Cantidad de espacios </label>
+          <input class="form-control" type="number" id="number_space" formControlName="number_space" min="1" max="40">
+
+        </div>
+        <small *ngIf="errorHandling('number_space', 'required')" class="text-danger">
+          La cantidad de espacios es requerida
+        </small>
+      </div>
+
+    </div>
+
+    <div class="col-xl-6">
+      <div class="form-group col-xl-12">
+        <label>Seleccione los tiquetes</label>
+        <div class="container" formArrayName="tickets" for="tickets">
+          <ul class="ks-cboxtags">
+
+            <li *ngFor="let t of tickets.controls; index as i">
+              <input type="checkbox" [formControlName]="i" inputmode="numeric" id="checkbox{{i}}"
+                [value]="ticketList[i]?.id" (change)="onCheckChange(ticketList[i]?.id, $event)" /><label
+                for="checkbox{{i}}">{{ticketList[i]?.name}}</label>
+            </li>
+
+          </ul>
+        </div>
+        <small *ngIf="errorHandling('tickets', 'required')" class="text-danger">
+          Seleccione al menos un tiquete
+        </small>
+      </div>
+
+      <div class="form-group col-xl-12">
+        <div class="col-xl-8">
+          <label for="radio">Disponible para venta</label>
+        </div>
+        <div>
+          <div class="inputGroup">
+            <input id="radio3" formControlName="available" inputmode="numeric" value="1" type="radio" />
+            <label for="radio3">Sí</label>
+          </div>
+          <div class="inputGroup">
+            <input id="radio4" formControlName="available" value="0" inputmode="numeric" type="radio" />
+            <label for="radio4">No</label>
+          </div>
+        </div>
+        <small *ngIf="errorHandling('available', 'required')" class="text-danger">
+          La disponibilidad de la pelicula requerida
+        </small>
+      </div>
+      <div class="form-group col-xl-12">
+        <div class="col-xl-8">
+          <label for="active">Visible</label>
+        </div>
+        <div>
+          <div class="inputGroup">
+            <input id="radio1" formControlName="visible" value="1" inputmode="numeric" type="radio" />
+            <label for="radio1">Sí</label>
+          </div>
+          <div class="inputGroup">
+            <input id="radio2" formControlName="visible" inputmode="numeric" value="0" type="radio" />
+            <label for="radio2">No</label>
+          </div>
+        </div>
+        <small *ngIf="errorHandling('visible', 'required')" class="text-danger">
+          La visibildad de la pelicula requerida
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+  </div>
+</form>
