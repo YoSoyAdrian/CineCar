@@ -129,11 +129,11 @@ export class CarteleraCreateComponent implements OnInit {
   submitForm() {
     console.log(this.formCreate.value);
 
-    if (this.formCreate.value.available == 1) {
+    if (this.formCreate.valid) {
       this.gService.create('carteleras/create', this.formCreate.value).subscribe(
         (respuesta: any) => {
           this.cartelera = respuesta;
-          this.router.navigate(['carteleras/mantenimiento/listado'], {
+          this.router.navigate(['mantenimiento/carteleras/listado'], {
             queryParams: { register: 'true' },
           });
         },

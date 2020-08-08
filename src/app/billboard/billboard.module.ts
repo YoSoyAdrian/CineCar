@@ -6,10 +6,11 @@ import { CarteleraComponent } from './cartelera/cartelera.component';
 import { CarteleraCreateComponent } from './cartelera-create/cartelera-create.component';
 import { CarteleraIndexComponent } from './cartelera-index/cartelera-index.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CarteleraListComponent } from './cartelera-list/cartelera-list.component';
 
 
 @NgModule({
-  declarations: [CarteleraComponent, CarteleraCreateComponent, CarteleraIndexComponent],
+  declarations: [CarteleraComponent, CarteleraCreateComponent, CarteleraIndexComponent, CarteleraListComponent],
   imports: [
     CommonModule,
     BillboardRoutingModule,

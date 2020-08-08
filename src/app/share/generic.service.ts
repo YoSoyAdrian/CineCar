@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { CustomHandlerErrorService } from './custom-handler-error.service';
 import { AuthenticationService } from './authentication.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 @Injectable({
   providedIn: 'root',
 })
@@ -55,7 +56,7 @@ export class GenericService {
       .pipe(catchError(this.handler.handleError.bind(this)));
   }
   // crear
-  create(endopoint: string, objCreate: any | any): Observable<any | any[]> {
+  create(endopoint: string, objCreate: any | any | File): Observable<any | any[]> {
     return this.http.post<any | any[]>(this.urlAPI + endopoint, objCreate, {
       headers: this.headers,
     });
@@ -67,5 +68,13 @@ export class GenericService {
       objUpdate,
       { headers: this.headers }
     );
+  }
+  postFile(endopoint: string, fileToUpload: File): Observable<boolean> {
+
+    const formData: FormData = new FormData();
+    formData.append('image', fileToUpload);
+    return this.http
+      .post(this.urlAPI + endopoint, formData, { headers: this.headers })
+      .pipe(catchError(this.handler.handleError.bind(this)));
   }
 }

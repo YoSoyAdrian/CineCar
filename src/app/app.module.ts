@@ -4,6 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -16,9 +17,11 @@ import { MainModule } from './main/main.module';
 import { ProductModule } from './product/product.module';
 import { BillboardModule } from './billboard/billboard.module';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,

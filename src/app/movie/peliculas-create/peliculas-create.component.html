@@ -1,4 +1,4 @@
-<form [formGroup]="formCreate" (ngSubmit)="submitForm()" novalidate>
+<form [formGroup]="formCreate" (ngSubmit)="submitForm()" enctype="multipart/form-data">
   <div class="row" style="background-color: 2b3e50;">
     <div class="col-xl-12 text-center mt-3 mb-3">
       <h3>Ingrese los datos de la pelicula</h3>
@@ -32,8 +32,8 @@
       <div class="col-xl-12">
         <div class="form-group col-xl-12">
           <label>Fecha de estreno</label>
-          <input formControlName="premiere_date" for="premiere_date" type="datetime" class="form-control"
-            id="premiere_date" placeholder="dd/MM/YYYY" />
+          <input formControlName="premiere_date" for="premiere_date" type="date" class="form-control" id="premiere_date"
+            placeholder="dd/MM/YYYY" />
           <small *ngIf="errorHandling('premiere_date', 'required')" class="text-danger">
             Fecha de estreno requerida (Día/Mes/Año)
           </small>
@@ -56,11 +56,11 @@
         </div>
         <div>
           <div class="inputGroup">
-            <input id="radio1" formControlName="active" value=1 type="radio" />
+            <input id="radio1" formControlName="active" inputmode="numeric" value="1" type="radio" />
             <label for="radio1">Sí</label>
           </div>
           <div class="inputGroup">
-            <input id="radio2" formControlName="active" value=0 type="radio" />
+            <input id="radio2" formControlName="active" inputmode="numeric" value="0" type="radio" />
             <label for="radio2">No</label>
           </div>
         </div>
@@ -105,8 +105,8 @@
             portada</button>
 
           <div class="image-upload-wrap">
-            <input for='images' formControlName="images" class="file-upload-input" type='file' onchange="readURL(this);"
-              accept="image/*" />
+            <input for='images' multiple formControlName="image" class="file-upload-input" type='file'
+              (change)="uploadFile($event)" onchange="readURL(this);" accept="image/*" #fileInput />
             <div class="drag-text">
               <h3>Arrastre y suelte un archivo o seleccione agregar imagen</h3>
             </div>
@@ -114,13 +114,13 @@
           <div class="file-upload-content">
             <img class="file-upload-image" src="#" alt="your image" />
             <div class="image-title-wrap">
-              <button type="button" onclick="removeUpload()" class="remove-image">Eliminar <span
-                  class="image-title">Subir
+              <button type="button" onclick="removeUpload()" class="remove-image">Eliminar
+                <span class="image-title">Subir
                   imagen</span></button>
             </div>
           </div>
         </div>
-        <small *ngIf="errorHandling('images', 'required')" class="text-danger">
+        <small *ngIf="errorHandling('image', 'required')" class="text-danger">
           La imagen de portada es requerida
         </small>
       </div>
@@ -130,8 +130,8 @@
             banner</button>
 
           <div class="image-upload-wrap1">
-            <input for="banner" formControlName="banner" class="file-upload-input1" type='file'
-              onchange="readURL1(this);" accept="image/*" />
+            <input multiple for="banner" formControlName="banner" class="file-upload-input1"
+              (change)="uploadFile1($event)"  type='file' onchange="readURL1(this);" accept="image/*" #fileInput />
             <div class="drag-text1">
               <h3>Arrastre y suelte un archivo o seleccione agregar imagen</h3>
             </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,12 +7,18 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
+
 @Component({
   selector: 'app-peliculas-create',
   templateUrl: './peliculas-create.component.html',
   styleUrls: ['./peliculas-create.component.scss']
 })
 export class PeliculasCreateComponent implements OnInit {
+  @ViewChild('fileInput') fileInput: ElementRef;
+
+  fileToUpload: File = null;
   $: any;
   classification_movie: any;
   pelicula: any;
@@ -23,6 +29,7 @@ export class PeliculasCreateComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private router: Router,
+    private http: HttpClient,
     private gService: GenericService,
     private authService: AuthenticationService,
     private notificacion: NotificacionService
@@ -36,8 +43,8 @@ export class PeliculasCreateComponent implements OnInit {
       synopsis: ['', [Validators.required]],
       premiere_date: ['', [Validators.required]],
       duration: ['', [Validators.required]],
-      images: ['', [Validators.required]],
-      banner: ['', [Validators.required]],
+      image: null,
+      banner: [],
       active: ['', [Validators.required]],
       classification_movie_id: ['', [Validators.required]],
       gener_movies: this.fb.array([]),
@@ -45,14 +52,36 @@ export class PeliculasCreateComponent implements OnInit {
 
     });
 
+
     this.getGeneros();
     this.getClasificaciones();
   }
 
   ngOnInit(): void {
 
+  }
+  uploadFile(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+
+    this.formCreate.patchValue({
+      image: file,
+
+    });
+    this.formCreate.get('image').updateValueAndValidity()
 
   }
+  uploadFile1(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+
+    this.formCreate.patchValue({
+      banner: file,
+
+    });
+    this.formCreate.get('banner').updateValueAndValidity()
+
+  }
+
+
   getClasificaciones() {
     this.gService
       .list('peliculas/clasificaciones')
@@ -114,11 +143,24 @@ export class PeliculasCreateComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.formCreate.value);
-    this.gService.create('peliculas/create', this.formCreate.value).subscribe(
+    var formData: any = new FormData();
+    formData.append("name", this.formCreate.get('name').value);
+    formData.append("synopsis", this.formCreate.get('synopsis').value);
+    formData.append("premiere_date", this.formCreate.get('premiere_date').value);
+    formData.append("duration", this.formCreate.get('duration').value);
+    formData.append("image", this.formCreate.get('image').value);
+    formData.append("banner", this.formCreate.get('banner').value);
+    formData.append("active", this.formCreate.get('active').value);
+    formData.append("classification_movie_id", this.formCreate.get('classification_movie_id').value);
+    for (var i = 0; i < this.gener_movies.length; i++) {
+      formData.append('gener_movies[]', this.gener_movies[i]);
+    }
+
+
+    this.http.post("http://127.0.0.1:8000/api/cinecar/peliculas/create", formData).subscribe(
       (respuesta: any) => {
         this.pelicula = respuesta;
-        this.router.navigate(['/peliculas/mantenimiento/listado'], {
+        this.router.navigate(['mantenimiento/peliculas/listado'], {
           queryParams: { register: 'true' },
         });
       },
@@ -128,6 +170,8 @@ export class PeliculasCreateComponent implements OnInit {
         this.notificacion.msjValidacion(this.error);
       }
     );
+
+
   }
   onReset() {
     this.formCreate.reset();

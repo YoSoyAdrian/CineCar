@@ -7,18 +7,21 @@ import { SiderbarComponent } from './siderbar/siderbar.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { PeliculasShowComponent } from './peliculas-show/peliculas-show.component';
 import { PeliculasCreateComponent } from './peliculas-create/peliculas-create.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PeliculasIndexComponent } from './peliculas-index/peliculas-index.component';
 import { PeliculasListComponent } from './peliculas-list/peliculas-list.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
-  declarations: [PeliculasComponent, CarouselComponent, PeliculasShowComponent, PeliculasCreateComponent, PeliculasIndexComponent, PeliculasListComponent],
+  declarations: [PeliculasComponent, CarouselComponent, PeliculasShowComponent, PeliculasCreateComponent, PeliculasIndexComponent, PeliculasListComponent,],
   imports: [
     CommonModule,
     MovieRoutingModule,
     SlickCarouselModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [PeliculasComponent, CarouselComponent, PeliculasShowComponent,]
 })

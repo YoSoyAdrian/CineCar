@@ -5,10 +5,11 @@
         <nav>
           <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
-              [routerLink]="['/mantenimiento/registrar']" routerLinkActive="router-link-active" role="tab"
-              aria-controls="nav-home" aria-selected="true" [class.active]="router.url == '/'">Registrar</a>
+              [routerLink]="['/mantenimiento/carteleras/registrar']" routerLinkActive="router-link-active" role="tab"
+              aria-controls="nav-home" aria-selected="true"
+              [class.active]="router.url == '/mantenimiento/carteleras/'">Registrar</a>
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" role="tab" aria-controls="nav-profile"
-              aria-selected="false" [routerLink]="['/mantenimiento/listado']"
+              aria-selected="false" [routerLink]="['/mantenimiento/carteleras/listado']"
               routerLinkActive="router-link-active">Listado</a>
             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" role="tab" aria-controls="nav-contact"
               aria-selected="false">Project Tab 3</a>
@@ -16,7 +17,7 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <app-cartelera-create *ngIf="router.url == '/mantenimiento'"></app-cartelera-create>
+            <app-cartelera-create *ngIf="router.url == '/mantenimiento/carteleras'"></app-cartelera-create>
             <router-outlet></router-outlet>
           </div>
         </div>
