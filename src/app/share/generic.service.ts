@@ -69,6 +69,13 @@ export class GenericService {
       { headers: this.headers }
     );
   }
+  // actualizar voto
+  updateVoto(endopoint: string, id:number): Observable<any | any[]> {
+    return this.http.patch<any | any[]>(
+      this.urlAPI + endopoint + `/${id}`,
+      { headers: this.headers }
+    );
+  }
   postFile(endopoint: string, fileToUpload: File): Observable<boolean> {
 
     const formData: FormData = new FormData();

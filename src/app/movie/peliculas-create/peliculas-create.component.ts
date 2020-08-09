@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 
+
 @Component({
   selector: 'app-peliculas-create',
   templateUrl: './peliculas-create.component.html',
@@ -118,13 +119,14 @@ export class PeliculasCreateComponent implements OnInit {
       (this.formCreate.controls.gener_movies as FormArray).push(control);
     });
   }
-  onCheckChange(idCheck, event) {
+  onCheckChange(idCheck: number, event) {
     /* seleccionado */
     if (event.target.checked) {
       // agregar un nuevo control en el array de controles de los identificadores
       (this.formCreate.controls.gener_movie_id as FormArray).push(
         new FormControl(event.target.value)
       );
+      console.log("Agregado", event.target.value);
     } else {
       /* Deseleccionar*/
       // Buscar el elemento que se le quito la selección
@@ -133,10 +135,15 @@ export class PeliculasCreateComponent implements OnInit {
       this.gener_movie_id.controls.forEach((ctrl: FormControl) => {
         if (idCheck == ctrl.value) {
           // Quitar el elemento deseleccionado del array
+
           (this.formCreate.controls.gener_movie_id as FormArray).removeAt(i);
+
+          console.log("Gener_movie_id", (this.formCreate.controls.gener_movie_id as FormArray).value);
+          console.log("Gener_movies", (this.formCreate.controls.gener_movies as FormArray).value);
+          console.log("IDCheck", idCheck);
+
           return;
         }
-
         i++;
       });
     }
@@ -152,25 +159,36 @@ export class PeliculasCreateComponent implements OnInit {
     formData.append("banner", this.formCreate.get('banner').value);
     formData.append("active", this.formCreate.get('active').value);
     formData.append("classification_movie_id", this.formCreate.get('classification_movie_id').value);
-    for (var i = 0; i < this.gener_movies.length; i++) {
-      formData.append('gener_movies[]', this.gener_movies[i]);
+
+
+    for (let i = 0; i < this.gener_movies.length; i++) {
+      const valor = this.gener_movies.value[i];
+
+      if (valor == true) {
+        console.log("valor: ", valor);
+        formData.append("gener_movies[]", this.generoList[i].id);
+
+
+        console.log(formData.get('gener_movies[]'));
+      }
+
     }
 
-
-    this.http.post("http://127.0.0.1:8000/api/cinecar/peliculas/create", formData).subscribe(
-      (respuesta: any) => {
-        this.pelicula = respuesta;
-        this.router.navigate(['mantenimiento/peliculas/listado'], {
-          queryParams: { register: 'true' },
-        });
-      },
-      (error) => {
-        this.error = error;
-        console.log(this.error);
-        this.notificacion.msjValidacion(this.error);
-      }
-    );
-
+    if (this.formCreate.valid) {
+      this.http.post("http://127.0.0.1:8000/api/cinecar/peliculas/create", formData).subscribe(
+        (respuesta: any) => {
+          this.pelicula = respuesta;
+          this.router.navigate(['mantenimiento/peliculas/listado'], {
+            queryParams: { register: 'true' },
+          });
+        },
+        (error) => {
+          this.error = error;
+          console.log(this.error);
+          this.notificacion.msjValidacion(this.error);
+        }
+      );
+    }
 
   }
   onReset() {

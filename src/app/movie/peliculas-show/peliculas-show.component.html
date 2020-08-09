@@ -1,45 +1,49 @@
-<div class="row">
+<form *ngIf="datos" [formGroup]="formUpdate" (ngSubmit)="submitForm()" novalidate>
+  <div class="row">
+    <div class='container col-xl-12 col-sm-12 col-md-12'>
 
-  <div class='container col-xl-12 col-sm-12 col-md-12'>
+      <div class="container_content" *ngIf="datos?.id">
+        <div class="container_content_inner">
+          <div class="title">
+            <h1>{{datos.name}}
+              <span class="minutes">{{datos.duration}}</span>
+              <span class="minutes">{{datos.classification_name}}</span>
 
-    <div class="container_content" *ngIf="datos?.id">
-      <div class="container_content_inner">
-        <div class="title">
-          <h1>{{datos.name}}
-            <span class="minutes">{{datos.duration}}</span>
-            <span class="minutes">{{datos.classification_name}}</span>
-
-          </h1>
-        </div>
-        <div class="column1 row">
-          <div *ngFor="let genero of datos.gener_movies">
-            <span class="tag col-xl-2 col-sm-2 col-md-2">{{genero.name}}</span>
-
+            </h1>
           </div>
-        </div> <!-- end column1 -->
-        <div class="par col-xl-12 col-sm-12 col-md-12">
+          <div class="column1 row">
+            <div *ngFor="let genero of datos.gener_movies">
+              <span class="tag col-xl-2 col-sm-2 col-md-2">{{genero.name}}</span>
 
-          <p>{{datos.synopsis}} </p>
-        </div>
-        <div class="btns">
-          <div class="row">
-            <div class="col-sm-12">
-              <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block">
-                <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
-                  <i class="fa fa-star"></i>
-                </li>
-              </ul>
             </div>
+          </div> <!-- end column1 -->
+          <div class="par col-xl-12 col-sm-12 col-md-12">
+
+            <p>{{datos.synopsis}} </p>
           </div>
-          <button class=' btns_more' type="button"> {{datos.vote_count}} Me gusta </button>
+          <div class="btns">
+            <div class="row">
+              <div class="col-sm-12">
+                <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block">
+                  <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
+                    <i class="fa fa-star"></i>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <input class='btns_more' formControlName="vote_count" />
+            {{datos.vote_count}} Me gusta
+
+          </div>
+        </div>
+      </div>
+      <div class="container_outer_img ">
+        <div class="img-inner">
+          <img [src]="datos?.banner" class=" container_img" />
         </div>
       </div>
     </div>
-    <div class="container_outer_img ">
-      <div class="img-inner">
-        <img [src]="datos?.banner" class=" container_img" />
-      </div>
-    </div>
+    <div class="overlay"></div>
   </div>
-  <div class="overlay"></div>
-</div>
+</form>
