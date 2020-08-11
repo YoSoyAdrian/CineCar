@@ -175,7 +175,7 @@ export class PeliculasCreateComponent implements OnInit {
     }
 
     if (this.formCreate.valid) {
-      this.gService.create('pelicula/create', formData).subscribe(
+      this.gService.create('peliculas/create', formData).subscribe(
         (respuesta: any) => {
           this.pelicula = respuesta;
           this.router.navigate(['mantenimiento/peliculas/listado'], {
