@@ -30,7 +30,7 @@ export class UserCreateComponent implements OnInit {
 
   reactiveFormCreate() {
     this.formCreate = this.fb.group({
-
+      name: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
 
@@ -43,10 +43,10 @@ export class UserCreateComponent implements OnInit {
     this.authService.createUser(this.formCreate.value).subscribe(
       (respuesta: any) => {
         this.usuario = respuesta;
-
         this.router.navigate(['/usuario/login'], {
           queryParams: { register: 'true' },
         });
+
       },
       (error) => {
         this.error = error;

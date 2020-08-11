@@ -23,9 +23,20 @@ export class CarteleraComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cardBillboard();
+    this.listaCarteleras();
+  }
+  listaCarteleras() {
+    this.gService
+      .list('carteleras/all')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (data: any) => {
+          this.datos = data;
+        },
+        (error: any) => {
+          this.notificacion.mensaje(error.name, error.message, 'error');
+        }
+      );
   }
 
-  cardBillboard() {
-  }
 }

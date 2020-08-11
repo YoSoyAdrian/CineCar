@@ -26,7 +26,7 @@ export class NotificacionService {
   Gestión de mensaje de validación de formularios para presentarlos en una notificación
   */
   msjValidacion(errores: any) {
-    let mensaje = '';
+    let mensaje = 'Complete todos los campos requierdos';
     if (errores != null) {
       if (errores.error.errors) {
         for (const item of errores.error.errors) {

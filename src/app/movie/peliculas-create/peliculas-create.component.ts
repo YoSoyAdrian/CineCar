@@ -175,7 +175,7 @@ export class PeliculasCreateComponent implements OnInit {
     }
 
     if (this.formCreate.valid) {
-      this.http.post("http://127.0.0.1:8000/api/cinecar/peliculas/create", formData).subscribe(
+      this.gService.create('pelicula/create', formData).subscribe(
         (respuesta: any) => {
           this.pelicula = respuesta;
           this.router.navigate(['mantenimiento/peliculas/listado'], {
@@ -188,6 +188,8 @@ export class PeliculasCreateComponent implements OnInit {
           this.notificacion.msjValidacion(this.error);
         }
       );
+    } else {
+
     }
 
   }

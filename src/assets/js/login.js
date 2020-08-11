@@ -38,7 +38,6 @@ function readURL(input) {
       $(".image-upload-wrap").hide();
 
       $(".file-upload-image").attr("src", e.target.result);
-      $(".file-upload-input").attr("src", input.files[0].name);
 
       $(".file-upload-content").show();
 
