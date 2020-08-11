@@ -3,18 +3,20 @@ import { takeUntil } from 'rxjs/operators';
 import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import { Subject } from 'rxjs';
-
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.scss']
 })
 export class ProductosComponent implements OnInit {
-datos: any;
+  datos: any;
   error: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(private gService: GenericService,
-    private notificacion: NotificacionService) {
+    private notificacion: NotificacionService,
+    private router: Router,
+    private route: ActivatedRoute,) {
   }
 
   ngOnInit(): void {

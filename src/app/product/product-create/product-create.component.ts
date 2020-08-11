@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/share/authentication.service';
+
 import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
@@ -27,9 +27,9 @@ export class ProductCreateComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private router: Router,
-    private http: HttpClient,
+
     private gService: GenericService,
-    private authService: AuthenticationService,
+
     private notificacion: NotificacionService
   ) {
 
@@ -152,9 +152,7 @@ export class ProductCreateComponent implements OnInit {
       if (valor == true) {
         console.log("valor: ", valor);
         formData.append("classification_products[]", this.clasificacionList[i].id);
-
       }
-
     }
 
     if (this.formCreate.valid) {
