@@ -5,7 +5,7 @@
 
   <button [name]="loading" [disabled]="!formCreate.valid" type="submit">Registrarse</button>
 </form>
-<ng-template *ngIf="loading">
+<ng-container *ngIf="loading">
   <div class="a" style="--n: 5; margin-top: 25%;
     margin-left: 83px;">
     <div class="dot" style="--i: 0"></div>
@@ -14,4 +14,4 @@
     <div class="dot" style="--i: 3"></div>
     <div class="dot" style="--i: 4"></div>
   </div>
-</ng-template>
+</ng-container>
