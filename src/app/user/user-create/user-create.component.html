@@ -1,7 +1,16 @@
 <form [formGroup]='formCreate' (ngSubmit)='submitFormCreate()' novalidate>
   <input type="text" placeholder="Nombre" formControlName='name' required>
+  <small *ngIf="errorHandling('name', 'required')" class="text-danger">
+    Nombre requerido
+  </small>
   <input type="email" placeholder="Email" formControlName='email' required>
+  <small *ngIf="errorHandling('email', 'required')" class="text-danger">
+    Email es requerido
+  </small>
   <input type="password" placeholder="Password" formControlName='password' required>
+  <small *ngIf="errorHandling('password', 'required')" class="text-danger">
+    Contraseña es requerida
+  </small>
 
   <button [name]="loading" [disabled]="!formCreate.valid" type="submit">Registrarse</button>
 </form>

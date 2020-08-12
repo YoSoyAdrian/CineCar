@@ -18,6 +18,7 @@ export class UserCreateComponent implements OnInit {
   error: any;
   formCreate: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  makeSubmit: boolean = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -50,6 +51,7 @@ export class UserCreateComponent implements OnInit {
       },
       (error) => {
         this.error = error;
+        this.loading = false;
         this.notificacion.msjValidacion(this.error);
       }
     );
@@ -59,6 +61,10 @@ export class UserCreateComponent implements OnInit {
   }
 
   public errorHandling = (control: string, error: string) => {
-    return this.formCreate.controls[control].hasError(error);
-  };
+    return (
+      this.formCreate.controls[control].hasError(error) &&
+      this.formCreate.controls[control].invalid &&
+      (this.makeSubmit || this.formCreate.controls[control].touched)
+    );
+  }
 }

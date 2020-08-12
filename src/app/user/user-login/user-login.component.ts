@@ -18,6 +18,7 @@ export class UserLoginComponent implements OnInit {
   error: any;
   formulario: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  makeSubmit: boolean = false;
   constructor(
     public fb: FormBuilder,
     private route: ActivatedRoute,
@@ -104,6 +105,7 @@ export class UserLoginComponent implements OnInit {
         (this.infoUsuario = respuesta), this.router.navigate(['peliculas/']);
       },
       (error: any) => {
+        this.loading = false;
         this.error = error;
         this.notificacion.msjValidacion(this.error);
       }
@@ -113,9 +115,11 @@ export class UserLoginComponent implements OnInit {
     this.formulario.reset();
   }
 
-  /* Manejar errores de formulario en Angular */
   public errorHandling = (control: string, error: string) => {
-
-    return this.formulario.controls[control].hasError(error);
-  };
+    return (
+      this.formulario.controls[control].hasError(error) &&
+      this.formulario.controls[control].invalid &&
+      (this.makeSubmit || this.formulario.controls[control].touched)
+    );
+  }
 }

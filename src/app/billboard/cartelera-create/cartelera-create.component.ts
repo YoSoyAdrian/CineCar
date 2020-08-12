@@ -21,6 +21,7 @@ export class CarteleraCreateComponent implements OnInit {
   error: any;
   formCreate: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  makeSubmit: boolean = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -155,8 +156,10 @@ export class CarteleraCreateComponent implements OnInit {
     this.router.navigate(['mantenimiento/carteleras/registrar']);
   }
   public errorHandling = (control: string, error: string) => {
-    return this.formCreate.controls[control].hasError(error);
-  };
-
-
+    return (
+      this.formCreate.controls[control].hasError(error) &&
+      this.formCreate.controls[control].invalid &&
+      (this.makeSubmit || this.formCreate.controls[control].touched)
+    );
+  }
 }

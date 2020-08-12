@@ -1,13 +1,8 @@
 <form [formGroup]="formCreate" (ngSubmit)="submitForm()" enctype="multipart/form-data">
   <div class="row" style="background-color: 2b3e50;">
     <div class="col-xl-12 text-center mt-3 mb-3">
-      <h3>D A T O S P R O D U C T O S</h3>
-      <div class="btn-group" role="group">
-        <button type="submit" [disabled]="!formCreate.valid" class="btn btn-primary">Registrar</button>
-        <button type="reset" (click)="onReset()" class="btn btn-secondary">
-          Cancelar
-        </button>
-      </div>
+      <h3>DATOS PRODUCTO</h3>
+
     </div>
     <div class="col-xl-6">
       <div class="col-xl-12">
@@ -120,7 +115,15 @@
       </div>
     </div>
   </div>
-  <div class="row">
-
+  <div class="row container-fluid">
+    <div _ngcontent-utb-c129="" class="row container-fluid">
+      <div _ngcontent-utb-c129="" role=" group" class="btn-group mb-4 col-xl-12 container-fluid"
+        style="justify-content: space-around;">
+        <div _ngcontent-utb-c129="" class="col-xl-4"><button _ngcontent-utb-c129="" type="submit"
+            class="btn btn-primary col-xl-6 container" disabled="">Registrar</button></div>
+        <div _ngcontent-utb-c129="" class="col-xl-4"><button _ngcontent-utb-c129="" type="reset"
+            class="btn btn-secondary col-xl-6 container"> Cancelar </button></div>
+      </div>
+    </div>
   </div>
 </form>

@@ -27,6 +27,7 @@ export class PeliculasCreateComponent implements OnInit {
   error: any;
   formCreate: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  makeSubmit: boolean = false;
   constructor(
     public fb: FormBuilder,
     private router: Router,
@@ -126,7 +127,7 @@ export class PeliculasCreateComponent implements OnInit {
       (this.formCreate.controls.gener_movie_id as FormArray).push(
         new FormControl(event.target.value)
       );
-      console.log("Agregado", event.target.value);
+    
     } else {
       /* Deseleccionar*/
       // Buscar el elemento que se le quito la selección
@@ -165,7 +166,7 @@ export class PeliculasCreateComponent implements OnInit {
       const valor = this.gener_movies.value[i];
 
       if (valor == true) {
-        console.log("valor: ", valor);
+
         formData.append("gener_movies[]", this.generoList[i].id);
 
 
@@ -200,8 +201,11 @@ export class PeliculasCreateComponent implements OnInit {
     this.router.navigate(['/peliculas/registrar']);
   }
   public errorHandling = (control: string, error: string) => {
-    return this.formCreate.controls[control].hasError(error);
-  };
-
+    return (
+      this.formCreate.controls[control].hasError(error) &&
+      this.formCreate.controls[control].invalid &&
+      (this.makeSubmit || this.formCreate.controls[control].touched)
+    );
+  }
 
 }

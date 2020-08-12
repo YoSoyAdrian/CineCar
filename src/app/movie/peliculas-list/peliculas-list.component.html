@@ -1,39 +1,53 @@
 <h1>
-  Listado de peliculas
+  Listado de Películas
 </h1>
 <p>
-  (Seleccione una pelicula para ver más a detalle)
+  (Seleccione una película para ver más a detalle)(aun no funcional)
 </p>
 <main>
-  <table>
+  <table style="text-align-last: center;">
     <thead>
       <tr>
         <th>
-          Nombre
+          Película
         </th>
         <th>
-          Cant.Votos
+          Votos
         </th>
-        <th></th>
+        <th>
+          Duración
+        </th>
+        <th colspan="3">
+          Fecha Estreno
+        </th>
+        <th>
+          Acciones
+        </th>
       </tr>
     </thead>
     <tfoot>
       <tr>
-        <th colspan='3'>
-          CineCar
+        <th colspan='9'>
+          C I N E C A R
         </th>
       </tr>
     </tfoot>
     <tbody>
 
       <tr *ngFor="let p of datos">
-        <td data-title='nombre'>
+        <td data-title='Película'>
           {{p.name}}
         </td>
-        <td data-title='Cant.Votos'>
+        <td data-title='Votos'>
           {{p.vote_count}}
         </td>
-        <td class='select'>
+        <td data-title='Duración'>
+          {{p.duration}}
+        </td>
+        <td colspan="3" data-title='Fecha Estreno'>
+          {{p.premiere_date}}
+        </td>
+        <td data-title='Acciones' class='select'>
           <a class='button' href='#'>
             Seleccionar
           </a>

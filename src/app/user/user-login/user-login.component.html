@@ -1,6 +1,12 @@
 <form [formGroup]='formulario' (ngSubmit)='submitFormLogin()' class="col-xl-12" novalidate>
-  <input type="text" placeholder="Email" formControlName="email">
-  <input type="password" placeholder="Password" formControlName="password">
+  <input type="text" placeholder="Email" formControlName="email" required>
+  <small *ngIf="errorHandling('email', 'required')" class="text-danger">
+    Email requerido
+  </small>
+  <input type="password" placeholder="Password" formControlName="password" required>
+  <small *ngIf="errorHandling('password', 'required')" class="text-danger">
+    Contraseña requerida
+  </small>
   <button [name]="loading" [disabled]="!formulario.valid" type="submit" value="Login">Iniciar Sesión</button>
 
 </form>
