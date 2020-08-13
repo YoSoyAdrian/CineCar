@@ -7,15 +7,19 @@ import { CarteleraCreateComponent } from './cartelera-create/cartelera-create.co
 import { CarteleraIndexComponent } from './cartelera-index/cartelera-index.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CarteleraListComponent } from './cartelera-list/cartelera-list.component';
+import { ReservationComponent } from './reservation/reservation.component';
+
+
 
 
 @NgModule({
-  declarations: [CarteleraComponent, CarteleraCreateComponent, CarteleraIndexComponent, CarteleraListComponent],
+  declarations: [CarteleraComponent, CarteleraCreateComponent, CarteleraIndexComponent, CarteleraListComponent, ReservationComponent],
   imports: [
     CommonModule,
     BillboardRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
-  exports: [CarteleraComponent]
+  exports: [CarteleraComponent, ReservationComponent]
 })
 export class BillboardModule { }

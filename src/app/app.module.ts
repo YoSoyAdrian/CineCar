@@ -16,13 +16,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainModule } from './main/main.module';
 import { ProductModule } from './product/product.module';
 import { BillboardModule } from './billboard/billboard.module';
-import { ReservationCreateComponent } from './reservation/reservation-create/reservation-create.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReservationCreateComponent,
+
 
   ],
   imports: [
@@ -41,6 +41,7 @@ import { ReservationCreateComponent } from './reservation/reservation-create/res
     MovieModule,
     ProductModule,
     BillboardModule,
+
     NgbModule,
     BrowserAnimationsModule,
     SlickCarouselModule,
@@ -48,6 +49,8 @@ import { ReservationCreateComponent } from './reservation/reservation-create/res
 
     // al final el gestor de las rutas principal
     AppRoutingModule,
+
+
 
 
 

@@ -1,9 +1,10 @@
-<h1>Tickets cards</h1>
 <ul>
   <li *ngFor="let peli of datos" class="booking-card" style="background-image: url({{peli.movie.image}});">
     <div class="book-container">
       <div class="content">
-        <button class="btn">Reservar</button>
+        <button class="btn modal-open" (click)='Modal()'>Reservar
+
+        </button>
       </div>
     </div>
     <div class="informations-container">
@@ -36,5 +37,19 @@
       </div>
     </div>
   </li>
-
 </ul>
+
+<!-- The Modal -->
+
+<div class="modal-box">
+  <div class="modal-box-content">
+    <ul>
+      <li><a href="#">One</a></li>
+      <li><a href="#">Two</a></li>
+      <li><a href="#">Three</a></li>
+      <li><a href="#">Four</a></li>
+      <li><a href="#">Five</a></li>
+    </ul>
+  </div>
+  <button class="modal-close"><span class="visuallyhidden">Close modal box</span></button>
+</div>
