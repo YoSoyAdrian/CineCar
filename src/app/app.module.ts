@@ -16,11 +16,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MainModule } from './main/main.module';
 import { ProductModule } from './product/product.module';
 import { BillboardModule } from './billboard/billboard.module';
+import { ReservationCreateComponent } from './reservation/reservation-create/reservation-create.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ReservationCreateComponent,
 
   ],
   imports: [
