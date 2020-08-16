@@ -17,7 +17,7 @@ const routes: Routes = [
       { path: 'registrar', component: CarteleraCreateComponent },
       { path: 'listado', component: CarteleraListComponent },
     ]
-  }, { path: 'reservacion', component: ReservationComponent },
+  }, { path: 'reservacion/:id', component: ReservationComponent },
 
 ];
 

@@ -2,9 +2,7 @@
   <li *ngFor="let peli of datos" class="booking-card" style="background-image: url({{peli.movie.image}});">
     <div class="book-container">
       <div class="content">
-        <button class="btn modal-open" type="submit" [routerLink]="['/reservacion']"
-          routerLinkActive="router-link-active">Reservar
-
+        <button class="btn modal-open" [routerLink]="['/reservacion/', peli.id]" routerLinkActive="active">Reservar
         </button>
       </div>
     </div>

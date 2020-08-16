@@ -8,25 +8,38 @@
           </span>
         </p>
       </div>
-      <div class="row mt-4">
-        <div class="col-xl-3 col-sm-12">
-          <img src="assets/img/1.png" width="100%" />
+      <div class="row mt-4" *ngIf="cartelera">
+        <div class="col-xl-5">
+          <div class="wrapper">
+            <div class="card">
+              <img src="{{cartelera.movie.banner}}">
+              <div class="descriptions">
+                <h1>{{cartelera.movie.name}}</h1>
+                <p>{{cartelera.movie.synopsis}}
+                </p>
+                <button>
+                  <i class="fab fa-youtube"></i>
+                  Play trailer on YouTube
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-xl-8 mt-4">
-          <div class="col-xl-3">
-            <a>Titulo: </a>
-          </div>
-          <div class="col-xl-3">
-            <a>Fecha: </a>
-          </div>
-          <div class="col-xl-3">
-            <a>Hora: </a>
-          </div>
-          <div class="col-xl-3">
-            <a>Localización: </a>
-          </div>
-        </div>
+        <div class="col-xl-5">
+          <div class="col-xl-12">
+            <h1 class="h1">Fecha: {{cartelera.current_date| date:"dd-MM-yyyy"}}</h1>
 
+          </div>
+          <div class="col-xl-12">
+            <h1 class="h1">Hora: {{cartelera.hour}}</h1>
+          </div>
+          <div class="col-xl-12">
+            <h1 class="h1">Duración: {{cartelera.movie.duration}}</h1>
+          </div>
+          <div class="col-xl-12">
+            <h1 class="h1">Localización: {{cartelera.location.name}}</h1>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -37,11 +50,13 @@
           Tiquetes
         </span>
       </p>
+
     </div>
+
   </div>
   <div class="row container-fluid mb-4">
     <div class="col-xl-12 mb-4">
-      <label>Seleccione los tiquetes</label>
+
       <div class="container" formArrayName="tickets" for="tickets">
         <ul class="ks-cboxtags">
 
@@ -73,13 +88,8 @@
             <div class="title">
               {{p.name}}
             </div>
-            <div class="desc">
-              {{p.description}}
-            </div>
-
-
             <div class="cta">
-              <div class="price">$130</div>
+              <div class="price">${{p.price}}</div>
               <button class="btn" (click)="obtenerProducto(p.id)" data-toggle="modal" data-target="#myModal">Add to
                 cart<span class="bg"></span></button>
             </div>

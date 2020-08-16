@@ -30,14 +30,14 @@ export class ReservationComponent implements OnInit {
   productos: any;
   constructor(
     public fb: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute,
     private gService: GenericService,
     private authService: AuthenticationService,
-    private notificacion: NotificacionService
-
+    private notificacion: NotificacionService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
-    this.reactiveForm();
+
+
 
   }
 
@@ -55,14 +55,21 @@ export class ReservationComponent implements OnInit {
       total: null,
       cantidad: null
     });
-    this.listaProductos();
-    this.getTickets();
 
+    this.getTickets();
+    this.listaProductos();
   }
 
   ngOnInit(): void {
 
+    let id = +this.route.snapshot.paramMap.get('id');
+    this.obtenerCartelera(id);
+    this.reactiveForm();
+  }
 
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   Calcular() {
@@ -85,6 +92,15 @@ export class ReservationComponent implements OnInit {
     this.totalProductos = t;
 
   }
+  obtenerCartelera(id: any) {
+    this.gService.get("carteleras", id).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.cartelera = data;
+
+    },
+      (error: any) => {
+        this.notificacion.mensaje(error.mensaje, error.name, 'error');
+      });
+  }
 
   listaProductos() {
     this.gService.list('productos/all').pipe(takeUntil(this.destroy$)).
@@ -97,16 +113,6 @@ export class ReservationComponent implements OnInit {
         }
       );
 
-  }
-
-  obtenerPelicula(id: any) {
-    this.gService.get("peliculas", id).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      this.movie = data;
-      this.reactiveForm();
-    },
-      (error: any) => {
-        this.notificacion.mensaje(error.mensaje, error.name, 'error');
-      });
   }
 
   obtenerProducto(id: any) {
