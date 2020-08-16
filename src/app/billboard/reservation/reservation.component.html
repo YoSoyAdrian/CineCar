@@ -1,0 +1,157 @@
+<form [formGroup]="formCreate" novalidate>
+  <div class="row container-fluid mt-4">
+    <div class="col-xl-12 col-sm-12">
+      <div class="col-xl-12 col-sm-12 text-center">
+        <p class="tiquete">
+          <span>
+            Reservación
+          </span>
+        </p>
+      </div>
+      <div class="row mt-4">
+        <div class="col-xl-3 col-sm-12">
+          <img src="assets/img/1.png" width="100%" />
+        </div>
+        <div class="col-xl-8 mt-4">
+          <div class="col-xl-3">
+            <a>Titulo: </a>
+          </div>
+          <div class="col-xl-3">
+            <a>Fecha: </a>
+          </div>
+          <div class="col-xl-3">
+            <a>Hora: </a>
+          </div>
+          <div class="col-xl-3">
+            <a>Localización: </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row container-fluid">
+    <div class="col-xl-12 text-center col-sm-12">
+      <p class="tiquete">
+        <span>
+          Tiquetes
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="row container-fluid mb-4">
+    <div class="col-xl-12 mb-4">
+      <label>Seleccione los tiquetes</label>
+      <div class="container" formArrayName="tickets" for="tickets">
+        <ul class="ks-cboxtags">
+
+          <li *ngFor="let t of tickets.controls; index as i">
+            <input type="checkbox" required [formControlName]="i" inputmode="numeric" id="checkbox{{i}}"
+              [value]="ticketList[i]?.id" (change)="onCheckChange(ticketList[i]?.id, $event)" /><label
+              for="checkbox{{i}}">{{ticketList[i]?.name}}</label>
+          </li>
+
+        </ul>
+      </div>
+      <small *ngIf="errorHandling('tickets', 'required')" class="text-danger">
+        Seleccione al menos un tiquete
+      </small>
+    </div>
+  </div>
+  <div class="row container-fluid mb-4">
+    <div class="col-xl-12 text-center col-sm-12">
+      <p class="tiquete">
+        <span>
+          Productos
+        </span>
+      </p>
+    </div>
+    <div class="col-xl-12 mb-4">
+      <div class="row">
+        <div class="col-xl-3 mb-3" *ngFor="let p of productos">
+          <div class="shop-card col-xl-12">
+            <div class="title">
+              {{p.name}}
+            </div>
+            <div class="desc">
+              {{p.description}}
+            </div>
+
+
+            <div class="cta">
+              <div class="price">$130</div>
+              <button class="btn" (click)="obtenerProducto(p.id)" data-toggle="modal" data-target="#myModal">Add to
+                cart<span class="bg"></span></button>
+            </div>
+          </div>
+          <div class="bg"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!---->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" *ngIf="product">
+          <div class="center-wrapper">
+            <div class="content">
+              <div class="bag">
+                <p class="bag-head"><span style="text-transform: uppercase">{{product.name}}</span> - item</p>
+              </div>
+              <div class="bag-product" style="color: black;">
+                <div class="image">
+                  <img src="{{product.image}}" class="product-image">
+                </div>
+                <div class="description">
+                  <p style="margin-bottom: 0.5rem;">Clasificación</p>
+                  <select style="width: 140px;">
+                    <option *ngFor="let t of product.classification_products" id="type_product" [value]="t.id">
+                      {{t.name}}
+                    </option>
+                  </select>
+                  <p style="margin-bottom: 0.5rem;">Precio unidad</p>
+                  <h2>{{product.price}}</h2>
+                  <div class="quantity-wrapper">
+                    <div>
+                      <label for="quantity" style="margin-right: 0.5rem;">Cantidad:</label>
+                      <input type="number" placeholder="cantidad" formControlName="cantidad" onfocus="this.value=''"
+                        required />
+                    </div>
+                    <button class=" btn-remove" type="submit" (click)="Calcular()">Agregar</button>
+                    <button class="btn-remove">Eliminar</button>
+                  </div>
+                </div>
+              </div>
+              <div class="bag-total">
+                <div class="subtotal">
+                  <p class="small">Subtotal:</p>
+                  <p class="small">{{subTotal}}</p>
+                </div>
+
+                <div class="total">
+                  <h3>Total:</h3>
+                  <h3>{{totalProductos}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!---->
+
+
+
+</form>

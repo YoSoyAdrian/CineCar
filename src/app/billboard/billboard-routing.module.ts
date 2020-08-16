@@ -4,6 +4,7 @@ import { CarteleraComponent } from './cartelera/cartelera.component';
 import { CarteleraCreateComponent } from './cartelera-create/cartelera-create.component';
 import { CarteleraIndexComponent } from './cartelera-index/cartelera-index.component';
 import { CarteleraListComponent } from './cartelera-list/cartelera-list.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,7 @@ const routes: Routes = [
       { path: 'registrar', component: CarteleraCreateComponent },
       { path: 'listado', component: CarteleraListComponent },
     ]
-  }
+  }, { path: 'reservacion', component: ReservationComponent },
 
 ];
 

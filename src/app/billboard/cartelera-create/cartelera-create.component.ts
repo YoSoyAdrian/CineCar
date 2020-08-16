@@ -83,7 +83,7 @@ export class CarteleraCreateComponent implements OnInit {
   getTickets() {
     return this.gService.list('carteleras/tiquetes').subscribe(
       (respuesta: any) => {
-        (this.ticketList = respuesta), this.checkboxPeliculas();
+        (this.ticketList = respuesta), this.checkboxTickets();
       },
       (error) => {
         this.error = error;
@@ -97,7 +97,7 @@ export class CarteleraCreateComponent implements OnInit {
   get tickets_id(): FormArray {
     return this.formCreate.get('tickets_id') as FormArray;
   }
-  private checkboxPeliculas() {
+  private checkboxTickets() {
     this.ticketList.forEach(() => {
       const control = new FormControl(); // primer parámetro valor a asignar
       (this.formCreate.controls.tickets as FormArray).push(control);
