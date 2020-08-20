@@ -62,7 +62,7 @@ ul {
     flex: 0 0 300px;
     flex-direction: column;
 
-    margin: 20px;
+    margin: 15px;
     margin-bottom: 30px;
     @include radius(10px);
 
@@ -90,7 +90,7 @@ ul {
     }
 
     .book-container {
-      height: 200px;
+      height: 80px;
       .content {
         position: relative;
         opacity: 0;
@@ -132,8 +132,6 @@ ul {
 
     .informations-container {
       flex: 1 0 auto;
-
-      padding: 20px;
 
       background: $grey2;
 
@@ -385,4 +383,96 @@ body {
   margin: -1px;
   padding: 0;
   border: 0;
+}
+//Titulo
+#pelicula {
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  display: inline-block;
+  border-bottom: 4px double rgba(255, 255, 255, 0.25);
+  border-width: 4px 0;
+  padding: 1.5em 0em;
+  width: 40em;
+
+  text-align: center;
+
+  span {
+    font: 566 2em/1 "Oswald", sans-serif;
+    letter-spacing: 0;
+    padding: 0.25em 0 0.325em;
+    display: block;
+    margin: 0 auto;
+    text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+
+    /* Clip Background Image */
+
+    background: url("http://f.cl.ly/items/010q3E1u3p2Q0j1L1S1o/animated_text_fill.png")
+      repeat-y;
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* Animate Background Image */
+
+    -webkit-text-fill-color: transparent;
+    animation: aitf 80s linear infinite;
+
+    /* Activate hardware acceleration for smoother animations */
+
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+}
+
+/* Animate Background Image */
+
+@keyframes aitf {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+//Menu
+
+.menu-bar {
+  border-radius: 25px;
+  height: fit-content;
+  display: inline-flex;
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  align-items: center;
+  padding: 0 10px;
+  margin: 50px 0 0 0;
+  li {
+    list-style: none;
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    padding: 12px 16px;
+    margin: 0 8px;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+    &::before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      transition: 0.2s;
+      border-radius: 25px;
+    }
+    &:hover {
+      &::before {
+        background: linear-gradient(to bottom, #e8edec, #d2d1d3);
+        box-shadow: 0px 3px 20px 0px black;
+        transform: scale(1.2);
+      }
+      color: black;
+    }
+  }
 }

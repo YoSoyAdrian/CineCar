@@ -14,6 +14,7 @@ export interface IError {
   status: number;
   statusText: string;
 }
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,9 +29,11 @@ export class CustomHandlerErrorService {
     if (error.status === 404) {
       error.error.message = 'Recurso no encontrado';
     }
+
     if (error.status === 401) {
       error.error.message = 'No autorizado';
     }
+
     if (error.status === 400) {
       error.error.message = 'Solicitud incorrecta';
     }

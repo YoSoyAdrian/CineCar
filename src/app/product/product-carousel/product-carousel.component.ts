@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { GenericService } from 'src/app/share/generic.service';
+import { FormBuilder, } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 import { NotificacionService } from 'src/app/share/notificacion.service';
+import { GenericService } from 'src/app/share/generic.service';
+import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-product-carousel',
@@ -14,7 +19,11 @@ export class ProductCarouselComponent implements OnInit {
   datos: any;
   error: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(private gService: GenericService,
+  constructor(public fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private gService: GenericService,
+    private authService: AuthenticationService,
     private notificacion: NotificacionService) {
   }
   ngOnInit(): void {

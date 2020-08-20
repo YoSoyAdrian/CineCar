@@ -71,10 +71,10 @@ export class GenericService {
     });
   }
   // actualizar
-  update(endopoint: string, objUpdate: any | any): Observable<any | any[]> {
+  update(endopoint: string, id: number, objUpdate: any | any): Observable<any | any[]> {
     this.getCurrentUser();
-    return this.http.patch<any | any[]>(
-      this.urlAPI + endopoint + `/${objUpdate.id}`,
+    return this.http.post<any | any[]>(
+      this.urlAPI + endopoint + `/${id}`,
       objUpdate,
       { headers: this.headers }
     );

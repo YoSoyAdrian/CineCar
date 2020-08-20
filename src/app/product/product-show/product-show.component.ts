@@ -11,27 +11,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 
 @Component({
-  selector: 'app-peliculas-show',
-  templateUrl: './peliculas-show.component.html',
-  styleUrls: ['./peliculas-show.component.scss']
+  selector: 'app-product-show',
+  templateUrl: './product-show.component.html',
+  styleUrls: ['./product-show.component.scss']
 })
-export class PeliculasShowComponent implements OnInit {
+export class ProductShowComponent implements OnInit {
   stars: number[] = [1, 2, 3, 4, 5];
   selectedValue: number;
   formUpdate: FormGroup;
-  id = 0;
+
   datos: any;
   error: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(
     public fb: FormBuilder,
-    private gService: GenericService,
-    private authService: AuthenticationService,
-    private notificacion: NotificacionService,
+    private router: Router,
     private route: ActivatedRoute,
-    private router: Router) {
-    this.id = +this.route.snapshot.paramMap.get('id');
-    this.obtenerPelicula(this.id);
+    private gService: GenericService,
+    private notificacion: NotificacionService) {
+    let id = +this.route.snapshot.paramMap.get('id');
+    this.obtenerProducto(id);
 
   }
 
@@ -64,7 +63,7 @@ export class PeliculasShowComponent implements OnInit {
     this.gService.updateVoto('votos', this.datos.id).subscribe(
       (respuesta: any) => {
         this.datos = respuesta;
-        this.obtenerPelicula(this.id);
+
       },
       (error) => {
         this.error = error;
@@ -73,8 +72,8 @@ export class PeliculasShowComponent implements OnInit {
     );
   }
 
-  obtenerPelicula(id: any) {
-    this.gService.get("peliculas", id).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+  obtenerProducto(id: any) {
+    this.gService.get("productos", id).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       this.datos = data;
       this.reactiveForm();
     },

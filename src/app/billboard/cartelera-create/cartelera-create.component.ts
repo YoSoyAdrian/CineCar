@@ -29,7 +29,9 @@ export class CarteleraCreateComponent implements OnInit {
     private authService: AuthenticationService,
     private notificacion: NotificacionService
   ) {
+
     this.reactiveForm();
+
   }
 
   reactiveForm() {
@@ -52,7 +54,11 @@ export class CarteleraCreateComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.fecha();
+  }
+  fecha() {
+    let fecha_minimo = new Date().toISOString().split("T")[0];
+    document.getElementById("fecha").setAttribute("min", fecha_minimo);
   }
   getPeliculas() {
     this.gService

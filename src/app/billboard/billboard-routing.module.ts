@@ -5,6 +5,8 @@ import { CarteleraCreateComponent } from './cartelera-create/cartelera-create.co
 import { CarteleraIndexComponent } from './cartelera-index/cartelera-index.component';
 import { CarteleraListComponent } from './cartelera-list/cartelera-list.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { AuthGuardService } from '../share/auth-guard.service';
+import { RolGuardService } from '../share/rol-guard.service';
 
 
 const routes: Routes = [
@@ -12,7 +14,8 @@ const routes: Routes = [
   { path: 'cartelera', component: CarteleraComponent },
 
   {
-    path: 'mantenimiento/carteleras', component: CarteleraIndexComponent,
+    path: 'mantenimiento/carteleras', component: CarteleraIndexComponent, canActivate: [AuthGuardService, RolGuardService],
+    data: { expectedRole: '1' },
     children: [
       { path: 'registrar', component: CarteleraCreateComponent },
       { path: 'listado', component: CarteleraListComponent },

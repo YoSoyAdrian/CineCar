@@ -467,11 +467,10 @@ $font-head: "Space Mono", sans-serif;
 $font-txt: "Lato", sans-serif;
 $small: 0.8rem;
 $blue: dodgerblue;
-$violet: lighten(rebeccapurple, 20%);
-$yellow: lemonchiffon;
+$violet: lighten(rgb(7, 7, 6), 20%);
+$yellow: rgb(26, 25, 23);
 
 .center-wrapper {
-  padding: 0.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -584,9 +583,16 @@ h2 {
 }
 
 .image {
-  width: 40%;
+  width: 55%;
+  display: block;
+  position: relative;
+  top: 30px;
+  left: 10px;
+
   img.product-image {
-    max-width: 100%;
+    max-width: 91%;
+    height: 177px;
+    border-radius: 14px;
   }
 }
 
@@ -604,7 +610,6 @@ button {
   cursor: pointer;
   width: 100px;
   background: none;
-  border: 2px solid $violet;
 }
 
 .quantity-wrapper {
@@ -808,3 +813,65 @@ Slick Dots
     stroke-dashoffset: 0;
   }
 }
+
+//Input
+:focus {
+  outline: none;
+}
+.input-container {
+  position: relative;
+  display: inline-flex;
+
+  input[type="number"] {
+    color: #efeff1;
+    width: 96%;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    background-color: #252831;
+    border: none;
+  }
+}
+.effect-1 ~ .focus-border {
+  position: absolute;
+  bottom: 0;
+
+  width: 0;
+  height: 2px;
+  background-color: #e6520c;
+  transition: 0.4s;
+}
+.effect-1:focus ~ .focus-border {
+  width: 86%;
+  transition: 0.4s;
+}
+
+//botones flotantes
+.social-sidebar-buttons {
+  width: 32px;
+  margin-left: 1100px;
+}
+.social-facebook {
+  height: 48px;
+  width: 48px;
+  margin: 0px 0 0 48px;
+  float: left;
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  -o-transition: all ease 0.3s;
+  -ms-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  position: fixed;
+  right: 0px;
+  z-index: 1000;
+  top: 200px;
+}
+.social-facebook:hover {
+  background-position: 0px -48px;
+  box-shadow: 0px 0px 4px 1px rgba(235, 230, 230, 0.8);
+}
+
+.facebook-hover {
+  background-image: url("https://1.bp.blogspot.com/-OUx8NjCmOPY/U-kFMvueC5I/AAAAAAAAVZU/c9GltNEzfwI/s1600/facebook-hover.png");
+}
+
+//Tabla

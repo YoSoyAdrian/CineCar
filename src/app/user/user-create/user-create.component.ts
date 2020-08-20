@@ -43,19 +43,20 @@ export class UserCreateComponent implements OnInit {
     this.loading = true;
     this.authService.createUser(this.formCreate.value).subscribe(
       (respuesta: any) => {
-        this.usuario = respuesta;
-        this.router.navigate(['/usuario/login'], {
-          queryParams: { register: 'true' },
+        (this.usuario = respuesta), this.router.navigateByUrl('/usuario/login', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['usuario/login']);
         });
-
+        window.location.reload();
       },
       (error) => {
         this.error = error;
         this.loading = false;
         this.notificacion.msjValidacion(this.error);
       }
+
     );
   }
+
   onReset() {
     this.formCreate.reset();
   }

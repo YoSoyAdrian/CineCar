@@ -1,28 +1,47 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Subject } from 'rxjs';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { Component, OnInit, } from '@angular/core';
+import { Subject, } from 'rxjs';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
-import { positionElements } from '@ng-bootstrap/ng-bootstrap/util/positioning';
+
+
 declare var $: any;
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
-  styleUrls: ['./reservation.component.scss']
+  styleUrls: ['./reservation.component.scss'],
 })
 export class ReservationComponent implements OnInit {
-  productosList: Array<Object> = new Array<Object>();
+  productosList: Array<{
+    cantidad: number;
+    nombre: string;
+    subtotal: number;
+  }> = new Array<{ cantidad: number; nombre: string; subtotal: number }>();
+  tiqueteList: Array<{ nombre: string; precio: number }> = new Array<{
+    nombre: string;
+    precio: number;
+  }>();
   subTotal = 0;
   totalProductos = 0;
+  precio = 0;
+  clasificacion = 0;
+  TotalTickets = 0;
   product: any;
-  movie: any;
+  auto: any;
   location: any;
   cartelera: any;
   ticketList: any;
+
   error: any;
   formCreate: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -34,12 +53,8 @@ export class ReservationComponent implements OnInit {
     private authService: AuthenticationService,
     private notificacion: NotificacionService,
     private route: ActivatedRoute,
-    private router: Router,
-  ) {
-
-
-
-  }
+    private router: Router
+  ) { }
 
   reactiveForm() {
     this.formCreate = this.fb.group({
@@ -52,19 +67,20 @@ export class ReservationComponent implements OnInit {
       visible: ['', [Validators.required]],
       tickets: this.fb.array([]),
       tickets_id: this.fb.array([]),
-      total: null,
-      cantidad: null
+      clasificacion: null,
+      cantidad: null,
     });
 
-    this.getTickets();
+
     this.listaProductos();
   }
 
   ngOnInit(): void {
-
     let id = +this.route.snapshot.paramMap.get('id');
     this.obtenerCartelera(id);
+
     this.reactiveForm();
+    this.Table();
   }
 
   ngOnDestroy() {
@@ -72,13 +88,37 @@ export class ReservationComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 
+  Table() {
+    $(function () {
+      // Start counting from the third row
+      var counter = 3;
+
+      // Remove row when delete btn is clicked
+      $('table').on('click', '#deleteRow', function (event) {
+        $(this).closest('tr').remove();
+
+        counter -= 1;
+      });
+    });
+  }
+  calcularProducto(event) {
+
+    this.clasificacion = this.formCreate.get('clasificacion').value;
+    this.product.price = parseInt((this.product.price + this.clasificacion));
+    console.log('Precio', this.product.price);
+
+  }
   Calcular() {
-    var cantidad = this.formCreate.get('cantidad').value;
+    var cantidad = (document.getElementById('cantProducto') as HTMLInputElement).value;
     var nombre = this.product.name;
-    this.subTotal = cantidad * this.product.price;
+    this.subTotal = parseInt(cantidad) * this.product.price;
     var t = 0;
     let i = 0;
-    this.productosList.push([cantidad, nombre, this.subTotal]);
+    this.productosList.push({
+      cantidad: parseInt(cantidad),
+      nombre: nombre,
+      subtotal: this.subTotal,
+    });
     for (var arreglo in this.productosList) {
       for (var elemento in this.productosList[arreglo]) {
         if (i == 2) {
@@ -90,36 +130,50 @@ export class ReservationComponent implements OnInit {
       i = 0;
     }
     this.totalProductos = t;
+    console.log("Productos: ", this.productosList);
+  }
 
+  obtenerCantidadTickets(nombre: string, precio: number) {
+    var cantidad = (document.getElementById(nombre) as HTMLInputElement).value;
+
+    if (cantidad.length != 0) {
+      this.tiqueteList.push({ nombre: nombre, precio: precio });
+    }
+    console.log('Tiquetes: ', this.tiqueteList);
   }
   obtenerCartelera(id: any) {
-    this.gService.get("carteleras", id).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      this.cartelera = data;
-
-    },
-      (error: any) => {
-        this.notificacion.mensaje(error.mensaje, error.name, 'error');
-      });
+    this.gService
+      .get('carteleras', id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (data: any) => {
+          this.cartelera = data;
+          this.getTickets();
+        },
+        (error: any) => {
+          this.notificacion.mensaje(error.mensaje, error.name, 'error');
+        }
+      );
   }
 
   listaProductos() {
-    this.gService.list('productos/all').pipe(takeUntil(this.destroy$)).
-      subscribe((data: any) => {
-        this.productos = data;
-      },
+    this.gService
+      .list('productos/all')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (data: any) => {
+          this.productos = data;
+        },
         (error: any) => {
-          this.notificacion.mensaje(error.mensaje, error.name, 'error')
-            ;
+          this.notificacion.mensaje(error.mensaje, error.name, 'error');
         }
       );
-
   }
 
   obtenerProducto(id: any) {
-    var p = this.productos.find(x => x.id == id);
+    var p = this.productos.find((x) => x.id == id);
     this.product = p;
-    console.log("id", id);
-    console.log("Productos", this.product);
+
   }
 
   getLocalizacion() {
@@ -136,15 +190,10 @@ export class ReservationComponent implements OnInit {
       );
   }
   getTickets() {
-    return this.gService.list('carteleras/tiquetes').subscribe(
-      (respuesta: any) => {
-        (this.ticketList = respuesta), this.checkboxTickets();
-      },
-      (error) => {
-        this.error = error;
-        this.notificacion.msjValidacion(this.error);
-      }
-    );
+
+    this.ticketList = this.cartelera.tickets;
+    this.checkboxTickets();
+
   }
   get tickets(): FormArray {
     return this.formCreate.get('tickets') as FormArray;
@@ -152,19 +201,24 @@ export class ReservationComponent implements OnInit {
   get tickets_id(): FormArray {
     return this.formCreate.get('tickets_id') as FormArray;
   }
+
   private checkboxTickets() {
     this.ticketList.forEach(() => {
       const control = new FormControl(); // primer parámetro valor a asignar
       (this.formCreate.controls.tickets as FormArray).push(control);
     });
   }
+
   onCheckChange(idCheck, event) {
     /* seleccionado */
     if (event.target.checked) {
       // agregar un nuevo control en el array de controles de los identificadores
+
       (this.formCreate.controls.tickets_id as FormArray).push(
         new FormControl(event.target.value)
       );
+
+      console.log('tiquete seleccionado');
     } else {
       /* Deseleccionar*/
       // Buscar el elemento que se le quito la selección
@@ -174,6 +228,12 @@ export class ReservationComponent implements OnInit {
         if (idCheck == ctrl.value) {
           // Quitar el elemento deseleccionado del array
           (this.formCreate.controls.tickets_id as FormArray).removeAt(i);
+          //Borrar tiquete
+
+          console.log('tiquete encontrado');
+          if ((this.formCreate.controls.tickets_id as FormArray).length == 0) {
+          }
+          console.log('tiquetes deseleccionado', this.tickets_id.value);
           return;
         }
 
@@ -186,20 +246,21 @@ export class ReservationComponent implements OnInit {
     console.log(this.formCreate.value);
 
     if (this.formCreate.valid) {
-      this.gService.create('carteleras/create', this.formCreate.value).subscribe(
-        (respuesta: any) => {
-          this.cartelera = respuesta;
-          this.router.navigate(['mantenimiento/carteleras/listado'], {
-            queryParams: { register: 'true' },
-          });
-        },
-        (error) => {
-          this.error = error;
-          console.log(this.error);
-          this.notificacion.msjValidacion(this.error);
-
-        }
-      );
+      this.gService
+        .create('carteleras/create', this.formCreate.value)
+        .subscribe(
+          (respuesta: any) => {
+            this.cartelera = respuesta;
+            this.router.navigate(['mantenimiento/carteleras/listado'], {
+              queryParams: { register: 'true' },
+            });
+          },
+          (error) => {
+            this.error = error;
+            console.log(this.error);
+            this.notificacion.msjValidacion(this.error);
+          }
+        );
     } else {
       console.log(this.error);
     }
@@ -216,5 +277,5 @@ export class ReservationComponent implements OnInit {
       this.formCreate.controls[control].invalid &&
       (this.makeSubmit || this.formCreate.controls[control].touched)
     );
-  }
+  };
 }

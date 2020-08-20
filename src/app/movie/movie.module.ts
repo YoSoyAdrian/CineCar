@@ -11,11 +11,13 @@ import { ReactiveFormsModule, } from '@angular/forms';
 import { PeliculasIndexComponent } from './peliculas-index/peliculas-index.component';
 import { PeliculasListComponent } from './peliculas-list/peliculas-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PeliculasDesactivadasComponent } from './peliculas-desactivadas/peliculas-desactivadas.component';
+import { PeliculasUpdateComponent } from './peliculas-update/peliculas-update.component';
 
 
 
 @NgModule({
-  declarations: [PeliculasComponent, CarouselComponent, PeliculasShowComponent, PeliculasCreateComponent, PeliculasIndexComponent, PeliculasListComponent,],
+  declarations: [PeliculasComponent, CarouselComponent, PeliculasShowComponent, PeliculasCreateComponent, PeliculasIndexComponent, PeliculasListComponent, PeliculasDesactivadasComponent, PeliculasUpdateComponent,],
   imports: [
     CommonModule,
     MovieRoutingModule,

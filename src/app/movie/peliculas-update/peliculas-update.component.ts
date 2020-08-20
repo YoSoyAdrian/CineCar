@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,17 +7,14 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
-
-
-
+import { pathToFileURL } from 'url';
 
 @Component({
-  selector: 'app-peliculas-create',
-  templateUrl: './peliculas-create.component.html',
-  styleUrls: ['./peliculas-create.component.scss']
+  selector: 'app-peliculas-update',
+  templateUrl: './peliculas-update.component.html',
+  styleUrls: ['./peliculas-update.component.scss']
 })
-export class PeliculasCreateComponent implements OnInit {
-  @ViewChild('fileInput') fileInput: ElementRef;
+export class PeliculasUpdateComponent implements OnInit {
 
   fileToUpload: File = null;
   $: any;
@@ -32,34 +29,28 @@ export class PeliculasCreateComponent implements OnInit {
     public fb: FormBuilder,
     private router: Router,
     private gService: GenericService,
+    private route: ActivatedRoute,
     private authService: AuthenticationService,
     private notificacion: NotificacionService
   ) {
-    this.reactiveForm();
+    //Desde el constructor obtener el identificar de la ruta
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.getPelicula(id);
   }
+  getPelicula(id: number) {
+    this.gService.get('peliculas', id).subscribe(
+      (respuesta: any) => {
+        this.pelicula = respuesta;
+        console.log(this.pelicula);
+        //se construye el formulario
+        this.reactiveForm();
 
-  reactiveForm() {
-    this.formCreate = this.fb.group({
-      name: ['', [Validators.required]],
-      synopsis: ['', [Validators.required]],
-      premiere_date: ['', [Validators.required]],
-      duration: ['', [Validators.required]],
-      image: null,
-      banner: [],
-      active: ['', [Validators.required]],
-      classification_movie_id: ['', [Validators.required]],
-      gener_movies: this.fb.array([]),
-      gener_movie_id: this.fb.array([]),
-
-    });
-
-
-    this.getGeneros();
-    this.getClasificaciones();
-  }
-
-  ngOnInit(): void {
-
+      },
+      (error) => {
+        this.error = error;
+        this.notificacion.msjValidacion(this.error);
+      }
+    );
   }
   uploadFile(event) {
     const file = (event.target as HTMLInputElement).files[0];
@@ -82,6 +73,32 @@ export class PeliculasCreateComponent implements OnInit {
 
   }
 
+  reactiveForm() {
+    this.getGeneros();
+    this.getClasificaciones();
+    //Si hay información del videojuego
+    if (this.pelicula) {
+      //Cargar la información del videojuego
+      //en los controles que conforman el formulario
+      this.formCreate = this.fb.group({
+        id: [this.pelicula.id, [Validators.required]],
+        name: [this.pelicula.name, [Validators.required]],
+        synopsis: [this.pelicula.synopsis, [Validators.required]],
+        premiere_date: [this.pelicula.premiere_date, [Validators.required]],
+        duration: [this.pelicula.duration, [Validators.required]],
+        image: [this.pelicula.image, [Validators.required]],
+        banner: [this.pelicula.banner, [Validators.required]],
+        active: [this.pelicula.active, [Validators.required]],
+        classification_movie_id: [this.pelicula.classification_movie_id, [Validators.required]],
+        gener_movies: this.fb.array([]),
+        gener_movie_id: this.fb.array([]),
+
+      });
+    }
+  }
+  ngOnInit(): void {
+
+  }
 
   getClasificaciones() {
     this.gService
@@ -99,7 +116,7 @@ export class PeliculasCreateComponent implements OnInit {
   getGeneros() {
     return this.gService.list('peliculas/generos').subscribe(
       (respuesta: any) => {
-        (this.generoList = respuesta), this.checkboxPeliculas();
+        (this.generoList = respuesta), this.checkboxGeneros();
       },
       (error) => {
         this.error = error;
@@ -113,37 +130,42 @@ export class PeliculasCreateComponent implements OnInit {
   get gener_movie_id(): FormArray {
     return this.formCreate.get('gener_movie_id') as FormArray;
   }
-  private checkboxPeliculas() {
-    this.generoList.forEach(() => {
-      const control = new FormControl(); // primer parámetro valor a asignar
+  private checkboxGeneros() {
+    //Recorrer la lista de plataformas y especificar si esta seleccionado
+    this.generoList.forEach((o) => {
+      let selected = false;
+      if (this.pelicula.gener_movies.find((x) => x.id == o.id)) {
+        selected = true;
+      }
+      const control = new FormControl(selected);
       (this.formCreate.controls.gener_movies as FormArray).push(control);
+      if (selected) {
+        //Agregar al array de id seleccionados
+        (this.formCreate.controls.gener_movie_id as FormArray).push(
+          new FormControl(o.id)
+        );
+      }
     });
   }
-  onCheckChange(idCheck: number, event) {
+  onCheckChange(idCheck, event) {
     /* seleccionado */
     if (event.target.checked) {
       // agregar un nuevo control en el array de controles de los identificadores
       (this.formCreate.controls.gener_movie_id as FormArray).push(
         new FormControl(event.target.value)
       );
-
     } else {
       /* Deseleccionar*/
       // Buscar el elemento que se le quito la selección
       let i = 0;
-      console.log(i);
+
       this.gener_movie_id.controls.forEach((ctrl: FormControl) => {
         if (idCheck == ctrl.value) {
           // Quitar el elemento deseleccionado del array
-
           (this.formCreate.controls.gener_movie_id as FormArray).removeAt(i);
-
-          console.log("Gener_movie_id", (this.formCreate.controls.gener_movie_id as FormArray).value);
-          console.log("Gener_movies", (this.formCreate.controls.gener_movies as FormArray).value);
-          console.log("IDCheck", idCheck);
-
           return;
         }
+
         i++;
       });
     }
@@ -151,6 +173,7 @@ export class PeliculasCreateComponent implements OnInit {
 
   submitForm() {
     var formData: any = new FormData();
+    formData.append("id", this.formCreate.get('id').value);
     formData.append("name", this.formCreate.get('name').value);
     formData.append("synopsis", this.formCreate.get('synopsis').value);
     formData.append("premiere_date", this.formCreate.get('premiere_date').value);
@@ -175,10 +198,10 @@ export class PeliculasCreateComponent implements OnInit {
     }
 
     if (this.formCreate.valid) {
-      this.gService.create('peliculas/create', formData).subscribe(
+      this.gService.update('peliculas/update', this.pelicula.id, formData).subscribe(
         (respuesta: any) => {
           this.pelicula = respuesta;
-          this.router.navigate(['mantenimiento/peliculas/listado'], {
+          this.router.navigate(['mantenimiento/peliculas/activas'], {
             queryParams: { register: 'true' },
           });
         },
@@ -191,20 +214,14 @@ export class PeliculasCreateComponent implements OnInit {
     } else {
 
     }
-
   }
   onReset() {
     this.formCreate.reset();
   }
   onBack() {
-    this.router.navigate(['/peliculas/registrar']);
+    this.router.navigate(['/videojuego/all']);
   }
   public errorHandling = (control: string, error: string) => {
-    return (
-      this.formCreate.controls[control].hasError(error) &&
-      this.formCreate.controls[control].invalid &&
-      (this.makeSubmit || this.formCreate.controls[control].touched)
-    );
-  }
-
+    return this.formCreate.controls[control].hasError(error);
+  };
 }

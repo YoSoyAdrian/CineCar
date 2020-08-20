@@ -1,0 +1,150 @@
+<form [formGroup]="formCreate" (ngSubmit)="submitForm()" *ngIf="pelicula" enctype="multipart/form-data">
+  <div class="row" style="background-color: 2b3e50;">
+    <div class="col-xl-12 text-center mt-3 mb-3">
+      <h3>DATOS PELICULA</h3>
+      <input type="hidden" formControlName="id" />
+    </div>
+    <div class="col-xl-6">
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control" formControlName="name" placeholder="nombre" />
+
+        </div>
+      </div>
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label for="synopsis">Sinopsis</label>
+          <textarea formControlName="synopsis" class="form-control" id="synopsis"></textarea>
+
+        </div>
+      </div>
+
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label>Fecha de estreno</label>
+          <input formControlName="premiere_date" for="premiere_date" type="date" class="form-control" id="premiere_date"
+            placeholder="dd/MM/YYYY" />
+
+        </div>
+      </div>
+      <div class="col-xl-12">
+        <div class="form-group col-xl-12">
+          <label>Duración</label>
+          <input formControlName="duration" for="duration" type="text" class="form-control" id="duration"
+            placeholder="eje: #h #m" />
+
+        </div>
+
+      </div>
+      <div class="form-group col-xl-12">
+        <div class="col-xl-8">
+          <label for="active">Disponible</label>
+        </div>
+        <div>
+          <div class="inputGroup">
+            <input id="radio1" formControlName="active" inputmode="numeric" value="1" type="radio" />
+            <label for="radio1">Sí</label>
+          </div>
+          <div class="inputGroup">
+            <input id="radio2" formControlName="active" inputmode="numeric" value="0" type="radio" />
+            <label for="radio2">No</label>
+          </div>
+          <div class="col-xl-8">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-xl-6">
+      <div class="form-group col-xl-12">
+        <label>Seleccione los generos</label>
+        <div class="container" formArrayName="gener_movies" for="gener_movies">
+          <ul class="ks-cboxtags">
+
+            <li *ngFor="let g of gener_movies.controls; index as i">
+              <input type="checkbox" [formControlName]="i" id="checkbox{{i}}" [value]="generoList[i]?.id"
+                (change)="onCheckChange(generoList[i]?.id, $event)" /><label
+                for="checkbox{{i}}">{{generoList[i]?.name}}</label>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="form-group col-xl-12">
+        <label for="classification_movie_id">Seleccione la clasificación</label>
+        <select class="form-control" formControlName="classification_movie_id">
+          <option *ngFor="let c of classification_movie" id="classification_movie" [value]="c.id">
+            {{c.name}}
+          </option>
+        </select>
+
+      </div>
+      <div class="col-xl-12">
+        <div class="file-upload">
+          <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Añadir
+            portada</button>
+
+          <div class="image-upload-wrap">
+            <input for='images' multiple formControlName="image" class="file-upload-input" type='file'
+              (change)="uploadFile($event)" onload="readURL(this);" onchange="readURL(this);" accept="image/*"
+              #fileInput />
+            <div *ngIf="pelicula.image==null" class="drag-text">
+              <h3>Arrastre y suelte un archivo o seleccione agregar imagen</h3>
+            </div>
+          </div>
+          <div>
+            <img class="file-upload-image" src="{{pelicula.image}}" alt="your image" />
+            <div *ngIf="pelicula.image==null" class="image-title-wrap">
+              <button type="button" onclick="removeUpload()" class="remove-image">Eliminar
+                <span class="image-title">Subir
+                  imagen</span></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-xl-12">
+        <div class="file-upload1">
+          <button class="file-upload-btn1" type="button" onclick="$('.file-upload-input1').trigger( 'click' )">Añadir
+            banner</button>
+
+          <div class="image-upload-wrap1">
+            <input multiple for="banner" formControlName="banner" class="file-upload-input1"
+              (change)="uploadFile1($event)" type='file' onchange="readURL1(this);" accept="image/*" #fileInput />
+            <div *ngIf="pelicula.banner==null" class="drag-text1">
+              <h3>Arrastre y suelte un archivo o seleccione agregar imagen</h3>
+            </div>
+          </div>
+          <div>
+            <img class="file-upload-image1" src="{{pelicula.banner}}" alt="your image" />
+            <div *ngIf="pelicula.banner==null" class="image-title-wrap1">
+              <button type="button" onclick="removeUpload1()" class="remove-image1">Eliminar <span
+                  class="image-title1">Subir
+                  imagen</span></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="row container-fluid">
+      <div _ngcontent-utb-c129="" class="row container-fluid">
+        <div _ngcontent-utb-c129="" role=" group" class="btn-group mb-4 col-xl-12 container-fluid"
+          style="justify-content: space-around;">
+          <div _ngcontent-utb-c129="" class="col-xl-4"><button _ngcontent-utb-c129="" type="submit"
+              class="btn btn-primary col-xl-6 container">Registrar</button></div>
+          <div _ngcontent-utb-c129="" class="col-xl-4"><button _ngcontent-utb-c129="" type="reset"
+              class="btn btn-secondary col-xl-6 container"> Cancelar </button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

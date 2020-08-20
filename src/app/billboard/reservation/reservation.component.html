@@ -1,3 +1,7 @@
+<div class="social-sidebar-buttons social-facebook" data-toggle="modal" data-target="#myModal1">
+  <i class="fas fa-shopping-cart" style="width: 100%; height: 100%; color: orange;"></i>
+</div>
+
 <form [formGroup]="formCreate" novalidate>
   <div class="row container-fluid mt-4">
     <div class="col-xl-12 col-sm-12">
@@ -12,32 +16,28 @@
         <div class="col-xl-5">
           <div class="wrapper">
             <div class="card">
-              <img src="{{cartelera.movie.banner}}">
+              <img src="{{ cartelera.movie.banner }}" />
               <div class="descriptions">
-                <h1>{{cartelera.movie.name}}</h1>
-                <p>{{cartelera.movie.synopsis}}
-                </p>
-                <button>
-                  <i class="fab fa-youtube"></i>
-                  Play trailer on YouTube
-                </button>
+                <h1>{{ cartelera.movie.name }}</h1>
+                <p>{{ cartelera.movie.synopsis }}</p>
               </div>
             </div>
           </div>
         </div>
         <div class="col-xl-5">
           <div class="col-xl-12">
-            <h1 class="h1">Fecha: {{cartelera.current_date| date:"dd-MM-yyyy"}}</h1>
-
+            <h1 class="h1">
+              Fecha: {{ cartelera.current_date | date: "dd-MM-yyyy" }}
+            </h1>
           </div>
           <div class="col-xl-12">
-            <h1 class="h1">Hora: {{cartelera.hour}}</h1>
+            <h1 class="h1">Hora: {{ cartelera.hour }}</h1>
           </div>
           <div class="col-xl-12">
-            <h1 class="h1">Duración: {{cartelera.movie.duration}}</h1>
+            <h1 class="h1">Duración: {{ cartelera.movie.duration }}</h1>
           </div>
           <div class="col-xl-12">
-            <h1 class="h1">Localización: {{cartelera.location.name}}</h1>
+            <h1 class="h1">Localización: {{ cartelera.location.name }}</h1>
           </div>
         </div>
       </div>
@@ -50,27 +50,19 @@
           Tiquetes
         </span>
       </p>
-
     </div>
-
   </div>
   <div class="row container-fluid mb-4">
     <div class="col-xl-12 mb-4">
-
       <div class="container" formArrayName="tickets" for="tickets">
         <ul class="ks-cboxtags">
-
           <li *ngFor="let t of tickets.controls; index as i">
-            <input type="checkbox" required [formControlName]="i" inputmode="numeric" id="checkbox{{i}}"
+            <input type="checkbox" required [formControlName]="i" inputmode="numeric" id="checkbox{{ i }}"
               [value]="ticketList[i]?.id" (change)="onCheckChange(ticketList[i]?.id, $event)" /><label
-              for="checkbox{{i}}">{{ticketList[i]?.name}}</label>
+              for="checkbox{{ i }}">{{ ticketList[i]?.name }}</label>
           </li>
-
         </ul>
       </div>
-      <small *ngIf="errorHandling('tickets', 'required')" class="text-danger">
-        Seleccione al menos un tiquete
-      </small>
     </div>
   </div>
   <div class="row container-fluid mb-4">
@@ -86,29 +78,30 @@
         <div class="col-xl-3 mb-3" *ngFor="let p of productos">
           <div class="shop-card col-xl-12">
             <div class="title">
-              {{p.name}}
+              {{ p.name }}
             </div>
             <div class="cta">
-              <div class="price">${{p.price}}</div>
-              <button class="btn" (click)="obtenerProducto(p.id)" data-toggle="modal" data-target="#myModal">Add to
-                cart<span class="bg"></span></button>
+              <div class="price">${{ p.price }}</div>
+              <button class="btn" (click)="obtenerProducto(p.id)" data-toggle="modal" data-target="#myModal">
+                Añadir<span class="bg"></span>
+              </button>
             </div>
           </div>
           <div class="bg"></div>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!---->
+  <!--Modal Product-->
   <div class="modal fade" id="myModal">
     <div class="modal-dialog">
-      <div class="modal-content">
-
+      <div class="modal-content" style="padding-bottom: 18px;">
         <!-- Modal Header -->
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">×</button>
+          <button type="button" class="close" data-dismiss="modal" style="padding-bottom: 10px; padding-top: 0px;">
+            ×
+          </button>
         </div>
 
         <!-- Modal body -->
@@ -116,52 +109,112 @@
           <div class="center-wrapper">
             <div class="content">
               <div class="bag">
-                <p class="bag-head"><span style="text-transform: uppercase">{{product.name}}</span> - item</p>
+                <p class="bag-head">
+                  <span style="text-transform: uppercase;">{{
+                    product.name
+                  }}</span>
+                  - item
+                </p>
               </div>
               <div class="bag-product" style="color: black;">
                 <div class="image">
-                  <img src="{{product.image}}" class="product-image">
+                  <img src="{{ product.image }}" class="product-image" />
                 </div>
                 <div class="description">
                   <p style="margin-bottom: 0.5rem;">Clasificación</p>
-                  <select style="width: 140px;">
-                    <option *ngFor="let t of product.classification_products" id="type_product" [value]="t.id">
-                      {{t.name}}
+                  <select formControlName="clasificacion" (change)="calcularProducto($event)" class="form-control"
+                    style="width: 140px;">
+                    <option *ngFor="let t of product.classification_products;index as i" id="type_product"
+                      [ngValue]="t.price">
+                      {{ t.name }}
                     </option>
                   </select>
                   <p style="margin-bottom: 0.5rem;">Precio unidad</p>
-                  <h2>{{product.price}}</h2>
+                  <h2>{{ product.price }}</h2>
                   <div class="quantity-wrapper">
                     <div>
                       <label for="quantity" style="margin-right: 0.5rem;">Cantidad:</label>
-                      <input type="number" placeholder="cantidad" formControlName="cantidad" onfocus="this.value=''"
-                        required />
+                      <input type="number" class="form-control form-group" placeholder="cantidad" id="cantProducto"
+                        onfocus="this.value=''" required />
                     </div>
-                    <button class=" btn-remove" type="submit" (click)="Calcular()">Agregar</button>
-                    <button class="btn-remove">Eliminar</button>
+                    <button data-dismiss="modal" class="form-control btn-remove" type="submit" (click)="Calcular()">
+                      Agregar
+                    </button>
+                    <button class="form-control btn-remove">Eliminar</button>
                   </div>
                 </div>
               </div>
               <div class="bag-total">
                 <div class="subtotal">
                   <p class="small">Subtotal:</p>
-                  <p class="small">{{subTotal}}</p>
+                  <p class="small">{{ subTotal }}</p>
                 </div>
 
                 <div class="total">
                   <h3>Total:</h3>
-                  <h3>{{totalProductos}}</h3>
+                  <h3>{{ totalProductos }}</h3>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
-  <!---->
+  <!--Modal Ticket-->
 
+  <!-- The Modal Product -->
+  <div class="modal fade" id="myModal1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" style="padding-bottom: 10px; padding-top: 0px;">
+            ×
+          </button>
+        </div>
+        <!-- Modal body -->
 
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12" style="padding-right: 0px;">
+              <div class="rounded-0 border-0 shadow" style="font-size: small;">
+                <div class="card-body">
+                  <!--  Bootstrap table-->
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Producto</th>
+                          <th scope="col">Cantidad</th>
+                          <th scope="col">SubTotal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let p of productosList">
+                          <td>{{ p.nombre }}</td>
+                          <td>{{ p.cantidad }}</td>
+                          <td>{{ p.subtotal }}</td>
+                          <td><button class="btn btn-danger rounded-0" id="deleteRow"><i class="fa fa-trash"></i>
+                            </button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
 
+                  <!-- Add rows button-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>

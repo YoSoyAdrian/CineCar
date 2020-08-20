@@ -4,16 +4,13 @@ import { GenericService } from 'src/app/share/generic.service';
 import { NotificacionService } from 'src/app/share/notificacion.service';
 import { Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import * as $ from 'jquery';
 @Component({
-  selector: 'app-cartelera',
-  templateUrl: './cartelera.component.html',
-  styleUrls: ['./cartelera.component.scss']
+  selector: 'app-product-desactivados',
+  templateUrl: './product-desactivados.component.html',
+  styleUrls: ['./product-desactivados.component.scss']
 })
-export class CarteleraComponent implements OnInit {
-
-
+export class ProductDesactivadosComponent implements OnInit {
   datos: any;
   error: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -22,20 +19,27 @@ export class CarteleraComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private gService: GenericService,
-    private notificacion: NotificacionService,
-
+    private notificacion: NotificacionService
   ) {
-
+    this.listaProductos();
   }
-
   ngOnInit(): void {
 
 
-    this.listaCarteleras();
+    $('.button, .close').on('click', function (e) {
+      e.preventDefault();
+      $('.detail, html, body').toggleClass('open');
+    });
+
   }
-  listaCarteleras() {
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Desinscribirse
+    this.destroy$.unsubscribe();
+  }
+  listaProductos() {
     this.gService
-      .list('carteleras/index')
+      .list('productos/all')
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data: any) => {
@@ -46,5 +50,9 @@ export class CarteleraComponent implements OnInit {
         }
       );
   }
-
+  actualizarProducto(id: number) {
+    this.router.navigate(['/productos/update', id], {
+      relativeTo: this.route,
+    });
+  }
 }

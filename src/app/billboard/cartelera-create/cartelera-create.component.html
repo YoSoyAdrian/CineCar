@@ -35,8 +35,7 @@
       <div class="col-xl-12">
         <div class="form-group col-xl-12">
           <label>Fecha a estrenar</label>
-          <input formControlName="current_date" type="date" class="form-control" id="premiere_date"
-            placeholder="dd/MM/YYYY" />
+          <input formControlName="current_date" type="date" class="form-control" id="fecha" placeholder="dd/MM/YYYY" />
           <small *ngIf="errorHandling('current_date', 'required')" class="text-danger">
             Fecha de estreno requerida (Día/Mes/Año)
           </small>
@@ -70,23 +69,21 @@
           <ul class="ks-cboxtags">
 
             <li *ngFor="let t of tickets.controls; index as i">
-              <input type="checkbox" required [formControlName]="i" inputmode="numeric" id="checkbox{{i}}"
+              <input type="checkbox" [formControlName]="i" inputmode="numeric" id="checkbox{{i}}"
                 [value]="ticketList[i]?.id" (change)="onCheckChange(ticketList[i]?.id, $event)" /><label
                 for="checkbox{{i}}">{{ticketList[i]?.name}}</label>
             </li>
 
           </ul>
         </div>
-        <small *ngIf="errorHandling('tickets', 'required')" class="text-danger">
-          Seleccione al menos un tiquete
-        </small>
+
       </div>
 
       <div class="form-group col-xl-12">
-        <div class="col-xl-8">
+        <div class="col-xl-12">
           <label for="radio">Disponible para venta</label>
         </div>
-        <div class="col-xl-8">
+        <div class="col-xl-12">
           <div class="inputGroup">
             <input id="radio3" formControlName="available" inputmode="numeric" value="1" type="radio" />
             <label for="radio3">Sí</label>
@@ -96,17 +93,17 @@
             <label for="radio4">No</label>
           </div>
         </div>
-        <div class="col-xl-8">
+        <div class="col-xl-12">
           <small *ngIf="errorHandling('available', 'required')" class="text-danger">
             La disponibilidad de la pelicula requerida
           </small>
         </div>
       </div>
       <div class="form-group col-xl-12">
-        <div class="col-xl-8">
+        <div class="col-xl-12">
           <label for="active">Visible</label>
         </div>
-        <div class="col-xl-8">
+        <div class="col-xl-12">
           <div class="inputGroup">
             <input id="radio1" formControlName="visible" value="1" inputmode="numeric" type="radio" />
             <label for="radio1">Sí</label>

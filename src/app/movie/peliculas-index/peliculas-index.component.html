@@ -8,10 +8,11 @@
               [routerLink]="['/mantenimiento/peliculas/registrar']" routerLinkActive="router-link-active" role="tab"
               aria-controls="nav-home" aria-selected="true" [class.active]="router.url == '/'">Nueva Película</a>
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" role="tab" aria-controls="nav-profile"
-              aria-selected="false" [routerLink]="['/mantenimiento/peliculas/listado']"
+              aria-selected="false" [routerLink]="['/mantenimiento/peliculas/activas']"
               routerLinkActive="router-link-active">Películas Activas</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" role="tab" aria-controls="nav-contact"
-              aria-selected="false">Películas Desactivadas</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" role="tab" aria-controls="nav-profile"
+              aria-selected="false" [routerLink]="['/mantenimiento/peliculas/desactivadas']"
+              routerLinkActive="router-link-active">Películas Desactivadas</a>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">

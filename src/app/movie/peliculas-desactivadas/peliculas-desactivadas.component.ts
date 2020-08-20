@@ -4,15 +4,13 @@ import { GenericService } from 'src/app/share/generic.service';
 import { NotificacionService } from 'src/app/share/notificacion.service';
 import { Subject } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import * as $ from 'jquery';
 @Component({
-  selector: 'app-cartelera',
-  templateUrl: './cartelera.component.html',
-  styleUrls: ['./cartelera.component.scss']
+  selector: 'app-peliculas-desactivadas',
+  templateUrl: './peliculas-desactivadas.component.html',
+  styleUrls: ['./peliculas-desactivadas.component.scss']
 })
-export class CarteleraComponent implements OnInit {
-
+export class PeliculasDesactivadasComponent implements OnInit {
 
   datos: any;
   error: any;
@@ -22,20 +20,23 @@ export class CarteleraComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private gService: GenericService,
-    private notificacion: NotificacionService,
-
-  ) {
-
-  }
-
+    private notificacion: NotificacionService
+  ) { }
   ngOnInit(): void {
-
-
-    this.listaCarteleras();
+    $('.button, .close').on('click', function (e) {
+      e.preventDefault();
+      $('.detail, html, body').toggleClass('open');
+    });
+    this.listaPeliculas();
   }
-  listaCarteleras() {
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Desinscribirse
+    this.destroy$.unsubscribe();
+  }
+  listaPeliculas() {
     this.gService
-      .list('carteleras/index')
+      .list('peliculas/desactivadas')
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data: any) => {
@@ -46,5 +47,9 @@ export class CarteleraComponent implements OnInit {
         }
       );
   }
-
+  actualizarVideojuego(id: number) {
+    this.router.navigate(['/peliculas/update', id], {
+      relativeTo: this.route,
+    });
+  }
 }
