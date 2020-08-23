@@ -7,7 +7,9 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
-import { pathToFileURL } from 'url';
+import 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 
 @Component({
   selector: 'app-peliculas-update',
@@ -204,15 +206,29 @@ export class PeliculasUpdateComponent implements OnInit {
           this.router.navigate(['mantenimiento/peliculas/activas'], {
             queryParams: { register: 'true' },
           });
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: '¡Película actualizada!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         },
         (error) => {
           this.error = error;
           console.log(this.error);
-          this.notificacion.msjValidacion(this.error);
+          Swal.fire({
+            icon: 'error',
+            title: '¡Ingrese los datos!',
+          })
         }
       );
     } else {
-
+      console.log(this.error);
+      Swal.fire({
+        icon: 'error',
+        title: '¡Ingrese TODOS los datos!',
+      })
     }
   }
   onReset() {

@@ -1,12 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { Subject, } from 'rxjs';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormArray,
-  FormControl,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 import { NotificacionService } from 'src/app/share/notificacion.service';
@@ -14,7 +8,9 @@ import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
+import 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 declare var $: any;
 @Component({
   selector: 'app-reservation',
@@ -22,6 +18,7 @@ declare var $: any;
   styleUrls: ['./reservation.component.scss'],
 })
 export class ReservationComponent implements OnInit {
+
   productosList: Array<{
     id: number;
     cantidad: number;
@@ -289,29 +286,46 @@ export class ReservationComponent implements OnInit {
   }
 
   submitForm() {
-    console.log("Cantidad", this.tiqueteList.length);
 
-    this.http.patch("http://127.0.0.1:8000/api/cinecar/carteleras/update/" + this.cartelera.id, {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .set('Accept', 'application/json'),
+    if (this.tiqueteList.length != 0) {
+      this.http.patch("http://127.0.0.1:8000/api/cinecar/carteleras/update/" + this.cartelera.id, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Accept', 'application/json'),
 
-    }, {
-      params: new HttpParams().append("cantidad", JSON.stringify(this.tiqueteList.length))
-    })
-      .subscribe(
-        (respuesta: any) => {
+      }, {
+        params: new HttpParams().append("cantidad", JSON.stringify(this.tiqueteList.length))
+      })
+        .subscribe(
 
-          this.router.navigate(['carteleras'], {
-            queryParams: { register: 'true' },
-          });
-        },
-        (error) => {
-          this.error = error;
-          console.log(this.error);
-          this.notificacion.msjValidacion(this.error);
-        }
-      );
+          (respuesta: any) => {
+            this.router.navigate(['cartelera'], {
+              queryParams: { register: 'true' },
+            });
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: '¡Reservado con éxito!',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          },
+          (error) => {
+            this.error = error;
+            console.log(this.error);
+            Swal.fire({
+              icon: 'error',
+              title: '¡Error de reservación!',
+            })
+          }
+        );
+    } else {
+
+      Swal.fire({
+        icon: 'error',
+        title: '¡Seleccione un tiquete!',
+      })
+    }
 
   }
   onReset() {

@@ -7,6 +7,9 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import { takeUntil } from 'rxjs/operators';
 import * as $ from 'jquery';
+import 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -36,8 +39,7 @@ export class UserLoginComponent implements OnInit {
   }
   /* Definir formulario y la validación */
   reactiveFormLogin() {
-    /*https://angular.io/guide/reactive-forms
-   https://angular.io/api/forms/Validators */
+
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -96,18 +98,35 @@ export class UserLoginComponent implements OnInit {
     //Reglas de validación de Angular inválidas
     if (this.formulario.invalid) {
 
+      Swal.fire({
+        icon: 'error',
+        title: '¡Ingrese TODOS los datos!',
+
+      })
       return;
 
     }
 
     this.authService.loginUser(this.formulario.value).subscribe(
       (respuesta: any) => {
-        (this.infoUsuario = respuesta), this.router.navigate(['peliculas/']);
+
+        (this.infoUsuario = respuesta), this.router.navigate(['cartelera']);
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: '¡Inicio de sesión éxitoso!',
+          showConfirmButton: false,
+          timer: 1500
+        })
       },
       (error: any) => {
         this.loading = false;
         this.error = error;
-        this.notificacion.msjValidacion(this.error);
+        Swal.fire({
+          icon: 'error',
+          title: '¡Error al iniciar sesión!',
+
+        })
       }
     );
   }

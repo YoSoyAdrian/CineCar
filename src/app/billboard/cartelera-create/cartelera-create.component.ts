@@ -7,6 +7,9 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
+import 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 @Component({
   selector: 'app-cartelera-create',
   templateUrl: './cartelera-create.component.html',
@@ -143,16 +146,30 @@ export class CarteleraCreateComponent implements OnInit {
           this.router.navigate(['mantenimiento/carteleras/listado'], {
             queryParams: { register: 'true' },
           });
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: '¡Cartelera registrada!',
+            showConfirmButton: false,
+            timer: 1000
+          })
         },
         (error) => {
           this.error = error;
           console.log(this.error);
-          this.notificacion.msjValidacion(this.error);
+          Swal.fire({
+            icon: 'error',
+            title: '¡Error de registro!',
+          })
 
         }
       );
     } else {
       console.log(this.error);
+      Swal.fire({
+        icon: 'error',
+        title: '¡Ingrese TODOS los datos!',
+      })
     }
   }
   onReset() {

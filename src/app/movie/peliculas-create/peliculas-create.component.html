@@ -66,9 +66,6 @@
         </div>
 
       </div>
-    </div>
-
-    <div class="col-xl-6">
       <div class="form-group col-xl-12">
         <label>Seleccione los generos</label>
         <div class="container" formArrayName="gener_movies" for="gener_movies">
@@ -87,6 +84,10 @@
       <small *ngIf="errorHandling('gener_movies', 'required')" class="text-danger">
         Seleccione al menos un genero
       </small>
+
+    </div>
+
+    <div class="col-xl-6">
       <div class="form-group col-xl-12">
         <label for="classification_movie_id">Seleccione la clasificación</label>
         <select class="form-control" formControlName="classification_movie_id">
@@ -157,7 +158,7 @@
         <div _ngcontent-utb-c129="" role=" group" class="btn-group mb-4 col-xl-12 container-fluid"
           style="justify-content: space-around;">
           <div _ngcontent-utb-c129="" class="col-xl-4"><button _ngcontent-utb-c129="" type="submit"
-              class="btn btn-primary col-xl-6 container" >Registrar</button></div>
+              class="btn btn-primary col-xl-6 container">Registrar</button></div>
           <div _ngcontent-utb-c129="" class="col-xl-4"><button _ngcontent-utb-c129="" type="reset"
               class="btn btn-secondary col-xl-6 container"> Cancelar </button></div>
         </div>

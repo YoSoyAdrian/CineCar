@@ -6,6 +6,9 @@ import { GenericService } from 'src/app/share/generic.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 @Component({
   selector: 'app-user-create',
   templateUrl: './user-create.component.html',
@@ -41,20 +44,38 @@ export class UserCreateComponent implements OnInit {
   ngOnInit(): void { }
   submitFormCreate() {
     this.loading = true;
-    this.authService.createUser(this.formCreate.value).subscribe(
-      (respuesta: any) => {
-        (this.usuario = respuesta), this.router.navigateByUrl('/usuario/login', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['usuario/login']);
-        });
-        window.location.reload();
-      },
-      (error) => {
-        this.error = error;
-        this.loading = false;
-        this.notificacion.msjValidacion(this.error);
-      }
+    if (this.formCreate.valid) {
+      this.authService.createUser(this.formCreate.value).subscribe(
+        (respuesta: any) => {
 
-    );
+          (this.usuario = respuesta), this.router.navigateByUrl('/usuario/login', { skipLocationChange: true }).then(() => {
+            Swal.fire({
+              position: 'top',
+              icon: 'success',
+              title: '¡Registro éxitoso!',
+              showConfirmButton: false,
+              timer: 2500
+            })
+            this.router.navigate(['usuario/login']);
+
+          });
+          window.location.reload();
+        },
+        (error) => {
+          this.error = error;
+          this.loading = false;
+          Swal.fire({
+            icon: 'error',
+            title: '¡Error de registro!',
+          })
+        }
+      );
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Ingrese TODOS los datos!',
+      })
+    }
   }
 
   onReset() {

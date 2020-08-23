@@ -7,8 +7,9 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
-
-
+import 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 
 
 @Component({
@@ -151,6 +152,7 @@ export class PeliculasCreateComponent implements OnInit {
 
   submitForm() {
     var formData: any = new FormData();
+
     formData.append("name", this.formCreate.get('name').value);
     formData.append("synopsis", this.formCreate.get('synopsis').value);
     formData.append("premiere_date", this.formCreate.get('premiere_date').value);
@@ -181,15 +183,29 @@ export class PeliculasCreateComponent implements OnInit {
           this.router.navigate(['mantenimiento/peliculas/activas'], {
             queryParams: { register: 'true' },
           });
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: '¡Película registrada!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         },
         (error) => {
           this.error = error;
           console.log(this.error);
-          this.notificacion.msjValidacion(this.error);
+          Swal.fire({
+            icon: 'error',
+            text: '¡Ingrese los datos correctamente!',
+          })
         }
       );
     } else {
 
+      Swal.fire({
+        icon: 'error',
+        text: '¡Ingrese TODOS los datos!',
+      })
     }
 
   }

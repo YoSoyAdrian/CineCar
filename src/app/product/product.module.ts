@@ -23,6 +23,7 @@ import { ProductDesactivadosComponent } from './product-desactivados/product-des
     CommonModule,
     ProductRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule]
+    HttpClientModule,
+  ]
 })
 export class ProductModule { }

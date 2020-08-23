@@ -18,6 +18,7 @@ import { ReservationComponent } from './reservation/reservation.component';
     CommonModule,
     BillboardRoutingModule,
     ReactiveFormsModule,
+   
 
   ],
   exports: [CarteleraComponent, ReservationComponent]

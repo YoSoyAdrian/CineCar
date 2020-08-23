@@ -107,11 +107,12 @@ label[for="file-input1"] {
 .container {
   max-width: 640px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 13px;
+
   padding-left: 0px;
 }
 
 ul.ks-cboxtags {
+  font-size: x-small;
   list-style: none;
   padding-left: 0px;
 }
@@ -282,11 +283,11 @@ ul.ks-cboxtags li input[type="radio"]:focus + label {
 }
 
 .file-upload-image {
-  max-height: 200px;
-  max-width: 200px;
+  max-height: 207px;
   margin: auto;
   padding: 20px;
-  margin-left: 161px;
+  padding-bottom: 0px;
+  margin-left: 156px;
 }
 
 .remove-image {
@@ -395,10 +396,9 @@ ul.ks-cboxtags li input[type="radio"]:focus + label {
 
 .file-upload-image1 {
   max-height: 200px;
-  max-width: 200px;
   margin: auto;
   padding: 20px;
-  margin-left: 161px;
+  margin-left: 77px;
 }
 
 .remove-image1 {

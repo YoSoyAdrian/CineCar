@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
-
+import 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 @Component({
   selector: 'app-product-update',
   templateUrl: './product-update.component.html',
@@ -189,13 +190,28 @@ export class ProductUpdateComponent implements OnInit {
           this.router.navigate(['mantenimiento/productos/activos'], {
             queryParams: { register: 'true' },
           });
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: '¡Producto actualizado!',
+            showConfirmButton: false,
+            timer: 1000
+          })
         },
         (error) => {
           this.error = error;
           console.log(this.error);
-          this.notificacion.msjValidacion(this.error);
+          Swal.fire({
+            icon: 'error',
+            title: '¡Ingrese los datos!',
+          })
         }
       );
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: '¡Ingrese TODOS los datos!',
+      })
     }
   }
   onReset() {

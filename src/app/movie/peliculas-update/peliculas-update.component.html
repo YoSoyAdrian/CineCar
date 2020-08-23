@@ -43,11 +43,13 @@
         </div>
         <div>
           <div class="inputGroup">
-            <input id="radio1" formControlName="active" inputmode="numeric" value="1" type="radio" />
+            <input id="radio1" formControlName="active" inputmode="numeric" value="1" type="radio"
+              [defaultChecked]="pelicula.active==1" />
             <label for="radio1">Sí</label>
           </div>
           <div class="inputGroup">
-            <input id="radio2" formControlName="active" inputmode="numeric" value="0" type="radio" />
+            <input id="radio2" formControlName="active" inputmode="numeric" value="0" type="radio"
+              [defaultChecked]="pelicula.active==0" />
             <label for="radio2">No</label>
           </div>
           <div class="col-xl-8">
@@ -56,9 +58,6 @@
         </div>
 
       </div>
-    </div>
-
-    <div class="col-xl-6">
       <div class="form-group col-xl-12">
         <label>Seleccione los generos</label>
         <div class="container" formArrayName="gener_movies" for="gener_movies">
@@ -74,7 +73,9 @@
         </div>
 
       </div>
+    </div>
 
+    <div class="col-xl-6">
       <div class="form-group col-xl-12">
         <label for="classification_movie_id">Seleccione la clasificación</label>
         <select class="form-control" formControlName="classification_movie_id">
@@ -82,7 +83,6 @@
             {{c.name}}
           </option>
         </select>
-
       </div>
       <div class="col-xl-12">
         <div class="file-upload">
