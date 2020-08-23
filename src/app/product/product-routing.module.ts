@@ -7,6 +7,8 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductShowComponent } from './product-show/product-show.component';
 import { AuthGuardService } from '../share/auth-guard.service';
 import { RolGuardService } from '../share/rol-guard.service';
+import { ProductDesactivadosComponent } from './product-desactivados/product-desactivados.component';
+import { ProductUpdateComponent } from './product-update/product-update.component';
 
 
 const routes: Routes = [
@@ -16,10 +18,13 @@ const routes: Routes = [
     data: { expectedRole: '1' },
     children: [
       { path: 'registrar', component: ProductCreateComponent },
-      { path: 'listado', component: ProductListComponent },
+      { path: 'activos', component: ProductListComponent },
+      { path: 'desactivados', component: ProductDesactivadosComponent },
+      { path: 'actualizar/:id', component: ProductUpdateComponent },
     ]
   },
   { path: 'productos/:id', component: ProductShowComponent },
+
 ];
 
 @NgModule({

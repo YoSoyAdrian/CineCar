@@ -7,7 +7,7 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
@@ -160,7 +160,7 @@ export class ProductCreateComponent implements OnInit {
       this.gService.create('productos/create', formData).subscribe(
         (respuesta: any) => {
           this.producto = respuesta;
-          this.router.navigate(['mantenimiento/productos/listado'], {
+          this.router.navigate(['mantenimiento/productos/activos'], {
             queryParams: { register: 'true' },
           });
         },

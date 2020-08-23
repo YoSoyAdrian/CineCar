@@ -87,6 +87,14 @@ export class GenericService {
       { headers: this.headers }
     );
   }
+  // actualizar cartelera
+  updateCartelera(endopoint: string, id: number, objUpdate: any | any): Observable<any | any[]> {
+    this.getCurrentUser();
+    return this.http.patch<any | any[]>(
+      this.urlAPI + endopoint + `/${id}`, objUpdate,
+      { headers: this.headers }
+    );
+  }
   postFile(endopoint: string, fileToUpload: File): Observable<boolean> {
 
     const formData: FormData = new FormData();

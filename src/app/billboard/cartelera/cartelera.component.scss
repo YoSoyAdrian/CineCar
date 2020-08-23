@@ -476,3 +476,210 @@ body {
     }
   }
 }
+//Select
+.dropdown {
+  --max-scroll: 8;
+  --text: #ffffff;
+  --border: #2f3545;
+  --borderActive: #23c4f8;
+  --background: #151924;
+  --arrow: #6c7486;
+  --arrowActive: #e4ecfa;
+  --listText: #99a3ba;
+  --listBackground: #f5f9ff;
+  --listActive: #e4ecfa;
+  --listTextActive: #6c7486;
+  --listBorder: none;
+  --textFilled: #99a3ba;
+  &.light {
+    --text: #cdd9ed;
+    --border: #cdd9ed;
+    --borderActive: #23c4f8;
+    --background: #fff;
+    --arrow: #99a3ba;
+    --arrowActive: #6c7486;
+    --listText: #99a3ba;
+    --listBackground: #fff;
+    --listActive: #f5f9ff;
+    --listTextActive: #6c7486;
+    --listBorder: #e4ecfa;
+    --textFilled: #6c7486;
+  }
+  width: 57%;
+  position: relative;
+  select {
+    display: none;
+  }
+  & > span {
+    cursor: pointer;
+    padding: 9px 16px;
+    border-radius: 6px;
+    display: block;
+    position: relative;
+    color: var(--text);
+    border: 1px solid var(--border);
+    background: var(--background);
+    transition: all 0.3s ease;
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 8px;
+      height: 2px;
+      border-radius: 1px;
+      top: 50%;
+      right: 15px;
+      background: var(--arrow);
+      transition: all 0.3s ease;
+    }
+    &:before {
+      margin-right: 4px;
+      transform: scale(0.96, 0.8) rotate(50deg);
+    }
+    &:after {
+      transform: scale(0.96, 0.8) rotate(-50deg);
+    }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    max-height: calc(var(--max-scroll) * 42px);
+    top: 42px;
+    left: 0;
+    z-index: 1;
+    right: 0;
+    background: var(--listBackground);
+    border-radius: 6px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transform-origin: 0 0;
+    transition: opacity 0.2s ease, visibility 0.2s ease,
+      transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
+    transform: scale(0.8) translate(0, 4px);
+    border: 1px solid var(--listBorder);
+    li {
+      opacity: 0;
+      transform: translate(6px, 0);
+      transition: all 0.3s ease;
+      a {
+        cursor: pointer;
+        display: block;
+        padding: 10px 16px;
+        color: var(--listText);
+        text-decoration: none;
+        outline: none;
+        position: relative;
+        transition: all 0.3s ease;
+        &:hover {
+          color: var(--listTextActive);
+        }
+      }
+      &.active {
+        a {
+          color: var(--listTextActive);
+          background: var(--listActive);
+          &:before,
+          &:after {
+            --scale: 0.6;
+            content: "";
+            display: block;
+            width: 10px;
+            height: 2px;
+            position: absolute;
+            right: 17px;
+            top: 50%;
+            opacity: 0;
+            background: var(--listText);
+            transition: all 0.2s ease;
+          }
+          &:before {
+            transform: rotate(45deg) scale(var(--scale));
+          }
+          &:after {
+            transform: rotate(-45deg) scale(var(--scale));
+          }
+          &:hover {
+            &:before,
+            &:after {
+              --scale: 0.9;
+              opacity: 1;
+            }
+          }
+        }
+      }
+      &:first-child {
+        a {
+          border-radius: 6px 6px 0 0;
+        }
+      }
+      &:last-child {
+        a {
+          border-radius: 0 0 6px 6px;
+        }
+      }
+    }
+  }
+  &.filled {
+    & > span {
+      color: var(--textFilled);
+    }
+  }
+  &.open {
+    & > span {
+      border-color: var(--borderActive);
+      &:before,
+      &:after {
+        background: var(--arrowActive);
+      }
+      &:before {
+        transform: scale(0.96, 0.8) rotate(-50deg);
+      }
+      &:after {
+        transform: scale(0.96, 0.8) rotate(50deg);
+      }
+    }
+    ul {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translate(0, 12px);
+      transition: opacity 0.3s ease, visibility 0.3s ease,
+        transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
+      li {
+        opacity: 1;
+        transform: translate(0, 0);
+        $i: 1;
+        @while $i <= 10 {
+          $delay: $i * 80;
+          &:nth-child(#{$i}) {
+            transition-delay: #{$delay}ms;
+          }
+          $i: $i + 1;
+        }
+      }
+    }
+  }
+}
+
+select {
+  --text: #ffffff;
+  --border: #2f3545;
+  --background: #151924;
+  &.dropdown {
+    padding: 9px 16px;
+    border-radius: 6px;
+    color: var(--text);
+    border: 1px solid var(--border);
+    background: var(--background);
+    line-height: 22px;
+    font-size: 16px;
+    font-family: inherit;
+    -webkit-appearance: none;
+  }
+}
+
+// switch

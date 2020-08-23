@@ -1,8 +1,7 @@
-<div class="social-sidebar-buttons social-facebook" data-toggle="modal" data-target="#myModal1">
-  <i class="fas fa-shopping-cart" style="width: 100%; height: 100%; color: orange;"></i>
-</div>
-
 <form [formGroup]="formCreate" novalidate>
+  <div class="social-sidebar-buttons social-facebook" data-toggle="modal" data-target="#myModal1">
+    <i class="fas fa-shopping-cart" style="width: 100%; height: 100%; color: orange;"></i>
+  </div>
   <div class="row container-fluid mt-4">
     <div class="col-xl-12 col-sm-12">
       <div class="col-xl-12 col-sm-12 text-center">
@@ -37,6 +36,9 @@
             <h1 class="h1">Duración: {{ cartelera.movie.duration }}</h1>
           </div>
           <div class="col-xl-12">
+            <h1 class="h1">Campos disponibles: {{ cartelera.number_space }}</h1>
+          </div>
+          <div class="col-xl-12">
             <h1 class="h1">Localización: {{ cartelera.location.name }}</h1>
           </div>
         </div>
@@ -58,11 +60,13 @@
         <ul class="ks-cboxtags">
           <li *ngFor="let t of tickets.controls; index as i">
             <input type="checkbox" required [formControlName]="i" inputmode="numeric" id="checkbox{{ i }}"
-              [value]="ticketList[i]?.id" (change)="onCheckChange(ticketList[i]?.id, $event)" /><label
+              [value]="ticketList[i]?.id" (change)="onCheckChange(ticketList[i]?.id,$event)" /><label
               for="checkbox{{ i }}">{{ ticketList[i]?.name }}</label>
           </li>
         </ul>
       </div>
+      <input type="number" formControlName="cantidad">
+      <button type="submit" (click)="submitForm()"></button>
     </div>
   </div>
   <div class="row container-fluid mb-4">
@@ -81,7 +85,7 @@
               {{ p.name }}
             </div>
             <div class="cta">
-              <div class="price">${{ p.price }}</div>
+              <div class="price">₡{{ p.price }}</div>
               <button class="btn" (click)="obtenerProducto(p.id)" data-toggle="modal" data-target="#myModal">
                 Añadir<span class="bg"></span>
               </button>
@@ -129,30 +133,43 @@
                       {{ t.name }}
                     </option>
                   </select>
+                  <small *ngIf="errorHandling('clasificacion', 'required' )" class="text-danger">
+                    El tamaño es necesario
+                  </small>
                   <p style="margin-bottom: 0.5rem;">Precio unidad</p>
-                  <h2>{{ product.price }}</h2>
+                  <h2>₡{{ product.price }}</h2>
                   <div class="quantity-wrapper">
                     <div>
                       <label for="quantity" style="margin-right: 0.5rem;">Cantidad:</label>
                       <input type="number" class="form-control form-group" placeholder="cantidad" id="cantProducto"
                         onfocus="this.value=''" required />
+                      <small *ngIf="errorHandling('cantidad', 'required' )" class="text-danger">
+                        La cantidad es necesaria
+                      </small>
                     </div>
-                    <button data-dismiss="modal" class="form-control btn-remove" type="submit" (click)="Calcular()">
-                      Agregar
-                    </button>
-                    <button class="form-control btn-remove">Eliminar</button>
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <button [disabled]="formCreate.valid" class="form-control btn-success" type="submit"
+                          (click)="calcularProducto($event)">
+                          Agregar
+                        </button>
+                      </div>
+                      <div class="col-xl-6">
+                        <button class="form-control btn-danger">Eliminar</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="bag-total">
                 <div class="subtotal">
-                  <p class="small">Subtotal:</p>
-                  <p class="small">{{ subTotal }}</p>
+                  <p class="small">Subtotal: </p>
+                  <p class="small">₡{{ subTotal }}</p>
                 </div>
 
                 <div class="total">
-                  <h3>Total:</h3>
-                  <h3>{{ totalProductos }}</h3>
+                  <h3>Total: </h3>
+                  <h3>₡{{ total }}</h3>
                 </div>
               </div>
             </div>
@@ -169,7 +186,11 @@
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" style="padding-bottom: 10px; padding-top: 0px;">
+          <div class="total">
+            <h3>Tiquete: </h3>
+            <h3 style="color:red"> ₡{{TotalTickets}}</h3>
+          </div>
+          <button type="button" class="close" data-dismiss="modal">
             ×
           </button>
         </div>
@@ -185,17 +206,21 @@
                     <table class="table">
                       <thead>
                         <tr>
+                          <th scope="col">#</th>
                           <th scope="col">Producto</th>
                           <th scope="col">Cantidad</th>
                           <th scope="col">SubTotal</th>
+                          <th scope="col">Acción</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let p of productosList">
+                        <tr *ngFor="let p of productosList;index as i">
+                          <td>{{ p.id }}</td>
                           <td>{{ p.nombre }}</td>
                           <td>{{ p.cantidad }}</td>
-                          <td>{{ p.subtotal }}</td>
-                          <td><button class="btn btn-danger rounded-0" id="deleteRow"><i class="fa fa-trash"></i>
+                          <td>₡{{ p.subtotal }}</td>
+                          <td><button class="btn btn-danger rounded-0" id="deleteRow" (click)="Table(i)"><i class="
+                              fa fa-trash"></i>
                             </button></td>
                         </tr>
                       </tbody>
@@ -209,10 +234,23 @@
           </div>
         </div>
         <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">
-            Close
-          </button>
+        <div class="modal-footer row">
+          <div class="total col-xl-12 " style="position: relative; display: inline-flex; ">
+            <h3>Total: ₡{{ total }}</h3>
+
+          </div>
+          <div class="row">
+            <div class="col-xl-6">
+              <button type="button" class="btn btn-success" (click)="reservar()" data-dismiss="modal">
+                Confirmar
+              </button>
+            </div>
+            <div class="col-xl-6">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ import { NotificacionService } from 'src/app/share/notificacion.service';
 import { GenericService } from 'src/app/share/generic.service';
 import * as $ from 'jquery';
 import { takeUntil } from 'rxjs/operators';
-
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 declare var $: any;
 @Component({
@@ -23,25 +23,29 @@ declare var $: any;
 })
 export class ReservationComponent implements OnInit {
   productosList: Array<{
+    id: number;
     cantidad: number;
     nombre: string;
     subtotal: number;
-  }> = new Array<{ cantidad: number; nombre: string; subtotal: number }>();
-  tiqueteList: Array<{ nombre: string; precio: number }> = new Array<{
+  }> = new Array<{ id: number; cantidad: number; nombre: string; subtotal: number }>();
+  tiqueteList: Array<{ id: number; nombre: string; precio: number }> = new Array<{
+    id: number;
     nombre: string;
     precio: number;
   }>();
   subTotal = 0;
   totalProductos = 0;
+  total = 0;
   precio = 0;
   clasificacion = 0;
   TotalTickets = 0;
+  cantidad = 0;
   product: any;
   auto: any;
   location: any;
   cartelera: any;
   ticketList: any;
-
+  idProducto = 1;
   error: any;
   formCreate: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -53,22 +57,16 @@ export class ReservationComponent implements OnInit {
     private authService: AuthenticationService,
     private notificacion: NotificacionService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private http: HttpClient,
   ) { }
 
   reactiveForm() {
     this.formCreate = this.fb.group({
-      location_id: ['', [Validators.required]],
-      movie_id: ['', [Validators.required]],
-      current_date: ['', [Validators.required]],
-      available: ['', [Validators.required]],
-      number_space: ['', [Validators.required]],
-      hour: ['', [Validators.required]],
-      visible: ['', [Validators.required]],
       tickets: this.fb.array([]),
       tickets_id: this.fb.array([]),
-      clasificacion: null,
-      cantidad: null,
+      clasificacion: ['4', [Validators.required]],
+      cantidad: ['', [Validators.required]],
     });
 
 
@@ -80,7 +78,7 @@ export class ReservationComponent implements OnInit {
     this.obtenerCartelera(id);
 
     this.reactiveForm();
-    this.Table();
+
   }
 
   ngOnDestroy() {
@@ -88,59 +86,73 @@ export class ReservationComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 
-  Table() {
-    $(function () {
-      // Start counting from the third row
-      var counter = 3;
-
-      // Remove row when delete btn is clicked
-      $('table').on('click', '#deleteRow', function (event) {
-        $(this).closest('tr').remove();
-
-        counter -= 1;
-      });
-    });
+  Table(id: number) {
+    var id = id;
+    console.log("Producto borrado:", this.productosList.splice(id, 1));
+    console.log("Producto restantes:", this.productosList);
+    this.Calcular();
   }
+
   calcularProducto(event) {
 
     this.clasificacion = this.formCreate.get('clasificacion').value;
-    this.product.price = parseInt((this.product.price + this.clasificacion));
-    console.log('Precio', this.product.price);
-
-  }
-  Calcular() {
     var cantidad = (document.getElementById('cantProducto') as HTMLInputElement).value;
     var nombre = this.product.name;
     this.subTotal = parseInt(cantidad) * this.product.price;
-    var t = 0;
-    let i = 0;
+
     this.productosList.push({
+      id: this.idProducto,
       cantidad: parseInt(cantidad),
       nombre: nombre,
       subtotal: this.subTotal,
     });
+    this.idProducto++;
+    this.Calcular();
+    console.log('Precio', this.product.price);
+
+  }
+
+  Calcular() {
+    var p = 0;
+    var t = 0;
+    var total = 0;
+    let i = 0;
     for (var arreglo in this.productosList) {
       for (var elemento in this.productosList[arreglo]) {
-        if (i == 2) {
+        if (i == 3) {
           var a = this.productosList[arreglo][elemento];
-          t += a;
+          console.log("Precio producto: ", a);
+          p += a;
         }
         i++;
       }
       i = 0;
     }
-    this.totalProductos = t;
-    console.log("Productos: ", this.productosList);
-  }
+    this.totalProductos = p;
 
-  obtenerCantidadTickets(nombre: string, precio: number) {
-    var cantidad = (document.getElementById(nombre) as HTMLInputElement).value;
+    for (var arreglo in this.tiqueteList) {
+      for (var elemento in this.tiqueteList[arreglo]) {
+        if (i == 2) {
+          var a = this.tiqueteList[arreglo][elemento];
 
-    if (cantidad.length != 0) {
-      this.tiqueteList.push({ nombre: nombre, precio: precio });
+          t += parseInt(a);
+        }
+        i++;
+      }
+      i = 0;
     }
-    console.log('Tiquetes: ', this.tiqueteList);
+    this.TotalTickets = t;
+    total = (this.totalProductos + this.TotalTickets);
+    this.total = total + (total * 0.13);
+
   }
+  reservar() {
+
+    this.cantidad = (this.tiqueteList.length);
+    console.log("cantidad: ", this.cantidad);
+
+  }
+
   obtenerCartelera(id: any) {
     this.gService
       .get('carteleras', id)
@@ -217,8 +229,18 @@ export class ReservationComponent implements OnInit {
       (this.formCreate.controls.tickets_id as FormArray).push(
         new FormControl(event.target.value)
       );
+      for (let i = 0; i < this.tickets.length; i++) {
+        const valor = this.tickets.value[i];
 
-      console.log('tiquete seleccionado');
+        if (valor == true && !this.tiqueteList.find(x => x.id == this.ticketList[i].id)) {
+
+          this.tiqueteList.push({ id: this.ticketList[i].id, nombre: this.ticketList[i].name, precio: this.ticketList[i].price });
+
+          console.log("Tiquetes:", this.tiqueteList);
+        }
+
+      }
+      this.Calcular();
     } else {
       /* Deseleccionar*/
       // Buscar el elemento que se le quito la selección
@@ -227,43 +249,46 @@ export class ReservationComponent implements OnInit {
       this.tickets_id.controls.forEach((ctrl: FormControl) => {
         if (idCheck == ctrl.value) {
           // Quitar el elemento deseleccionado del array
+
+          console.log("Tiquete borrado:", this.tiqueteList.splice(i, 1));
+
           (this.formCreate.controls.tickets_id as FormArray).removeAt(i);
           //Borrar tiquete
+          console.log("Tiquetes restantes:", this.tiqueteList);
 
-          console.log('tiquete encontrado');
-          if ((this.formCreate.controls.tickets_id as FormArray).length == 0) {
-          }
-          console.log('tiquetes deseleccionado', this.tickets_id.value);
+          this.Calcular();
+
           return;
         }
 
         i++;
       });
     }
+
   }
 
   submitForm() {
     console.log(this.formCreate.value);
 
-    if (this.formCreate.valid) {
-      this.gService
-        .create('carteleras/create', this.formCreate.value)
-        .subscribe(
-          (respuesta: any) => {
-            this.cartelera = respuesta;
-            this.router.navigate(['mantenimiento/carteleras/listado'], {
-              queryParams: { register: 'true' },
-            });
-          },
-          (error) => {
-            this.error = error;
-            console.log(this.error);
-            this.notificacion.msjValidacion(this.error);
-          }
-        );
-    } else {
-      console.log(this.error);
-    }
+    this.http.patch("http://127.0.0.1:8000/api/cinecar/carteleras/update/" + this.cartelera.id, this.formCreate.value, {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('Accept', 'application/json')
+    })
+      .subscribe(
+        (respuesta: any) => {
+
+          this.router.navigate(['carteleras'], {
+            queryParams: { register: 'true' },
+          });
+        },
+        (error) => {
+          this.error = error;
+          console.log(this.error);
+          this.notificacion.msjValidacion(this.error);
+        }
+      );
+
   }
   onReset() {
     this.formCreate.reset();

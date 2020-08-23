@@ -608,8 +608,6 @@ select {
 
 button {
   cursor: pointer;
-  width: 100px;
-  background: none;
 }
 
 .quantity-wrapper {
@@ -653,7 +651,7 @@ input[type="checkbox"],
   margin-bottom: 1rem;
 }
 
-button,
+
 .change-delivery {
   color: $violet;
 }
