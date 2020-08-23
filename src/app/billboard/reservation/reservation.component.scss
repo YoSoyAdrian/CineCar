@@ -526,8 +526,7 @@ nav {
   font-family: $font-head;
 }
 
-.logo,
-button {
+.logo {
   text-transform: uppercase;
 }
 
@@ -618,7 +617,6 @@ button {
   -webkit-box-direction: normal;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
-  margin: 1rem 0 0.5rem;
 }
 
 select {
@@ -650,7 +648,6 @@ input[type="checkbox"],
 .total {
   margin-bottom: 1rem;
 }
-
 
 .change-delivery {
   color: $violet;

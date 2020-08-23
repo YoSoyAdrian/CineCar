@@ -70,3 +70,4 @@ $(".image-upload-wrap1").bind("dragleave", function () {
 });
 
 ///Select menu
+$("#MyModal option[value='0']").attr("selected", true);

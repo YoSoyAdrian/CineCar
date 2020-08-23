@@ -68,7 +68,7 @@
 
     </div>
   </div>
-  <div class="row container-fluid mb-4">
+  <div class="row container-fluid mb-4 mr-0 ml-0">
     <div class="col-xl-12 text-center col-sm-12">
       <p class="tiquete">
         <span>
@@ -97,7 +97,7 @@
   </div>
 
   <!--Modal Product-->
-  <div class="modal fade" id="myModal">
+  <form [formGroup]="formCreate" class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content" style="padding-bottom: 18px;">
         <!-- Modal Header -->
@@ -127,8 +127,8 @@
                   <p style="margin-bottom: 0.5rem;">Clasificación</p>
                   <select formControlName="clasificacion" (change)="calcularClasificacion($event)" class="form-control"
                     style="width: 140px;">
-                    <option *ngFor="let t of product.classification_products;let index =index" [value]="t.price"
-                     >
+                    <option value="0">Seleccionar</option>
+                    <option *ngFor="let t of product.classification_products;let index =index" [value]="t.price">
                       {{ t.name }}
                     </option>
                   </select>
@@ -180,7 +180,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </form>
   <!--Modal Ticket-->
 
   <!-- The Modal Product -->
@@ -244,7 +244,7 @@
           </div>
           <div class="row">
             <div class="col-xl-6">
-              <button type="button" class="btn btn-success" (click)="reservar()" data-dismiss="modal">
+              <button type="button" class="btn btn-success" (click)="submitForm()" data-dismiss="modal">
                 Confirmar
               </button>
             </div>

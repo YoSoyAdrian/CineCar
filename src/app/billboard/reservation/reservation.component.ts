@@ -60,7 +60,9 @@ export class ReservationComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-  ) { }
+  ) {
+
+  }
 
   reactiveForm() {
     this.formCreate = this.fb.group({
@@ -95,7 +97,7 @@ export class ReservationComponent implements OnInit {
   }
 
   calcularClasificacion(event) {
-    if (event.target.value != "") {
+    if (event.target.value != 0) {
       this.clasificacion = parseInt(event.target.value, 10);
 
       this.precio = parseInt(this.product.price + this.clasificacion);
@@ -198,7 +200,9 @@ export class ReservationComponent implements OnInit {
   }
 
   obtenerProducto(id: any) {
-
+    $("#cantidad").val("");
+    $("#cantidad").attr("disabled", true);
+    console.log($("#MyModal option[value='0']").attr("selected", true));
     var p = this.productos.find((x) => x.id == id);
     this.product = p;
     this.precio = this.product.price;
@@ -285,12 +289,15 @@ export class ReservationComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.formCreate.value);
+    console.log("Cantidad", this.tiqueteList.length);
 
-    this.http.patch("http://127.0.0.1:8000/api/cinecar/carteleras/update/" + this.cartelera.id, this.formCreate.value, {
+    this.http.patch("http://127.0.0.1:8000/api/cinecar/carteleras/update/" + this.cartelera.id, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
-        .set('Accept', 'application/json')
+        .set('Accept', 'application/json'),
+
+    }, {
+      params: new HttpParams().append("cantidad", JSON.stringify(this.tiqueteList.length))
     })
       .subscribe(
         (respuesta: any) => {
