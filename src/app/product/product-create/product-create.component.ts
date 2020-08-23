@@ -160,7 +160,7 @@ export class ProductCreateComponent implements OnInit {
       this.gService.create('productos/create', formData).subscribe(
         (respuesta: any) => {
           this.producto = respuesta;
-          this.router.navigate(['mantenimiento/productos/activos'], {
+          this.router.navigate(['/mantenimiento/productos/activos'], {
             queryParams: { register: 'true' },
           });
         },

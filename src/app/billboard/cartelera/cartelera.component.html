@@ -19,7 +19,7 @@
   <div class="col-xl-2" style="margin-top: 50px; align-self: end;">
     <select class="dropdown" aria-placeholder="Seleccione una ubicación" (change)="filtrarUbicaciones($event)"
       placeholder="Seleccione una ubicación">
-      <option [value]="0">Todas</option>
+      <option [value]="0" aria-selected="true">Todas</option>
       <option *ngFor="let l of localizaciones" [value]="l.id">{{l.name}}
       </option>
     </select>

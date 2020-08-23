@@ -1,8 +1,8 @@
-<form [formGroup]="formCreate" (ngSubmit)="submitForm()" enctype="multipart/form-data">
+<form [formGroup]="formCreate" (ngSubmit)="submitForm()" *ngIf="producto" enctype="multipart/form-data">
   <div class="row" style="background-color: 2b3e50;">
     <div class="col-xl-12 text-center mt-3 mb-3">
-      <h3>DATOS PRODUCTO</h3>
-
+      <h3>ACTUALIZAR PRODUCTO</h3>
+      <input type="hidden" formControlName="id" />
     </div>
     <div class="col-xl-6">
       <div class="col-xl-12">
@@ -27,7 +27,8 @@
       <div class="col-xl-12">
         <div class="form-group col-xl-12">
           <label>Precio</label>
-          <input formControlName="price" for="price" type="number" class="form-control" id="price" placeholder="1000" />
+          <input formControlName="price" for="price" type="number" class="form-control" id="price" min="1" minlength="1"
+            placeholder="1000" />
           <small *ngIf="errorHandling('price', 'required')" class="text-danger">
             Precio requerido, sin guiones
           </small>
@@ -93,24 +94,23 @@
             portada</button>
 
           <div class="image-upload-wrap">
-            <input formControlName="image" class="file-upload-input" type='file' (change)="uploadFile($event)"
-              onchange="readURL(this);" accept="image/*" />
-            <div class="drag-text">
+            <input for='images' multiple formControlName="image" class="file-upload-input" type='file'
+              (change)="uploadFile($event)" onload="readURL(this);" onchange="readURL(this);" accept="image/*"
+              #fileInput />
+            <div *ngIf="producto.image==null" class="drag-text">
               <h3>Arrastre y suelte un archivo o seleccione agregar imagen</h3>
             </div>
           </div>
-          <div class="file-upload-content">
-            <img class="file-upload-image" src="#" alt="your image" />
-            <div class="image-title-wrap">
+          <div>
+            <img class="file-upload-image" src="{{producto.image}}" alt="your image" />
+            <div *ngIf="producto.image==null" class="image-title-wrap">
               <button type="button" onclick="removeUpload()" class="remove-image">Eliminar
                 <span class="image-title">Subir
                   imagen</span></button>
             </div>
           </div>
-          <small *ngIf="errorHandling('image', 'required')" class="text-danger">
-            La imagen de portada es requerida
-          </small>
         </div>
+
 
       </div>
     </div>
@@ -120,136 +120,7 @@
       <div _ngcontent-utb-c129="" role=" group" class="btn-group mb-4 col-xl-12 container-fluid"
         style="justify-content: space-around;">
         <div _ngcontent-utb-c129="" class="col-xl-4"><button _ngcontent-utb-c129="" type="submit"
-            class="btn btn-primary col-xl-6 container">Registrar</button></div>
-        <div _ngcontent-utb-c129="" class="col-xl-4"><button _ngcontent-utb-c129="" type="reset"
-            class="btn btn-secondary col-xl-6 container"> Cancelar </button></div>
-      </div>
-    </div>
-  </div>
-</form>
-<form [formGroup]="formCreate" (ngSubmit)="submitForm()" enctype="multipart/form-data">
-  <div class="row" style="background-color: 2b3e50;">
-    <div class="col-xl-12 text-center mt-3 mb-3">
-      <h3>DATOS PRODUCTO</h3>
-
-    </div>
-    <div class="col-xl-6">
-      <div class="col-xl-12">
-        <div class="form-group col-xl-12">
-          <label for="name">Nombre</label>
-          <input type="text" class="form-control" id="name" formControlName="name" placeholder="nombre" />
-          <small *ngIf="errorHandling('name', 'required')" class="text-danger">
-            El nombre del producto es requerido
-          </small>
-        </div>
-      </div>
-      <div class="col-xl-12">
-        <div class="form-group col-xl-12">
-          <label for="synopsis">Descripción</label>
-          <textarea formControlName="description" class="form-control" id="description"></textarea>
-          <small *ngIf="errorHandling('description', 'required')" class="text-danger">
-            La descripción es requerida
-          </small>
-        </div>
-      </div>
-
-      <div class="col-xl-12">
-        <div class="form-group col-xl-12">
-          <label>Precio</label>
-          <input formControlName="price" for="price" type="number" class="form-control" id="price" placeholder="1000" />
-          <small *ngIf="errorHandling('price', 'required')" class="text-danger">
-            Precio requerido, sin guiones
-          </small>
-        </div>
-      </div>
-
-      <div class="form-group col-xl-12">
-        <div class="col-xl-8">
-          <label for="active">Disponible</label>
-        </div>
-        <div>
-          <div class="inputGroup">
-            <input id="radio1" formControlName="active" inputmode="numeric" value="1" type="radio" />
-            <label for="radio1">Sí</label>
-          </div>
-          <div class="inputGroup">
-            <input id="radio2" formControlName="active" inputmode="numeric" value="0" type="radio" />
-            <label for="radio2">No</label>
-          </div>
-          <div class="col-xl-8">
-            <small *ngIf="errorHandling('active', 'required')" class="text-danger">
-              Disponibilidad del producto es requerida
-            </small>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="col-xl-6">
-      <div class="form-group col-xl-12">
-        <label>Seleccione las clasificaciones</label>
-        <div class="container" formArrayName="classification_products" for="classification_products">
-          <ul class="ks-cboxtags">
-
-            <li *ngFor="let c of classification_products.controls; index as i">
-              <input type="checkbox" [formControlName]="i" id="checkbox{{i}}" [value]="clasificacionList[i]?.id"
-                (change)="onCheckChange(clasificacionList[i]?.id, $event)" /><label
-                for="checkbox{{i}}">{{clasificacionList[i]?.name}}</label>
-            </li>
-
-          </ul>
-        </div>
-
-      </div>
-      <small *ngIf="errorHandling('classification_products', 'required')" class="text-danger">
-        Seleccione al menos una clasificación
-      </small>
-      <div class="form-group col-xl-12">
-        <label for="type_product_id">Seleccione el tipo de producto</label>
-        <select class="form-control" formControlName="type_product_id">
-          <option *ngFor="let t of type_product" id="type_product" [value]="t.id">
-            {{t.name}}
-          </option>
-        </select>
-        <small *ngIf="errorHandling('type_product_id', 'required')" class="text-danger">
-          La clasificación del producto es necesaria
-        </small>
-      </div>
-      <div class="col-xl-12">
-        <div class="file-upload">
-          <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Añadir
-            portada</button>
-
-          <div class="image-upload-wrap">
-            <input formControlName="image" class="file-upload-input" type='file' (change)="uploadFile($event)"
-              onchange="readURL(this);" accept="image/*" />
-            <div class="drag-text">
-              <h3>Arrastre y suelte un archivo o seleccione agregar imagen</h3>
-            </div>
-          </div>
-          <div class="file-upload-content">
-            <img class="file-upload-image" src="#" alt="your image" />
-            <div class="image-title-wrap">
-              <button type="button" onclick="removeUpload()" class="remove-image">Eliminar
-                <span class="image-title">Subir
-                  imagen</span></button>
-            </div>
-          </div>
-          <small *ngIf="errorHandling('image', 'required')" class="text-danger">
-            La imagen de portada es requerida
-          </small>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <div class="row container-fluid">
-    <div _ngcontent-utb-c129="" class="row container-fluid">
-      <div _ngcontent-utb-c129="" role=" group" class="btn-group mb-4 col-xl-12 container-fluid"
-        style="justify-content: space-around;">
-        <div _ngcontent-utb-c129="" class="col-xl-4"><button _ngcontent-utb-c129="" type="submit"
-            class="btn btn-primary col-xl-6 container">Registrar</button></div>
+            class="btn btn-primary col-xl-6 container">Actualizar</button></div>
         <div _ngcontent-utb-c129="" class="col-xl-4"><button _ngcontent-utb-c129="" type="reset"
             class="btn btn-secondary col-xl-6 container"> Cancelar </button></div>
       </div>

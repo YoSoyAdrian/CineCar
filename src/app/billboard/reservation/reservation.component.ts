@@ -37,6 +37,7 @@ export class ReservationComponent implements OnInit {
   totalProductos = 0;
   total = 0;
   precio = 0;
+  iva = 0;
   clasificacion = 0;
   TotalTickets = 0;
   cantidad = 0;
@@ -93,12 +94,23 @@ export class ReservationComponent implements OnInit {
     this.Calcular();
   }
 
+  calcularClasificacion(event) {
+    if (event.target.value != "") {
+      this.clasificacion = parseInt(event.target.value, 10);
+
+      this.precio = parseInt(this.product.price + this.clasificacion);
+      $("#cantidad").removeAttr("disabled");
+    }
+  }
   calcularProducto(event) {
 
-    this.clasificacion = this.formCreate.get('clasificacion').value;
-    var cantidad = (document.getElementById('cantProducto') as HTMLInputElement).value;
+    $("#agregar").removeAttr("disabled");
+    $("#eliminar").removeAttr("disabled");
+    this.subTotal = 0;
+
+    var cantidad = this.formCreate.get('cantidad').value;
     var nombre = this.product.name;
-    this.subTotal = parseInt(cantidad) * this.product.price;
+    this.subTotal = (cantidad * this.precio);
 
     this.productosList.push({
       id: this.idProducto,
@@ -116,6 +128,7 @@ export class ReservationComponent implements OnInit {
     var p = 0;
     var t = 0;
     var total = 0;
+    var iva = 0;
     let i = 0;
     for (var arreglo in this.productosList) {
       for (var elemento in this.productosList[arreglo]) {
@@ -142,8 +155,10 @@ export class ReservationComponent implements OnInit {
       i = 0;
     }
     this.TotalTickets = t;
-    total = (this.totalProductos + this.TotalTickets);
-    this.total = total + (total * 0.13);
+    total = this.totalProductos + this.TotalTickets;
+    iva = total * 0.13;
+    this.iva = iva;
+    this.total = total + iva;
 
   }
   reservar() {
@@ -183,8 +198,10 @@ export class ReservationComponent implements OnInit {
   }
 
   obtenerProducto(id: any) {
+
     var p = this.productos.find((x) => x.id == id);
     this.product = p;
+    this.precio = this.product.price;
 
   }
 

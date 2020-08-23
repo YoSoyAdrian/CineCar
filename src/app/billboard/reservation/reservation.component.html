@@ -65,8 +65,7 @@
           </li>
         </ul>
       </div>
-      <input type="number" formControlName="cantidad">
-      <button type="submit" (click)="submitForm()"></button>
+
     </div>
   </div>
   <div class="row container-fluid mb-4">
@@ -126,10 +125,10 @@
                 </div>
                 <div class="description">
                   <p style="margin-bottom: 0.5rem;">Clasificación</p>
-                  <select formControlName="clasificacion" (change)="calcularProducto($event)" class="form-control"
+                  <select formControlName="clasificacion" (change)="calcularClasificacion($event)" class="form-control"
                     style="width: 140px;">
-                    <option *ngFor="let t of product.classification_products;index as i" id="type_product"
-                      [ngValue]="t.price">
+                    <option *ngFor="let t of product.classification_products;let index =index" [value]="t.price"
+                     >
                       {{ t.name }}
                     </option>
                   </select>
@@ -137,25 +136,25 @@
                     El tamaño es necesario
                   </small>
                   <p style="margin-bottom: 0.5rem;">Precio unidad</p>
-                  <h2>₡{{ product.price }}</h2>
+                  <h2>₡{{ precio }}</h2>
                   <div class="quantity-wrapper">
                     <div>
                       <label for="quantity" style="margin-right: 0.5rem;">Cantidad:</label>
-                      <input type="number" class="form-control form-group" placeholder="cantidad" id="cantProducto"
-                        onfocus="this.value=''" required />
+                      <input type="number" min="1" disabled formControlName="cantidad" class="form-control form-group"
+                        placeholder="cantidad" id="cantidad" onfocus="this.value=''" required />
                       <small *ngIf="errorHandling('cantidad', 'required' )" class="text-danger">
                         La cantidad es necesaria
                       </small>
                     </div>
                     <div class="row">
                       <div class="col-xl-6">
-                        <button [disabled]="formCreate.valid" class="form-control btn-success" type="submit"
+                        <button id="agregar" class="form-control btn-success" type="submit"
                           (click)="calcularProducto($event)">
                           Agregar
                         </button>
                       </div>
                       <div class="col-xl-6">
-                        <button class="form-control btn-danger">Eliminar</button>
+                        <button id="eliminar" class="form-control btn-danger">Eliminar</button>
                       </div>
                     </div>
                   </div>
@@ -165,6 +164,10 @@
                 <div class="subtotal">
                   <p class="small">Subtotal: </p>
                   <p class="small">₡{{ subTotal }}</p>
+                </div>
+                <div class="subtotal">
+                  <p class="small">IVA: </p>
+                  <p class="small">₡{{ iva   }}</p>
                 </div>
 
                 <div class="total">

@@ -9,10 +9,11 @@
               aria-controls="nav-home" aria-selected="true"
               [class.active]="router.url == '/mantenimiento/productos'">Nuevo Producto</a>
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" role="tab" aria-controls="nav-profile"
-              aria-selected="false" [routerLink]="['/mantenimiento/productos/listado']"
+              aria-selected="false" [routerLink]="['/mantenimiento/productos/activos']"
               routerLinkActive="router-link-active">Productos Activos</a>
             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" role="tab" aria-controls="nav-contact"
-              aria-selected="false">Productos Desactivados</a>
+              aria-selected="false" [routerLink]="['/mantenimiento/productos/desactivados']"
+              routerLinkActive="router-link-active">Productos Desactivados</a>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">

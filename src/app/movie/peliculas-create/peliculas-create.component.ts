@@ -178,7 +178,7 @@ export class PeliculasCreateComponent implements OnInit {
       this.gService.create('peliculas/create', formData).subscribe(
         (respuesta: any) => {
           this.pelicula = respuesta;
-          this.router.navigate(['mantenimiento/peliculas/listado'], {
+          this.router.navigate(['mantenimiento/peliculas/activas'], {
             queryParams: { register: 'true' },
           });
         },
@@ -197,7 +197,7 @@ export class PeliculasCreateComponent implements OnInit {
     this.formCreate.reset();
   }
   onBack() {
-    this.router.navigate(['/peliculas/registrar']);
+    this.router.navigate(['/mantenimiento/peliculas/registrar']);
   }
   public errorHandling = (control: string, error: string) => {
     return (
