@@ -43,7 +43,7 @@ export class ProductUpdateComponent implements OnInit {
   reactiveForm() {
     this.getClasificaciones();
     this.getTipoProductos();
-
+    this.getActive();
     if (this.producto) {
       this.formCreate = this.fb.group({
         id: [this.producto.id, [Validators.required]],
@@ -58,10 +58,20 @@ export class ProductUpdateComponent implements OnInit {
 
       });
     }
+
   }
 
   ngOnInit(): void {
 
+  }
+  getActive() {
+    if (this.producto.active == 1) {
+      console.log("Activo: ", this.producto.active);
+      $("#radio1").attr("checked", true);
+    } else {
+      console.log("Desactivado: ", this.producto.active);
+      $("#radio2").attr("checked", true);
+    }
   }
   getProducto(id: number) {
     this.gService.get('productos', id).subscribe(

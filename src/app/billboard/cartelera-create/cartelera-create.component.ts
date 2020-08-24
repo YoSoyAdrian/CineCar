@@ -16,7 +16,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
   styleUrls: ['./cartelera-create.component.scss']
 })
 export class CarteleraCreateComponent implements OnInit {
-
+  nombreDia: any;
   movie: any;
   location: any;
   cartelera: any;
@@ -42,6 +42,7 @@ export class CarteleraCreateComponent implements OnInit {
       location_id: ['', [Validators.required]],
       movie_id: ['', [Validators.required]],
       current_date: ['', [Validators.required]],
+      date: ['', [Validators.required]],
       available: ['', [Validators.required]],
       number_space: ['', [Validators.required]],
       hour: ['', [Validators.required]],
@@ -58,6 +59,24 @@ export class CarteleraCreateComponent implements OnInit {
   ngOnInit(): void {
 
     this.fecha();
+  }
+  dia() {
+    let dias = [
+      "Lunes",
+      "Martes",
+      "Miercoles",
+      "Jueves",
+      "Viernes",
+      "Sabado",
+      "Domingo",
+    ];
+
+    var x = ((document.getElementById("fecha") as HTMLInputElement));
+    let date = new Date(x.value);
+    console.log(date);
+
+    this.formCreate.get('date').setValue(dias[date.getDay()]);
+
   }
   fecha() {
     let fecha_minimo = new Date().toISOString().split("T")[0];

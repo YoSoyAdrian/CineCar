@@ -35,7 +35,9 @@
       <div class="col-xl-12">
         <div class="form-group col-xl-12">
           <label>Fecha a estrenar</label>
-          <input formControlName="current_date" type="date" class="form-control" id="fecha" placeholder="dd/MM/YYYY" />
+          <input formControlName="current_date" type="date" (change)="dia()" class="form-control" id="fecha"
+            placeholder="dd/MM/YYYY" />
+          <input type="hidden" formControlName="date" id="dia" />
           <small *ngIf="errorHandling('current_date', 'required')" class="text-danger">
             Fecha de estreno requerida (Día/Mes/Año)
           </small>

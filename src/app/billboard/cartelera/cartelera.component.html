@@ -8,12 +8,12 @@
 
   <div class="col col-xl-10 text-center" style="padding-left: 242px;">
     <ul class="menu-bar">
-      <li>Lunes</li>
-      <li>Martes</li>
-      <li>Miércoles</li>
-      <li>Jueves</li>
-      <li>Viernes</li>
-      <li>Sábado</li>
+      <li (click)="filtrarGeneros('Lunes')">Lunes</li>
+      <li (click)="filtrarGeneros('Martes')">Martes</li>
+      <li (click)="filtrarGeneros('Miercoles')">Miercoles</li>
+      <li (click)="filtrarGeneros('Jueves')">Jueves</li>
+      <li (click)="filtrarGeneros('Viernes')">Viernes</li>
+      <li (click)="filtrarGeneros('Sabado')">Sabado</li>
     </ul>
   </div>
   <div class="col-xl-2" style="margin-top: 50px;align-self: end;text-align-last: center;">
@@ -25,7 +25,7 @@
       </option>
     </select>
   </div>
-  <div class="col-xl-auto col-sm-auto col-md-auto mb-4" style="margin-top: 50px;">
+  <div class="col-xl-12 col-sm-auto col-md-auto mb-4" style="margin-top: 50px;">
     <ul class="container-fluid">
       <li *ngFor="let peli of cartelera" class="booking-card col-xl-12"
         style="background-image: url({{peli.movie.image}});">
