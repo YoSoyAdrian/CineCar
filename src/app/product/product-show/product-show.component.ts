@@ -74,9 +74,9 @@ export class ProductShowComponent implements OnInit {
       (respuesta: any) => {
         this.datos = respuesta;
         Swal.fire({
-          position: 'top-end',
+          position: 'top',
           icon: 'success',
-          title: '¡Reservado con éxito!',
+          title: '¡Voto registrado!',
           showConfirmButton: false,
           timer: 1500
         });
