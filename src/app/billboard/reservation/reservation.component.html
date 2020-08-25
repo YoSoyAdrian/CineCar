@@ -141,15 +141,15 @@
                     <div>
                       <label for="quantity" style="margin-right: 0.5rem;">Cantidad:</label>
                       <input type="number" min="1" disabled formControlName="cantidad" class="form-control form-group"
-                        placeholder="cantidad" id="cantidad" onfocus="this.value=''" required />
-                      <small *ngIf="errorHandling('cantidad', 'required' )" class="text-danger">
+                        placeholder="cantidad" id="cantidad" required />
+                      <small style="margin-left: 31px;" *ngIf="errorHandling('cantidad', 'required' )"
+                        class="text-danger">
                         La cantidad es necesaria
                       </small>
                     </div>
                     <div class="container-fluid">
                       <div class="col-xl-12">
-                        <button id="agregar" class="form-control btn-success" type="submit"
-                          (click)="calcularProducto($event)">
+                        <button id="agregar" class="form-control btn-success" (click)="calcularProducto()">
                           Agregar
                         </button>
                       </div>
@@ -179,9 +179,9 @@
       </div>
     </div>
   </form>
-  <!--Modal Ticket-->
 
-  <!-- The Modal Product -->
+
+  <!-- The Modal Reservacion-->
   <div class="modal fade" id="myModal1">
     <div class="modal-dialog">
       <div class="modal-content">

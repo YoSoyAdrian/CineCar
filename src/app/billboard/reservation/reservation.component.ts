@@ -101,26 +101,27 @@ export class ReservationComponent implements OnInit {
       $("#cantidad").removeAttr("disabled");
     }
   }
-  calcularProducto(event) {
+  calcularProducto() {
 
     $("#agregar").removeAttr("disabled");
     $("#eliminar").removeAttr("disabled");
     this.subTotal = 0;
 
     var cantidad = this.formCreate.get('cantidad').value;
-    var nombre = this.product.name;
-    this.subTotal = (cantidad * this.precio);
+    if (parseInt(cantidad) != null) {
+      var nombre = this.product.name;
+      this.subTotal = (cantidad * this.precio);
 
-    this.productosList.push({
-      id: this.idProducto,
-      cantidad: parseInt(cantidad),
-      nombre: nombre,
-      subtotal: this.subTotal,
-    });
-    this.idProducto++;
-    this.Calcular();
-    console.log('Precio', this.product.price);
-
+      this.productosList.push({
+        id: this.idProducto,
+        cantidad: parseInt(cantidad),
+        nombre: nombre,
+        subtotal: this.subTotal,
+      });
+      this.idProducto++;
+      this.Calcular();
+      console.log('Precio', this.product.price);
+    }
   }
 
   Calcular() {
@@ -197,6 +198,7 @@ export class ReservationComponent implements OnInit {
   }
 
   obtenerProducto(id: any) {
+    this.makeSubmit = false;
     $("#cantidad").val("");
     $("#cantidad").attr("disabled", true);
     console.log($("#MyModal option[value='0']").attr("selected", true));
@@ -204,6 +206,7 @@ export class ReservationComponent implements OnInit {
     this.product = p;
     this.precio = this.product.price;
     this.subTotal = 0;
+
   }
 
   getLocalizacion() {

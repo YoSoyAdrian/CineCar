@@ -137,6 +137,7 @@ export class ProductCreateComponent implements OnInit {
   submitForm() {
 
     var formData: FormData = new FormData();
+    
     formData.append("name", this.formCreate.get('name').value);
     formData.append("description", this.formCreate.get('description').value);
     formData.append("price", this.formCreate.get('price').value);
