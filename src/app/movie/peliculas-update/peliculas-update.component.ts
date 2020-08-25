@@ -234,9 +234,7 @@ export class PeliculasUpdateComponent implements OnInit {
   onReset() {
     this.formCreate.reset();
   }
-  onBack() {
-    this.router.navigate(['/videojuego/all']);
-  }
+
   public errorHandling = (control: string, error: string) => {
     return this.formCreate.controls[control].hasError(error);
   };

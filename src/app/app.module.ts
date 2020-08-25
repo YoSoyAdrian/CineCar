@@ -13,7 +13,6 @@ import { HomeModule } from './home/home.module';
 import { UserModule } from './user/user.module';
 import { MovieModule } from './movie/movie.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MainModule } from './main/main.module';
 import { ProductModule } from './product/product.module';
 import { BillboardModule } from './billboard/billboard.module';
 
@@ -45,7 +44,7 @@ import { BillboardModule } from './billboard/billboard.module';
     NgbModule,
     BrowserAnimationsModule,
     SlickCarouselModule,
-    MainModule,
+    
 
     // al final el gestor de las rutas principal
     AppRoutingModule,

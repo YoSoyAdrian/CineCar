@@ -1,18 +1,34 @@
-<div class="wrapper">
-  <div class="outer">
-    <div class="content animated fadeInLeft">
-      <span class="bg animated ">{{datos.type_product.name}}</span>
-      <h1>{{datos.name}}</h1>
-      <a>Categorias</a>
-      <ul *ngFor="let c of datos.classification_products">
-        <li>{{c.name}}</li>
-      </ul>
-      <div class="button">
-        <a>{{datos.price}}</a><a class="cart-btn" href="#"><i class="cart-icon ion-bag"></i>ADD TO CART</a>
+<form *ngIf="datos" [formGroup]="formUpdate" (ngSubmit)="submitForm()" novalidate>
+  <div class="wrapper" *ngIf="datos?.id">
+    <div class="outer">
+      <div class="content animated fadeInLeft">
+        <span class="bg animated ">{{datos.type_product.name}}</span>
+        <h1>{{datos.name}}</h1>
+        <a>Categorias</a>
+        <ul *ngFor="let c of datos.classification_products">
+          <li>{{c.name}}</li>
+        </ul>
+        <div class="button">
+          <a>₡{{datos.price}}</a>
+        </div>
+        <div class="rw-ui-container">
+          <div class="btns">
+            <div class="row">
+              <div class="col-sm-12">
+                <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block">
+                  <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}">
+                    <i class="fa fa-star"></i>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {{datos.like_count}} Me gusta
+
+          </div>
+        </div>
       </div>
-
+      <img src="{{datos.image}}" width="300px" class="animated fadeInRight">
     </div>
-    <img src="{{datos.image}}" width="300px" class="animated fadeInRight">
-  </div>
 
-</div>
+  </div>
+</form>

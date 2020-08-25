@@ -48,12 +48,13 @@
           {{p.premiere_date|date:"dd-MM-yyyy"}}
         </td>
         <td data-title='Acciones' class='select'>
-          <a class='button' href='#'>
+          <button class='button' [routerLink]="['/peliculas/', p.id]" routerLinkActive="active">
             Seleccionar
-          </a>
-          <a class='button' [routerLink]="['/mantenimiento/peliculas/actualizar/', p.id]" routerLinkActive="active">
+          </button>
+          <button class='button' [routerLink]="['/mantenimiento/peliculas/actualizar/', p.id]"
+            routerLinkActive="active">
             Actualizar
-          </a>
+          </button>
         </td>
 
       </tr>

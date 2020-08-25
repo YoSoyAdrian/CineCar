@@ -203,7 +203,7 @@ export class ReservationComponent implements OnInit {
     var p = this.productos.find((x) => x.id == id);
     this.product = p;
     this.precio = this.product.price;
-
+    this.subTotal = 0;
   }
 
   getLocalizacion() {

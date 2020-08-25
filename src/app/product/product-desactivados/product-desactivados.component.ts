@@ -39,7 +39,7 @@ export class ProductDesactivadosComponent implements OnInit {
   }
   listaProductos() {
     this.gService
-      .list('productos/all')
+      .list('productos/desactivadas')
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data: any) => {

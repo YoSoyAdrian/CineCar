@@ -13,7 +13,7 @@
 .outer {
   position: relative;
   background: #fff;
-  height: 350px;
+  height: 400px;
   width: 550px;
   overflow: hidden;
   display: flex;
@@ -56,8 +56,6 @@ p {
   font-family: caption;
 }
 .button {
-  width: fit-content;
-  height: fit-content;
   margin-top: 10px;
 }
 
@@ -99,14 +97,90 @@ p {
 }
 
 .button a:nth-of-type(1) {
-  border-radius: 50px 0 0 50px;
+  border-radius: 90px 90px 90px 90px;
   border-right: none;
-}
-
-.button a:nth-of-type(2) {
-  border-radius: 0px 50px 50px 0;
+  width: 86%;
+  font-size: larger;
+  text-align: center;
 }
 
 .cart-icon {
   padding-right: 8px;
+}
+//stars
+@import url("https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css");
+
+fieldset,
+label {
+  margin: 0;
+  padding: 0;
+  transform: translateY(50px);
+  animation: slideUp 0.8s ease-in-out forwards 1s;
+}
+body {
+  margin: 20px;
+}
+h1 {
+  font-size: 1.5em;
+  margin: 4px;
+}
+
+/****** Style Star Rating Widget *****/
+
+.rating {
+  border: none;
+  float: left;
+}
+
+.rating > input {
+  display: none;
+}
+.rating > label:before {
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label {
+  color: #ddd;
+  float: right;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label {
+  color: #ffd700;
+} /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label {
+  color: #ffed85;
+}
+
+.rating-list li {
+  float: right;
+  color: #ddd;
+  padding: 10px 5px;
+}
+
+.rating-list li:hover,
+.rating-list li:hover ~ li,
+.rating-list li.selected {
+  color: #ffd700;
+}
+
+.rating-list {
+  display: inline-block;
+  list-style: none;
 }

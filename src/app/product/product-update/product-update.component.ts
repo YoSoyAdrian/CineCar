@@ -64,13 +64,15 @@ export class ProductUpdateComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+
   getActive() {
     if (this.producto.active == 1) {
       console.log("Activo: ", this.producto.active);
-      $("#radio1").attr("checked", true);
+      $(".inputGroup #radio1").attr("checked");
     } else {
       console.log("Desactivado: ", this.producto.active);
-      $("#radio2").attr("checked", true);
+      $("#radio2").attr("checked");
     }
   }
   getProducto(id: number) {

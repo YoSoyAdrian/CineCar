@@ -32,8 +32,9 @@ export class CarteleraComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.obtenerFechaSemana();
+
     this.listaCarteleras();
+    this.filtrarCarteleras();
     this.listaUbicaciones();
   }
   listaCarteleras() {
@@ -49,6 +50,11 @@ export class CarteleraComponent implements OnInit {
           this.notificacion.mensaje(error.name, error.message, 'error');
         }
       );
+  }
+  filtrarCarteleras() {
+
+    this.cartelera = this.datos.filter(x => x.number_space > 0);
+
   }
   listaUbicaciones() {
     this.gService
@@ -67,7 +73,7 @@ export class CarteleraComponent implements OnInit {
 
     const value = event.target.value;
     if (value != 0) {
-      this.cartelera = this.datos.filter(x => x.location_id == value);
+      this.cartelera = this.datos.filter(x => x.location_id == value && x.number_space > 0);
     } else {
       this.cartelera = this.datos;
     }
@@ -82,15 +88,5 @@ export class CarteleraComponent implements OnInit {
       this.cartelera = this.datos;
     }
   }
-  obtenerFechaSemana() {
-    var today = new Date();
 
-    var date;
-    var month = today.getMonth();
-    var year = today.getFullYear();
-    var current_date = date + '/' + month + '/' + year;
-
-
-    console.log(this.fechas);
-  }
 }

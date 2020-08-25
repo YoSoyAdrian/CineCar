@@ -23,7 +23,7 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['productos']" routerLinkActive="router-link-active">Productos</a>
         </li>
-        <li class="nav-item dropdown" *ngIf="currentUser?.user">
+        <li class="nav-item dropdown" *ngIf="currentUser?.user.rol_id==1">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="true">
             Mantenimiento

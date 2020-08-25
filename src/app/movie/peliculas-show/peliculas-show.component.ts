@@ -7,8 +7,11 @@ import { GenericService } from 'src/app/share/generic.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { AuthenticationService } from 'src/app/share/authentication.service';
+import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-peliculas-show',
@@ -29,6 +32,7 @@ export class PeliculasShowComponent implements OnInit {
     private authService: AuthenticationService,
     private notificacion: NotificacionService,
     private route: ActivatedRoute,
+    private http: HttpClient,
     private router: Router) {
     this.id = +this.route.snapshot.paramMap.get('id');
     this.obtenerPelicula(this.id);
@@ -61,9 +65,23 @@ export class PeliculasShowComponent implements OnInit {
   }
   submitForm() {
     console.log(this.formUpdate.value);
-    this.gService.updateVoto('votos', this.datos.id).subscribe(
+    this.http.patch("http://127.0.0.1:8000/api/cinecar/votos/update/" + this.datos.id, {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('Accept', 'application/json'),
+
+    }, {
+      params: new HttpParams().append("cantidad", JSON.stringify(this.selectedValue))
+    }).subscribe(
       (respuesta: any) => {
         this.datos = respuesta;
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: '¡Voto registrado!',
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.obtenerPelicula(this.id);
       },
       (error) => {
@@ -82,5 +100,7 @@ export class PeliculasShowComponent implements OnInit {
         this.notificacion.mensaje(error.mensaje, error.name, 'error');
       });
   }
+  calcularRanking() {
 
+  }
 }

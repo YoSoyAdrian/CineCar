@@ -7,8 +7,11 @@ import { GenericService } from 'src/app/share/generic.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { AuthenticationService } from 'src/app/share/authentication.service';
+import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-show',
@@ -19,7 +22,7 @@ export class ProductShowComponent implements OnInit {
   stars: number[] = [1, 2, 3, 4, 5];
   selectedValue: number;
   formUpdate: FormGroup;
-
+  id: any;
   datos: any;
   error: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -28,9 +31,10 @@ export class ProductShowComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private gService: GenericService,
-    private notificacion: NotificacionService) {
-    let id = +this.route.snapshot.paramMap.get('id');
-    this.obtenerProducto(id);
+    private notificacion: NotificacionService,
+    private http: HttpClient) {
+    this.id = +this.route.snapshot.paramMap.get('id');
+    this.obtenerProducto(this.id);
 
   }
 
@@ -48,22 +52,35 @@ export class ProductShowComponent implements OnInit {
 
   reactiveForm() {
 
-    //Si hay información del videojuego
+
     if (this.datos) {
-      //Cargar la información del videojuego
-      //en los controles que conforman el formulario
+
       this.formUpdate = this.fb.group({
         id: [this.datos.id, [Validators.required]],
-        vote_count: [this.datos.vote_count, [Validators.required]],
+        like_count: [this.datos.like_count, [Validators.required]],
       });
     }
   }
   submitForm() {
     console.log(this.formUpdate.value);
-    this.gService.updateVoto('votos', this.datos.id).subscribe(
+    this.http.patch("http://127.0.0.1:8000/api/cinecar/likes/update/" + this.datos.id, {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('Accept', 'application/json'),
+
+    }, {
+      params: new HttpParams().append("cantidad", JSON.stringify(this.selectedValue))
+    }).subscribe(
       (respuesta: any) => {
         this.datos = respuesta;
-
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: '¡Reservado con éxito!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.obtenerProducto(this.id);
       },
       (error) => {
         this.error = error;

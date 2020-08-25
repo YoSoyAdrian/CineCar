@@ -37,6 +37,7 @@ export class PeliculasCreateComponent implements OnInit {
     private notificacion: NotificacionService
   ) {
     this.reactiveForm();
+
   }
 
   reactiveForm() {
@@ -45,7 +46,7 @@ export class PeliculasCreateComponent implements OnInit {
       synopsis: ['', [Validators.required]],
       premiere_date: ['', [Validators.required]],
       duration: ['', [Validators.required]],
-      image: null,
+      image: [],
       banner: [],
       active: ['', [Validators.required]],
       classification_movie_id: ['', [Validators.required]],
@@ -196,18 +197,17 @@ export class PeliculasCreateComponent implements OnInit {
           console.log(this.error);
           Swal.fire({
             icon: 'error',
-            text: '¡Ingrese los datos correctamente!',
+            title: '¡Ingrese los datos!',
           })
         }
       );
     } else {
-
+      console.log(this.error);
       Swal.fire({
         icon: 'error',
-        text: '¡Ingrese TODOS los datos!',
+        title: '¡Ingrese TODOS los datos!',
       })
     }
-
   }
   onReset() {
     this.formCreate.reset();

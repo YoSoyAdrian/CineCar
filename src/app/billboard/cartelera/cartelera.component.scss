@@ -39,7 +39,7 @@ $orange: #ec992c;
 * {
   margin: 0;
   padding: 0;
-
+  margin-bottom: 10px;
   font-family: $font;
 }
 
@@ -59,7 +59,7 @@ ul {
     position: relative;
     width: 213px;
     display: flex;
-    flex: 0 0 324px;
+    flex: 0 0 260px;
     flex-direction: column;
 
     margin: 15px;

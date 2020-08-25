@@ -47,9 +47,5 @@ export class PeliculasListComponent implements OnInit {
         }
       );
   }
-  actualizarVideojuego(id: number) {
-    this.router.navigate(['/peliculas/update', id], {
-      relativeTo: this.route,
-    });
-  }
+
 }

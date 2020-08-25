@@ -63,7 +63,7 @@ export class GenericService {
       .pipe(catchError(this.handler.handleError.bind(this)));
   }
   // crear
-  create(endopoint: string, objCreate: any | any): Observable<any | any[] | File> {
+  create(endopoint: string, objCreate: any | any | File): Observable<any | any[] | File> {
     this.getCurrentUser();
 
     return this.http.post(this.urlAPI + endopoint, objCreate, {

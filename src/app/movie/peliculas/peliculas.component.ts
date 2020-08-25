@@ -19,11 +19,24 @@ export class PeliculasComponent implements OnInit {
     private notificacion: NotificacionService) {
   }
   ngOnInit(): void {
-
+    this.listaPeliculas();
   }
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
-  
+
+  listaPeliculas() {
+    this.gService.list('peliculas/all').pipe(takeUntil(this.destroy$)).
+      subscribe((data: any) => {
+
+        this.datos = data;
+      },
+        (error: any) => {
+          this.notificacion.mensaje(error.mensaje, error.name, 'error')
+            ;
+        }
+      );
+  }
+
 }
