@@ -32,11 +32,11 @@ export class CarteleraComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     this.listaCarteleras();
     this.filtrarCarteleras();
     this.listaUbicaciones();
   }
+
   listaCarteleras() {
     this.gService
       .list('carteleras/index')

@@ -146,16 +146,14 @@
                         La cantidad es necesaria
                       </small>
                     </div>
-                    <div class="row">
-                      <div class="col-xl-6">
+                    <div class="container-fluid">
+                      <div class="col-xl-12">
                         <button id="agregar" class="form-control btn-success" type="submit"
                           (click)="calcularProducto($event)">
                           Agregar
                         </button>
                       </div>
-                      <div class="col-xl-6">
-                        <button id="eliminar" class="form-control btn-danger">Eliminar</button>
-                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -237,7 +235,7 @@
           </div>
         </div>
         <!-- Modal footer -->
-        <div class="modal-footer row">
+        <div class="modal-footer">
           <div class="total col-xl-12 " style="position: relative; display: inline-flex; ">
             <h3>Total: ₡{{ total }}</h3>
 

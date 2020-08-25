@@ -14,19 +14,20 @@
       <li (click)="filtrarGeneros('Jueves')">Jueves</li>
       <li (click)="filtrarGeneros('Viernes')">Viernes</li>
       <li (click)="filtrarGeneros('Sabado')">Sabado</li>
+      <li (click)="filtrarGeneros('Domingo')">Domingo</li>
     </ul>
   </div>
   <div class="col-xl-2" style="margin-top: 50px;align-self: end;text-align-last: center;">
     <p style="color: white; text-align-last: center;">Ubicaciones</p>
-    <select class="dropdown" aria-placeholder="Seleccione una ubicación" (change)="filtrarUbicaciones($event)"
+    <select class="dropdown" aria-placeholder="Seleccione una ubicación" (click)="filtrarUbicaciones($event)"
       placeholder="Seleccione una ubicación">
-      <option [value]="0" aria-selected="true">Todas</option>
+      <option [value]="0">Todas</option>
       <option *ngFor="let l of localizaciones" [value]="l.id">{{l.name}}
       </option>
     </select>
   </div>
   <div class="col-xl-12 col-sm-auto col-md-auto mb-4">
-    <ul class="container-fluid">
+    <ul class="container-fluid" style="padding-left: 99px;">
       <li *ngFor="let peli of cartelera " class="booking-card col-xl-12"
         style="background-image: url({{peli.movie.image}});">
         <div class="book-container">
